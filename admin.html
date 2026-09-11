@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Studio Control Panel — Derrick Files Studio</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--black:#000;--s1:#141414;--s2:#1c1c1c;--s3:#2a2a2a;--line:#262626;
+  --gold:#ffc91e;--white:#f4f4f5;--ash:#9a9aa0;--steel:#6b6b70;--ok:#3ddc84;--bad:#ff5a5a;
+  --d:"Archivo",system-ui,sans-serif;--b:"Inter",system-ui,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--black);color:var(--white);font:15px/1.6 var(--b)}
+h1,h2,h3,.d{font-family:var(--d);text-transform:uppercase;margin:0}
+a{color:var(--gold);text-decoration:none}
+/* topbar */
+.top{position:sticky;top:0;z-index:50;background:rgba(0,0,0,.95);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);display:flex;align-items:center;gap:16px;
+  padding:0 20px;height:62px}
+.lgo{font-family:var(--d);font-weight:900;font-size:15px;letter-spacing:-.02em}
+.lgo b{color:var(--gold)}
+.lgo small{display:block;font-size:8px;letter-spacing:.26em;color:var(--steel);font-weight:600}
+.top .sp{flex:1}
+.btn{font-family:var(--d);font-weight:800;font-size:11.5px;letter-spacing:.11em;
+  text-transform:uppercase;padding:12px 18px;border:0;cursor:pointer;transition:.18s;
+  display:inline-flex;align-items:center;gap:8px}
+.btn-p{background:var(--gold);color:#000}.btn-p:hover{background:#fff}
+.btn-p:disabled{background:var(--s3);color:var(--steel);cursor:not-allowed}
+.btn-s{background:transparent;color:var(--white);border:1px solid var(--s3)}
+.btn-s:hover{border-color:var(--gold);color:var(--gold)}
+.btn-d{background:transparent;color:var(--bad);border:1px solid #3a2020}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--steel);flex-shrink:0}
+.dot.on{background:var(--ok)}.dot.dirty{background:var(--gold)}
+/* layout */
+.wrap{display:grid;grid-template-columns:216px 1fr;min-height:calc(100vh - 62px)}
+aside{border-right:1px solid var(--line);background:var(--s1);padding:18px 0}
+aside a{display:block;padding:11px 20px;font-family:var(--d);font-size:11.5px;font-weight:700;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ash);cursor:pointer;border-left:2px solid transparent}
+aside a:hover{color:var(--white);background:var(--s2)}
+aside a.on{color:var(--gold);border-left-color:var(--gold);background:var(--s2)}
+aside .grp{padding:16px 20px 6px;font-family:var(--d);font-size:9.5px;letter-spacing:.2em;color:var(--steel)}
+main{padding:30px 32px 80px;max-width:940px}
+@media(max-width:820px){.wrap{grid-template-columns:1fr}aside{display:flex;flex-wrap:wrap;padding:8px;border-right:0;border-bottom:1px solid var(--line)}aside a{border-left:0;border-bottom:2px solid transparent;padding:9px 12px}aside a.on{border-left:0;border-bottom-color:var(--gold)}aside .grp{display:none}main{padding:22px 18px 70px}}
+/* fields */
+h2.pt{font-size:26px;letter-spacing:-.03em;margin-bottom:6px}
+.pd{color:var(--ash);font-size:14px;margin:0 0 26px}
+.fld{margin-bottom:18px}
+label{display:block;font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:7px}
+label .hint{color:var(--steel);letter-spacing:.06em;font-weight:600;text-transform:none;font-family:var(--b);font-size:11px}
+input[type=text],input[type=url],input[type=date],textarea,select{width:100%;background:var(--s1);
+  border:1px solid var(--line);color:var(--white);padding:12px 14px;font:14.5px/1.55 var(--b);
+  border-radius:0;transition:border-color .16s}
+input:focus,textarea:focus,select:focus{outline:0;border-color:var(--gold)}
+textarea{min-height:90px;resize:vertical}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:620px){.row2{grid-template-columns:1fr}}
+.card{background:var(--s1);border:1px solid var(--line);padding:20px;margin-bottom:14px}
+.card h3{font-size:14px;margin-bottom:14px;color:var(--white)}
+.chead{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.chead h3{flex:1;margin:0}
+.sw{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--ash)}
+.sw input{width:auto}
+/* image picker */
+.imgf{display:flex;gap:14px;align-items:flex-start}
+.imgf .prev{width:104px;height:104px;object-fit:cover;border:1px solid var(--line);background:var(--s2);flex-shrink:0}
+.imgf .ctrl{flex:1;min-width:0}
+.imgf input[type=file]{display:none}
+.fake{display:inline-block;border:1px solid var(--s3);padding:9px 14px;font-family:var(--d);
+  font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;color:var(--white);margin-top:8px}
+.fake:hover{border-color:var(--gold);color:var(--gold)}
+/* list items */
+.item{background:var(--s1);border:1px solid var(--line);margin-bottom:10px}
+.ihead{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.ihead img{width:46px;height:46px;object-fit:cover;border:1px solid var(--line);flex-shrink:0}
+.ihead .t{flex:1;min-width:0}
+.ihead .t b{display:block;font-family:var(--d);font-size:13.5px;text-transform:uppercase;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ihead .t span{font-size:12px;color:var(--steel)}
+.ihead .ch{color:var(--gold);font-size:15px}
+.ibody{padding:0 16px 18px;border-top:1px solid var(--line);display:none}
+.item.open .ibody{display:block;padding-top:18px}
+.iact{display:flex;gap:8px;margin-top:14px}
+/* toast */
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(140%);
+  background:var(--gold);color:#000;font-family:var(--d);font-weight:800;font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;padding:15px 26px;transition:transform .3s;z-index:99;
+  max-width:90vw;text-align:center}
+#toast.show{transform:translateX(-50%) translateY(0)}
+#toast.bad{background:var(--bad);color:#fff}
+/* setup */
+.setup{max-width:520px;margin:70px auto;padding:0 20px}
+.note{background:var(--s1);border-left:2px solid var(--gold);padding:16px 18px;font-size:13.5px;
+  color:var(--ash);line-height:1.7;margin-bottom:22px}
+.note b{color:var(--white)}
+code{background:var(--s2);padding:2px 6px;font-size:12.5px;color:var(--gold)}
+.hide{display:none !important}
+</style>
+</head>
+<body>
+
+<!-- ============ SETUP / LOGIN ============ -->
+<div id="setup" class="setup">
+  <div class="lgo" style="font-size:20px;margin-bottom:6px">DERRICK<b>FILES</b><small>STUDIO CONTROL PANEL</small></div>
+  <p class="pd" style="margin-top:18px">Connect the panel to your GitHub repository. Everything you save here is committed straight to the repo, and Cloudflare rebuilds the live site automatically.</p>
+  <div class="note">
+    <b>One-time setup.</b> Create a fine-grained personal access token at
+    <a href="https://github.com/settings/personal-access-tokens/new" target="_blank" rel="noopener">github.com/settings/personal-access-tokens</a>
+    with <b>Contents: Read and write</b> on this repository only. The token is stored in this browser
+    only — it is never sent anywhere except GitHub.
+  </div>
+  <div class="fld"><label>GitHub owner <span class="hint">your username or org</span></label>
+    <input type="text" id="s_owner" placeholder="djderrickfiles"></div>
+  <div class="fld"><label>Repository name</label>
+    <input type="text" id="s_repo" placeholder="derrickfiles-main"></div>
+  <div class="fld"><label>Branch</label><input type="text" id="s_branch" value="main"></div>
+  <div class="fld"><label>Access token</label>
+    <input type="text" id="s_token" placeholder="github_pat_..." autocomplete="off"></div>
+  <button class="btn btn-p" id="connect">Connect</button>
+  <button class="btn btn-s" id="demo">Preview without saving</button>
+</div>
+
+<!-- ============ APP ============ -->
+<div id="app" class="hide">
+  <div class="top">
+    <div class="lgo">DERRICK<b>FILES</b><small>CONTROL PANEL</small></div>
+    <span class="dot" id="stat" title="status"></span>
+    <span id="statx" style="font-size:12px;color:var(--steel)"></span>
+    <div class="sp"></div>
+    <a class="btn btn-s" href="/" target="_blank">View site</a>
+    <button class="btn btn-p" id="save" disabled>Save &amp; publish</button>
+  </div>
+  <div class="wrap">
+    <aside id="nav"></aside>
+    <main id="view"></main>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* =========================================================
+   STATE
+   ========================================================= */
+const LS = 'dfs_admin_cfg';
+let cfg = JSON.parse(localStorage.getItem(LS) || 'null');
+let C = null;              // content.json
+let sha = null;            // current file sha
+let dirty = false;
+let pending = {};          // path -> base64 (new images to commit)
+let demoMode = false;
+let view = 'site';
+
+const $ = id => document.getElementById(id);
+const toast = (m, bad) => { const t = $('toast'); t.textContent = m; t.className = 'show' + (bad ? ' bad' : ''); setTimeout(() => t.className = '', 3200); };
+const mark = () => { dirty = true; $('save').disabled = false; $('stat').className = 'dot dirty'; $('statx').textContent = 'Unsaved changes'; };
+const clean = () => { dirty = false; pending = {}; $('save').disabled = true; $('stat').className = 'dot on'; $('statx').textContent = 'Published'; };
+
+window.addEventListener('beforeunload', e => { if (dirty) { e.preventDefault(); e.returnValue = ''; } });
+
+/* =========================================================
+   GITHUB
+   ========================================================= */
+const api = (p, opt = {}) => fetch(`https://api.github.com/repos/${cfg.owner}/${cfg.repo}${p}`, {
+  ...opt, headers: { Authorization: `Bearer ${cfg.token}`, Accept: 'application/vnd.github+json', ...(opt.headers || {}) }
+});
+
+async function loadContent() {
+  if (demoMode) { C = await (await fetch('/content.json')).json(); return; }
+  const r = await api(`/contents/content.json?ref=${cfg.branch}`);
+  if (!r.ok) throw new Error(`GitHub ${r.status} — check owner, repo, branch and token permissions.`);
+  const j = await r.json();
+  sha = j.sha;
+  C = JSON.parse(decodeURIComponent(escape(atob(j.content.replace(/\n/g, '')))));
+}
+
+async function publish() {
+  if (demoMode) { toast('Preview mode — nothing was saved'); return; }
+  $('save').disabled = true; $('statx').textContent = 'Publishing…';
+  try {
+    // 1. commit any new images first
+    for (const [p, b64] of Object.entries(pending)) {
+      let esha = null;
+      const ex = await api(`/contents/${p}?ref=${cfg.branch}`);
+      if (ex.ok) esha = (await ex.json()).sha;
+      const r = await api(`/contents/${p}`, {
+        method: 'PUT',
+        body: JSON.stringify({ message: `studio: update image ${p}`, content: b64, branch: cfg.branch, ...(esha ? { sha: esha } : {}) })
+      });
+      if (!r.ok) throw new Error(`Image upload failed (${p})`);
+    }
+    // 2. commit content.json
+    const body = btoa(unescape(encodeURIComponent(JSON.stringify(C, null, 2))));
+    const r = await api('/contents/content.json', {
+      method: 'PUT',
+      body: JSON.stringify({ message: 'studio: update site content', content: body, sha, branch: cfg.branch })
+    });
+    if (!r.ok) {
+      const e = await r.json().catch(() => ({}));
+      throw new Error(e.message || `GitHub ${r.status}`);
+    }
+    sha = (await r.json()).content.sha;
+    clean();
+    toast('Published — the site rebuilds in about a minute');
+  } catch (e) {
+    $('save').disabled = false;
+    $('statx').textContent = 'Not saved';
+    toast(e.message, true);
+  }
+}
+
+/* =========================================================
+   FIELD HELPERS
+   ========================================================= */
+function text(label, obj, key, hint, ta) {
+  const id = 'f' + Math.random().toString(36).slice(2);
+  const el = document.createElement('div'); el.className = 'fld';
+  el.innerHTML = `<label>${label}${hint ? ` <span class="hint">${hint}</span>` : ''}</label>` +
+    (ta ? `<textarea id="${id}"></textarea>` : `<input type="text" id="${id}">`);
+  const inp = el.querySelector('#' + id);
+  inp.value = obj[key] ?? '';
+  inp.oninput = () => { obj[key] = inp.value; mark(); };
+  return el;
+}
+function lines(label, obj, key, hint) {
+  const el = document.createElement('div'); el.className = 'fld';
+  el.innerHTML = `<label>${label}${hint ? ` <span class="hint">${hint}</span>` : ''}</label><textarea style="min-height:150px"></textarea>`;
+  const t = el.querySelector('textarea');
+  t.value = (obj[key] || []).join('\n\n');
+  t.oninput = () => { obj[key] = t.value.split(/\n\s*\n/).map(s => s.trim()).filter(Boolean); mark(); };
+  return el;
+}
+function csv(label, obj, key, hint) {
+  const el = document.createElement('div'); el.className = 'fld';
+  el.innerHTML = `<label>${label}${hint ? ` <span class="hint">${hint}</span>` : ''}</label><input type="text">`;
+  const i = el.querySelector('input');
+  i.value = (obj[key] || []).join(', ');
+  i.oninput = () => { obj[key] = i.value.split(',').map(s => s.trim()).filter(Boolean); mark(); };
+  return el;
+}
+function toggle(label, obj, key) {
+  const el = document.createElement('div'); el.className = 'fld';
+  el.innerHTML = `<label class="sw"><input type="checkbox"> ${label}</label>`;
+  const c = el.querySelector('input');
+  c.checked = !!obj[key];
+  c.onchange = () => { obj[key] = c.checked; mark(); };
+  return el;
+}
+function image(label, obj, key) {
+  const el = document.createElement('div'); el.className = 'fld';
+  el.innerHTML = `<label>${label}</label>
+    <div class="imgf">
+      <img class="prev" src="${obj[key] || ''}" alt="">
+      <div class="ctrl">
+        <input type="text" value="${obj[key] || ''}">
+        <label class="fake">Upload new picture</label>
+        <input type="file" accept="image/*">
+      </div>
+    </div>`;
+  const prev = el.querySelector('.prev'), path = el.querySelector('input[type=text]');
+  const file = el.querySelector('input[type=file]'), fake = el.querySelector('.fake');
+  path.oninput = () => { obj[key] = path.value; prev.src = path.value; mark(); };
+  fake.onclick = () => file.click();
+  file.onchange = async () => {
+    const f = file.files[0]; if (!f) return;
+    if (f.size > 4e6) return toast('Image too large — keep it under 4MB', true);
+    const name = f.name.toLowerCase().replace(/[^a-z0-9.]+/g, '-');
+    const p = `assets/img/${Date.now().toString(36)}-${name}`;
+    const buf = await f.arrayBuffer();
+    let bin = ''; const b = new Uint8Array(buf);
+    for (let i = 0; i < b.length; i++) bin += String.fromCharCode(b[i]);
+    pending[p] = btoa(bin);
+    obj[key] = '/' + p; path.value = obj[key];
+    prev.src = URL.createObjectURL(f);
+    mark(); toast('Picture staged — hit Save & publish');
+  };
+  return el;
+}
+function card(title, nodes) {
+  const c = document.createElement('div'); c.className = 'card';
+  if (title) { const h = document.createElement('h3'); h.textContent = title; c.appendChild(h); }
+  nodes.forEach(n => c.appendChild(n));
+  return c;
+}
+function row(a, b) { const r = document.createElement('div'); r.className = 'row2'; r.appendChild(a); r.appendChild(b); return r; }
+function head(t, d) {
+  const w = document.createElement('div');
+  w.innerHTML = `<h2 class="pt">${t}</h2><p class="pd">${d}</p>`;
+  return w;
+}
+function btn(label, cls, fn) {
+  const b = document.createElement('button'); b.className = 'btn ' + cls; b.textContent = label; b.onclick = fn; return b;
+}
+
+/* generic repeatable list editor */
+function list(arr, opts) {
+  const wrap = document.createElement('div');
+  const render = () => {
+    wrap.innerHTML = '';
+    arr.forEach((it, i) => {
+      const d = document.createElement('div'); d.className = 'item';
+      const h = document.createElement('div'); h.className = 'ihead';
+      h.innerHTML = `${opts.img ? `<img src="${it[opts.img] || ''}" alt="">` : ''}
+        <div class="t"><b>${(it[opts.title] || 'Untitled').replace(/&amp;/g, '&')}</b><span>${(it[opts.sub] || '').slice(0, 80)}</span></div>
+        <span class="ch">+</span>`;
+      h.onclick = () => { d.classList.toggle('open'); h.querySelector('.ch').textContent = d.classList.contains('open') ? '–' : '+'; };
+      const b = document.createElement('div'); b.className = 'ibody';
+      opts.fields(it, i).forEach(n => b.appendChild(n));
+      const act = document.createElement('div'); act.className = 'iact';
+      if (i > 0) act.appendChild(btn('↑ Move up', 'btn-s', () => { [arr[i - 1], arr[i]] = [arr[i], arr[i - 1]]; mark(); render(); }));
+      if (i < arr.length - 1) act.appendChild(btn('↓ Move down', 'btn-s', () => { [arr[i + 1], arr[i]] = [arr[i], arr[i + 1]]; mark(); render(); }));
+      act.appendChild(btn('Delete', 'btn-d', () => { if (confirm('Delete this item?')) { arr.splice(i, 1); mark(); render(); } }));
+      b.appendChild(act);
+      d.appendChild(h); d.appendChild(b); wrap.appendChild(d);
+    });
+    const add = btn(opts.addLabel || '+ Add new', 'btn-p', () => { arr.push(JSON.parse(JSON.stringify(opts.blank))); mark(); render(); });
+    add.style.marginTop = '12px'; wrap.appendChild(add);
+  };
+  render(); return wrap;
+}
+
+/* =========================================================
+   VIEWS
+   ========================================================= */
+const VIEWS = {
+  site: () => {
+    const S = C.site, v = $('view');
+    v.appendChild(head('Studio details', 'Name, contact and address. These appear on every page and in the data Google reads.'));
+    v.appendChild(card('Identity', [
+      row(text('Company name', S, 'brand'), text('Artist name', S, 'person')),
+      text('Role line', S, 'roles', 'separated by /'),
+      text('Tagline', S, 'tagline'),
+      row(text('Domain', S, 'domain'), text('Founded', S, 'founded')),
+    ]));
+    v.appendChild(card('Contact', [
+      row(text('Phone', S, 'phone', '+256…'), text('Phone shown', S, 'phoneDisplay')),
+      row(text('WhatsApp number', S, 'whatsapp', 'digits only'), text('Email', S, 'email')),
+      text('Street address', S, 'street'),
+      row(text('City', S, 'city'), text('Country', S, 'country')),
+      row(text('Google rating', S, 'rating'), text('Review count', S, 'reviews')),
+    ]));
+    v.appendChild(card('Opening hours', [list(S.hours, {
+      title: 'days', sub: 'time', blank: { days: '', time: '' },
+      fields: h => [row(text('Days', h, 'days'), text('Hours', h, 'time'))],
+      addLabel: '+ Add hours row'
+    })]));
+    v.appendChild(card('Social links', Object.keys(S.social).map(k =>
+      text(k, S.social, k))));
+  },
+
+  promo: () => {
+    const v = $('view');
+    v.appendChild(head('Promo &amp; adverts', 'The gold bar at the top of every page — use it for a sponsor, an upcoming event or a promotion. Turn it off when there is nothing to announce.'));
+    v.appendChild(card('Promo bar', [
+      toggle('Show the promo bar', C.promo, 'enabled'),
+      row(text('Label', C.promo, 'kind', 'e.g. Now open, This Friday, Sponsored'), text('Button text', C.promo, 'ctaLabel')),
+      text('Message', C.promo, 'text', 'HTML allowed', true),
+      text('Button link', C.promo, 'ctaLink', 'e.g. /dj-academy/ or a full URL'),
+    ]));
+    v.appendChild(card('Google AdSense', [
+      toggle('Enable AdSense', C.adsense, 'enabled'),
+      text('Publisher ID', C.adsense, 'client', 'ca-pub-…'),
+      row(text('In-article slot ID', C.adsense, 'slotInArticle'), text('Footer slot ID', C.adsense, 'slotFooter')),
+    ]));
+    const n = document.createElement('div'); n.className = 'note';
+    n.innerHTML = `<b>Before switching AdSense on:</b> your site must be approved in your AdSense account first. Paste the publisher ID and the slot IDs from that account here, then tick Enable. The script and the ad units are injected automatically on every page.`;
+    v.appendChild(n);
+  },
+
+  home: () => {
+    const h = C.home, v = $('view');
+    v.appendChild(head('Home page', 'The hero, the two lanes and the full-width quote band.'));
+    v.appendChild(card('Hero', [
+      text('Kicker', h, 'heroKicker'),
+      row(text('Title line 1', h, 'heroTitle'), text('Title line 2 (gold)', h, 'heroTitleAccent')),
+      text('Intro paragraph', h, 'heroText', 'HTML allowed', true),
+      image('Hero picture', h, 'heroImage'),
+    ]));
+    v.appendChild(card('Quote band', [
+      text('Quote', h, 'bandQuote', 'use <span> for the gold part', true),
+      image('Background picture', h, 'bandImage'),
+    ]));
+    v.appendChild(card('The two lanes', [
+      text('Section title', h, 'introTitle'),
+      text('Section intro', h, 'introText', '', true),
+      image('Artist lane picture', h, 'laneDjImage'),
+      image('Company lane picture', h, 'laneCoImage'),
+    ]));
+  },
+
+  about: () => {
+    const a = C.about, v = $('view');
+    v.appendChild(head('About page', 'The page Google reads to understand who you are.'));
+    v.appendChild(card('', [
+      text('Lead sentence', a, 'lead', 'keep this identical everywhere', true),
+      lines('Body paragraphs', a, 'body', 'blank line between paragraphs'),
+      image('Picture', a, 'image'),
+    ]));
+  },
+
+  services: () => {
+    const v = $('view');
+    v.appendChild(head('Services', 'Each one becomes its own landing page at /slug/ with its own search listing.'));
+    v.appendChild(list(C.services, {
+      title: 'title', sub: 'excerpt', img: 'image',
+      blank: { slug: 'new-service', title: 'New service', short: 'New', tagline: '', excerpt: '', image: '/assets/img/derrick-2.jpg', intro: '', features: [], faq: [] },
+      addLabel: '+ Add a service',
+      fields: s => [
+        row(text('Title', s, 'title'), text('Short name', s, 'short', 'for menus')),
+        row(text('URL slug', s, 'slug', 'lowercase-with-dashes'), text('Tagline', s, 'tagline')),
+        text('Card summary', s, 'excerpt', 'one sentence', true),
+        text('Page intro', s, 'intro', 'first paragraph on the landing page', true),
+        image('Picture', s, 'image'),
+        card('What you get', [list(s.features, {
+          title: 't', sub: 'd', blank: { t: '', d: '' },
+          fields: f => [text('Heading', f, 't'), text('Description', f, 'd', '', true)],
+          addLabel: '+ Add a point'
+        })]),
+        card('Questions &amp; answers', [list(s.faq || (s.faq = []), {
+          title: 'q', sub: 'a', blank: { q: '', a: '' },
+          fields: f => [text('Question', f, 'q'), text('Answer', f, 'a', '', true)],
+          addLabel: '+ Add a question'
+        })]),
+      ]
+    }));
+  },
+
+  blog: () => {
+    const v = $('view');
+    v.appendChild(head('Blog', 'Posts pull people in from search. One good post a month beats ten thin ones.'));
+    v.appendChild(list(C.blog, {
+      title: 'title', sub: 'excerpt', img: 'cover',
+      blank: { slug: 'new-post', title: 'New post', date: new Date().toISOString().slice(0, 10), author: 'DJ Derrick Files', cover: '/assets/img/derrick-2.jpg', excerpt: '', tags: [], body: [''] },
+      addLabel: '+ Write a new post',
+      fields: p => [
+        text('Title', p, 'title'),
+        row(text('URL slug', p, 'slug'), text('Date', p, 'date', 'YYYY-MM-DD')),
+        row(text('Author', p, 'author'), csv('Tags', p, 'tags', 'comma separated')),
+        text('Summary', p, 'excerpt', 'shown on cards and in search results', true),
+        image('Cover picture', p, 'cover'),
+        lines('Article', p, 'body', 'blank line between paragraphs'),
+      ]
+    }));
+  },
+
+  mixes: () => {
+    const v = $('view');
+    v.appendChild(head('Mixes', 'Your catalogue page.'));
+    v.appendChild(card('', [
+      text('Intro', C.mixes, 'intro', '', true),
+      csv('Genres', C.mixes, 'genres', 'comma separated'),
+    ]));
+    v.appendChild(card('Featured series', [list(C.mixes.items, {
+      title: 'title', sub: 'desc', blank: { title: '', desc: '', link: 'https://www.mixcloud.com/derrickfiles/' },
+      fields: m => [text('Title', m, 'title'), text('Description', m, 'desc', '', true), text('Link', m, 'link')],
+      addLabel: '+ Add a series'
+    })]));
+  },
+
+  shop: () => {
+    const v = $('view');
+    v.appendChild(head('Shop', 'Items link to WhatsApp so customers can order and pay by mobile money.'));
+    v.appendChild(card('', [text('Intro', C.shop, 'intro', '', true)]));
+    v.appendChild(list(C.shop.items, {
+      title: 'title', sub: 'desc', img: 'image',
+      blank: { title: '', desc: '', price: 'Enquire', image: '/assets/img/derrick-2.jpg' },
+      addLabel: '+ Add an item',
+      fields: i => [
+        row(text('Title', i, 'title'), text('Price', i, 'price')),
+        text('Description', i, 'desc', '', true), image('Picture', i, 'image')
+      ]
+    }));
+  },
+
+  gallery: () => {
+    const v = $('view');
+    v.appendChild(head('Gallery', 'Pictures of the room, the gear, the stage builds and the nights.'));
+    v.appendChild(card('', [text('Intro', C.gallery, 'intro', '', true)]));
+    v.appendChild(list(C.gallery.items, {
+      title: 'caption', img: 'image', blank: { image: '/assets/img/derrick-2.jpg', caption: '' },
+      addLabel: '+ Add a picture',
+      fields: g => [image('Picture', g, 'image'), text('Caption', g, 'caption')]
+    }));
+  },
+
+  youtube: () => {
+    const v = $('view');
+    v.appendChild(head('YouTube', 'Paste video IDs — the part after v= in the URL.'));
+    v.appendChild(card('', [
+      text('Intro', C.youtube, 'intro', '', true),
+      text('Channel URL', C.youtube, 'channel'),
+    ]));
+    v.appendChild(list(C.youtube.videos, {
+      title: 'title', sub: 'id', blank: { id: '', title: '' },
+      addLabel: '+ Add a video',
+      fields: y => [row(text('Video ID', y, 'id', 'e.g. dQw4w9WgXcQ'), text('Title', y, 'title'))]
+    }));
+  },
+};
+
+const MENU = [
+  ['Site', [['site', 'Studio details'], ['promo', 'Promo &amp; ads']]],
+  ['Pages', [['home', 'Home'], ['about', 'About'], ['services', 'Services'], ['blog', 'Blog']]],
+  ['Content', [['mixes', 'Mixes'], ['shop', 'Shop'], ['gallery', 'Gallery'], ['youtube', 'YouTube']]],
+];
+
+function renderNav() {
+  $('nav').innerHTML = MENU.map(([g, items]) =>
+    `<div class="grp">${g}</div>` + items.map(([k, l]) =>
+      `<a data-v="${k}" class="${view === k ? 'on' : ''}">${l}</a>`).join('')).join('');
+  $('nav').querySelectorAll('a').forEach(a => a.onclick = () => { view = a.dataset.v; render(); });
+}
+function render() { renderNav(); $('view').innerHTML = ''; VIEWS[view](); window.scrollTo(0, 0); }
+
+/* =========================================================
+   BOOT
+   ========================================================= */
+async function start() {
+  $('setup').classList.add('hide'); $('app').classList.remove('hide');
+  try {
+    await loadContent();
+    clean();
+    if (demoMode) { $('statx').textContent = 'Preview mode — changes are not saved'; $('stat').className = 'dot'; }
+    render();
+  } catch (e) {
+    $('app').classList.add('hide'); $('setup').classList.remove('hide');
+    toast(e.message, true);
+  }
+}
+
+$('connect').onclick = () => {
+  cfg = {
+    owner: $('s_owner').value.trim(), repo: $('s_repo').value.trim(),
+    branch: $('s_branch').value.trim() || 'main', token: $('s_token').value.trim()
+  };
+  if (!cfg.owner || !cfg.repo || !cfg.token) return toast('Fill in every field', true);
+  localStorage.setItem(LS, JSON.stringify(cfg));
+  demoMode = false; start();
+};
+$('demo').onclick = () => { demoMode = true; start(); };
+$('save').onclick = publish;
+
+if (cfg && cfg.token) { $('s_owner').value = cfg.owner; $('s_repo').value = cfg.repo; $('s_branch').value = cfg.branch; $('s_token').value = cfg.token; start(); }
+</script>
+</body>
+</html>
