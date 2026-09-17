@@ -1,5 +1,8 @@
 # Derrick Files Studio — website
 
+**Live:** https://www.derrickfiles.com · **Control panel:** https://www.derrickfiles.com/admin/
+**Hosting:** Cloudflare Pages project `derrickfiles-site` — every push to `main` rebuilds and deploys.
+
 Static site for **derrickfiles.com**. Content lives in one file (`content.json`),
 a small Node script turns it into plain HTML, and a browser-based control panel
 lets you edit everything and publish without touching code.
