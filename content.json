@@ -14,12 +14,24 @@
     "country": "Uganda",
     "rating": "4.6",
     "reviews": "24",
-    "founded": "2019",
+    "founded": "2020",
     "hours": [
-      { "days": "Monday – Thursday", "time": "8:00 am – 10:00 pm" },
-      { "days": "Friday", "time": "8:00 am – 11:00 pm" },
-      { "days": "Saturday", "time": "10:00 am – 11:00 pm" },
-      { "days": "Sunday", "time": "12:00 pm – 8:00 pm" }
+      {
+        "days": "Monday – Thursday",
+        "time": "8:00 am – 10:00 pm"
+      },
+      {
+        "days": "Friday",
+        "time": "8:00 am – 11:00 pm"
+      },
+      {
+        "days": "Saturday",
+        "time": "10:00 am – 11:00 pm"
+      },
+      {
+        "days": "Sunday",
+        "time": "12:00 pm – 8:00 pm"
+      }
     ],
     "social": {
       "instagram": "https://www.instagram.com/derrickfiles/",
@@ -31,7 +43,6 @@
       "x": "https://x.com/derrickfiles"
     }
   },
-
   "promo": {
     "enabled": true,
     "kind": "Now open",
@@ -39,14 +50,12 @@
     "ctaLabel": "Book a class",
     "ctaLink": "/dj-academy/"
   },
-
   "adsense": {
     "enabled": false,
     "client": "ca-pub-XXXXXXXXXXXXXXXX",
     "slotInArticle": "",
     "slotFooter": ""
   },
-
   "home": {
     "heroKicker": "Kampala, Uganda",
     "heroTitle": "DJ Derrick",
@@ -60,7 +69,6 @@
     "laneDjImage": "/assets/img/derrick-portrait.jpg",
     "laneCoImage": "/assets/img/brand-tee.jpg"
   },
-
   "about": {
     "title": "About",
     "lead": "DJ Derrick Files is a Ugandan DJ, personality, artiste, producer, events tech and stage manager based in Kampala, and the founder of Derrick Files Studio.",
@@ -71,7 +79,6 @@
     ],
     "image": "/assets/img/derrick-2.jpg"
   },
-
   "services": [
     {
       "slug": "dj-academy",
@@ -82,14 +89,32 @@
       "image": "/assets/img/derrick-4.jpg",
       "intro": "The Derrick Files DJ Academy puts you behind professional decks from day one. No simulators, no waiting your turn on a phone app — real controllers, real mixers, real monitoring, with someone watching your hands and correcting you in the moment.",
       "features": [
-        { "t": "Beginner track", "d": "Beatmatching, phrasing, EQ and your first clean 30-minute set." },
-        { "t": "Advanced track", "d": "Scratch technique, harmonic mixing, open-format transitions and crowd reading." },
-        { "t": "Real equipment", "d": "Train on Pioneer, Denon and Numark gear — the same kit you will meet in a booth." },
-        { "t": "Studio access", "d": "Practice time in the room between sessions, not just during lessons." }
+        {
+          "t": "Beginner track",
+          "d": "Beatmatching, phrasing, EQ and your first clean 30-minute set."
+        },
+        {
+          "t": "Advanced track",
+          "d": "Scratch technique, harmonic mixing, open-format transitions and crowd reading."
+        },
+        {
+          "t": "Real equipment",
+          "d": "Train on Pioneer, Denon and Numark gear — the same kit you will meet in a booth."
+        },
+        {
+          "t": "Studio access",
+          "d": "Practice time in the room between sessions, not just during lessons."
+        }
       ],
       "faq": [
-        { "q": "Do I need my own equipment?", "a": "No. All training happens on studio equipment. If you do own gear, bring it and we will set it up with you." },
-        { "q": "How long does a course take?", "a": "It depends on the track and how often you come in. Call 0789 191 660 and we will map a schedule around you." }
+        {
+          "q": "Do I need my own equipment?",
+          "a": "No. All training happens on studio equipment. If you do own gear, bring it and we will set it up with you."
+        },
+        {
+          "q": "How long does a course take?",
+          "a": "It depends on the track and how often you come in. Call 0789 191 660 and we will map a schedule around you."
+        }
       ]
     },
     {
@@ -101,14 +126,32 @@
       "image": "/assets/img/derrick-3.jpg",
       "intro": "A stocked hire floor for DJs, promoters and venues across Kampala. Book the kit you need for a night, a weekend or a season — delivered, set up and collected, with a technician on call if anything goes sideways mid-show.",
       "features": [
-        { "t": "Controllers &amp; CDJs", "d": "Pioneer, Denon and Numark decks, mixers and all-in-one controllers." },
-        { "t": "Booth packages", "d": "Deck, mixer, monitors, stands and cabling as one bookable unit." },
-        { "t": "Delivery &amp; setup", "d": "We deliver, rig, line-check and collect. You just play." },
-        { "t": "Technician on call", "d": "Support during the event, not just a handover at the door." }
+        {
+          "t": "Controllers &amp; CDJs",
+          "d": "Pioneer, Denon and Numark decks, mixers and all-in-one controllers."
+        },
+        {
+          "t": "Booth packages",
+          "d": "Deck, mixer, monitors, stands and cabling as one bookable unit."
+        },
+        {
+          "t": "Delivery &amp; setup",
+          "d": "We deliver, rig, line-check and collect. You just play."
+        },
+        {
+          "t": "Technician on call",
+          "d": "Support during the event, not just a handover at the door."
+        }
       ],
       "faq": [
-        { "q": "Do you deliver outside Kampala?", "a": "Yes — we supply events across Uganda and the wider East African region. Distance affects the quote, so call ahead." },
-        { "q": "Is a deposit required?", "a": "Terms depend on the package and the length of hire. Call 0789 191 660 for a quote." }
+        {
+          "q": "Do you deliver outside Kampala?",
+          "a": "Yes — we supply events across Uganda and the wider East African region. Distance affects the quote, so call ahead."
+        },
+        {
+          "q": "Is a deposit required?",
+          "a": "Terms depend on the package and the length of hire. Call 0789 191 660 for a quote."
+        }
       ]
     },
     {
@@ -120,14 +163,32 @@
       "image": "/assets/img/derrick-portrait.jpg",
       "intro": "Jog wheels that drift, faders that crackle, channels that cut out, laptops that choke mid-set. The maintenance bench at Plot 1 Bukoto Street handles DJ equipment and the computers that run it — diagnosis first, honest quote second, repair third.",
       "features": [
-        { "t": "DJ gear repair", "d": "Controllers, mixers and CDJs — faders, jog wheels, ports, power and audio paths." },
-        { "t": "Servicing", "d": "Preventive cleaning and calibration so gear survives another season of gigs." },
-        { "t": "Computers", "d": "Laptop and desktop repair, servicing, Windows and macOS installation." },
-        { "t": "Sales &amp; accessories", "d": "Computers, peripherals, cables and the small parts that always go missing." }
+        {
+          "t": "DJ gear repair",
+          "d": "Controllers, mixers and CDJs — faders, jog wheels, ports, power and audio paths."
+        },
+        {
+          "t": "Servicing",
+          "d": "Preventive cleaning and calibration so gear survives another season of gigs."
+        },
+        {
+          "t": "Computers",
+          "d": "Laptop and desktop repair, servicing, Windows and macOS installation."
+        },
+        {
+          "t": "Sales &amp; accessories",
+          "d": "Computers, peripherals, cables and the small parts that always go missing."
+        }
       ],
       "faq": [
-        { "q": "Do you quote before repairing?", "a": "Always. We diagnose, tell you what is wrong and what it costs, and you decide before any work starts." },
-        { "q": "Can you service gear you did not sell?", "a": "Yes. Bring in any make — the bench is not limited to equipment bought from us." }
+        {
+          "q": "Do you quote before repairing?",
+          "a": "Always. We diagnose, tell you what is wrong and what it costs, and you decide before any work starts."
+        },
+        {
+          "q": "Can you service gear you did not sell?",
+          "a": "Yes. Bring in any make — the bench is not limited to equipment bought from us."
+        }
       ]
     },
     {
@@ -139,14 +200,32 @@
       "image": "/assets/img/live-1.jpg",
       "intro": "Sound that suits the room instead of fighting it. We scale the system to the space and the crowd — an intimate launch, a full wedding, or an open-air stage — and we line-check it before anyone walks in.",
       "features": [
-        { "t": "Room-matched systems", "d": "The rig is specified for your venue, not pulled off a shelf." },
-        { "t": "Full PA", "d": "Tops, subs, amps, desks, monitoring, microphones and cabling." },
-        { "t": "Engineer on site", "d": "Someone on the desk through the event, keeping the mix honest." },
-        { "t": "Bundled with stage", "d": "Combine with stage, lighting and LED for one quote and one team." }
+        {
+          "t": "Room-matched systems",
+          "d": "The rig is specified for your venue, not pulled off a shelf."
+        },
+        {
+          "t": "Full PA",
+          "d": "Tops, subs, amps, desks, monitoring, microphones and cabling."
+        },
+        {
+          "t": "Engineer on site",
+          "d": "Someone on the desk through the event, keeping the mix honest."
+        },
+        {
+          "t": "Bundled with stage",
+          "d": "Combine with stage, lighting and LED for one quote and one team."
+        }
       ],
       "faq": [
-        { "q": "Can you cover outdoor events?", "a": "Yes — open-air stages are a core part of what we supply, including power planning and weather cover." },
-        { "q": "Do you provide microphones for speeches?", "a": "Yes, wired and wireless, along with a technician to manage handovers during the programme." }
+        {
+          "q": "Can you cover outdoor events?",
+          "a": "Yes — open-air stages are a core part of what we supply, including power planning and weather cover."
+        },
+        {
+          "q": "Do you provide microphones for speeches?",
+          "a": "Yes, wired and wireless, along with a technician to manage handovers during the programme."
+        }
       ]
     },
     {
@@ -158,14 +237,32 @@
       "image": "/assets/img/event-1.jpg",
       "intro": "Truss, staging and a lighting rig that makes the room look like the event it is. We build it, focus it, program it and run it — then strike it and get out of your venue on time.",
       "features": [
-        { "t": "Truss &amp; staging", "d": "Stage decks, truss structures and rigging built to the venue." },
-        { "t": "Moving heads", "d": "Intelligent lighting programmed to the programme, not left on auto." },
-        { "t": "Washers &amp; blinders", "d": "Colour wash, blinders and floodlights for crowd and stage coverage." },
-        { "t": "Build &amp; strike", "d": "Full crew for load-in, show and load-out." }
+        {
+          "t": "Truss &amp; staging",
+          "d": "Stage decks, truss structures and rigging built to the venue."
+        },
+        {
+          "t": "Moving heads",
+          "d": "Intelligent lighting programmed to the programme, not left on auto."
+        },
+        {
+          "t": "Washers &amp; blinders",
+          "d": "Colour wash, blinders and floodlights for crowd and stage coverage."
+        },
+        {
+          "t": "Build &amp; strike",
+          "d": "Full crew for load-in, show and load-out."
+        }
       ],
       "faq": [
-        { "q": "How much notice do you need?", "a": "The bigger the build, the earlier the better. Call 0789 191 660 with your date and we will tell you honestly if it is workable." },
-        { "q": "Can you work with our venue's existing rig?", "a": "Yes — we regularly supplement house systems rather than replacing them." }
+        {
+          "q": "How much notice do you need?",
+          "a": "The bigger the build, the earlier the better. Call 0789 191 660 with your date and we will tell you honestly if it is workable."
+        },
+        {
+          "q": "Can you work with our venue's existing rig?",
+          "a": "Yes — we regularly supplement house systems rather than replacing them."
+        }
       ]
     },
     {
@@ -177,14 +274,32 @@
       "image": "/assets/img/derrick-2.jpg",
       "intro": "LED walls for stage backdrops, brand activations, conferences and outdoor screenings — supplied, rigged, fed and operated. We handle the content pipeline too, so your visuals actually reach the panel in the right resolution.",
       "features": [
-        { "t": "Indoor screens", "d": "High-resolution panels for conferences, launches and stage backdrops." },
-        { "t": "Outdoor screens", "d": "Bright, weather-capable walls for open-air events and screenings." },
-        { "t": "Content &amp; playback", "d": "Processors, playback and a operator running your visuals live." },
-        { "t": "Any configuration", "d": "Sized and shaped to the stage — straight walls, side panels or custom builds." }
+        {
+          "t": "Indoor screens",
+          "d": "High-resolution panels for conferences, launches and stage backdrops."
+        },
+        {
+          "t": "Outdoor screens",
+          "d": "Bright, weather-capable walls for open-air events and screenings."
+        },
+        {
+          "t": "Content &amp; playback",
+          "d": "Processors, playback and a operator running your visuals live."
+        },
+        {
+          "t": "Any configuration",
+          "d": "Sized and shaped to the stage — straight walls, side panels or custom builds."
+        }
       ],
       "faq": [
-        { "q": "What content format should we send?", "a": "Send us what you have and we will tell you what it needs to become. Getting this right early saves the show." },
-        { "q": "Can the screen run during daylight?", "a": "Our outdoor panels are specified for daylight visibility. Indoor panels are not — tell us the environment when you enquire." }
+        {
+          "q": "What content format should we send?",
+          "a": "Send us what you have and we will tell you what it needs to become. Getting this right early saves the show."
+        },
+        {
+          "q": "Can the screen run during daylight?",
+          "a": "Our outdoor panels are specified for daylight visibility. Indoor panels are not — tell us the environment when you enquire."
+        }
       ]
     },
     {
@@ -196,14 +311,32 @@
       "image": "/assets/img/event-1.jpg",
       "intro": "One team from concept to strike. We draft the programme, book the acts, supply the technical, run the show on the day and hand you a venue back in the state we found it.",
       "features": [
-        { "t": "Programme design", "d": "Drafting and executing a run-of-show that actually holds a crowd." },
-        { "t": "Acts &amp; performers", "d": "Booking and coordinating DJs, MCs, live acts and dancers." },
-        { "t": "Technical supply", "d": "Sound, stage, lighting and LED from the same house — one quote, one crew." },
-        { "t": "On-the-day delivery", "d": "Stage management and technical operation through the event." }
+        {
+          "t": "Programme design",
+          "d": "Drafting and executing a run-of-show that actually holds a crowd."
+        },
+        {
+          "t": "Acts &amp; performers",
+          "d": "Booking and coordinating DJs, MCs, live acts and dancers."
+        },
+        {
+          "t": "Technical supply",
+          "d": "Sound, stage, lighting and LED from the same house — one quote, one crew."
+        },
+        {
+          "t": "On-the-day delivery",
+          "d": "Stage management and technical operation through the event."
+        }
       ],
       "faq": [
-        { "q": "Do you take on corporate events?", "a": "Yes — corporate functions, launches and brand activations are a large part of the work." },
-        { "q": "Can you supply only part of the event?", "a": "Yes. Plenty of clients book only the technical, or only the DJ. Take what you need." }
+        {
+          "q": "Do you take on corporate events?",
+          "a": "Yes — corporate functions, launches and brand activations are a large part of the work."
+        },
+        {
+          "q": "Can you supply only part of the event?",
+          "a": "Yes. Plenty of clients book only the technical, or only the DJ. Take what you need."
+        }
       ]
     },
     {
@@ -215,14 +348,32 @@
       "image": "/assets/img/derrick-3.jpg",
       "intro": "Weddings punish bad coordination. Booking the DJ, the PA, the lighting and the coordinator from four different vendors is how a timeline falls apart. Here it is one team, one number and one person accountable for the day running to plan.",
       "features": [
-        { "t": "Wedding DJ", "d": "Open-format sets read to the room, from the ceremony through the last dance." },
-        { "t": "Sound for speeches", "d": "Microphones and a technician managing handovers so no toast gets lost." },
-        { "t": "Lighting &amp; decor support", "d": "Uplighting, dance-floor lighting and stage wash." },
-        { "t": "Day coordination", "d": "A run-of-show and someone holding the timeline together." }
+        {
+          "t": "Wedding DJ",
+          "d": "Open-format sets read to the room, from the ceremony through the last dance."
+        },
+        {
+          "t": "Sound for speeches",
+          "d": "Microphones and a technician managing handovers so no toast gets lost."
+        },
+        {
+          "t": "Lighting &amp; decor support",
+          "d": "Uplighting, dance-floor lighting and stage wash."
+        },
+        {
+          "t": "Day coordination",
+          "d": "A run-of-show and someone holding the timeline together."
+        }
       ],
       "faq": [
-        { "q": "Do you meet before the day?", "a": "Yes — we plan the run-of-show and the music direction with you in advance. Surprises on the day are the enemy." },
-        { "q": "Can we give you a playlist?", "a": "Absolutely. Bring must-plays and do-not-plays; the reading of the room is our job." }
+        {
+          "q": "Do you meet before the day?",
+          "a": "Yes — we plan the run-of-show and the music direction with you in advance. Surprises on the day are the enemy."
+        },
+        {
+          "q": "Can we give you a playlist?",
+          "a": "Absolutely. Bring must-plays and do-not-plays; the reading of the room is our job."
+        }
       ]
     },
     {
@@ -234,14 +385,32 @@
       "image": "/assets/img/derrick-4.jpg",
       "intro": "A production room built for finishing things. Recording, mixing, mashups, edits and bespoke mixtape work — for artists, for brands and for DJs who need a clean custom edit that nobody else has.",
       "features": [
-        { "t": "Recording", "d": "Vocal and instrument tracking in a treated room." },
-        { "t": "Mixing", "d": "Mixes finished to a standard that survives a club system." },
-        { "t": "Mashups &amp; edits", "d": "Custom edits, bootlegs and transitions built for your set." },
-        { "t": "Content shoots", "d": "The room doubles as a backdrop for artist and brand content." }
+        {
+          "t": "Recording",
+          "d": "Vocal and instrument tracking in a treated room."
+        },
+        {
+          "t": "Mixing",
+          "d": "Mixes finished to a standard that survives a club system."
+        },
+        {
+          "t": "Mashups &amp; edits",
+          "d": "Custom edits, bootlegs and transitions built for your set."
+        },
+        {
+          "t": "Content shoots",
+          "d": "The room doubles as a backdrop for artist and brand content."
+        }
       ],
       "faq": [
-        { "q": "Do you work with new artists?", "a": "Yes. Come in with an idea and we will tell you honestly what it needs." },
-        { "q": "Can you master as well?", "a": "Tell us the destination — streaming, club play or radio — and we will advise on the right finishing chain." }
+        {
+          "q": "Do you work with new artists?",
+          "a": "Yes. Come in with an idea and we will tell you honestly what it needs."
+        },
+        {
+          "q": "Can you master as well?",
+          "a": "Tell us the destination — streaming, club play or radio — and we will advise on the right finishing chain."
+        }
       ]
     },
     {
@@ -253,59 +422,139 @@
       "image": "/assets/img/derrick-hero.jpg",
       "intro": "Open-format sets across Afrobeats, Amapiano, Dancehall, Ragga, Kompa and R&amp;B, built for the room rather than for a pre-baked playlist. More than sixty mixes published since 2019 — listen first, then book.",
       "features": [
-        { "t": "Club nights", "d": "Residencies, guest slots and weekly takeovers." },
-        { "t": "Weddings &amp; private", "d": "Full-day coverage with sound and lighting if you need it." },
-        { "t": "Corporate &amp; brands", "d": "Activations, launches and corporate functions." },
-        { "t": "Festivals", "d": "Main and side-stage sets, with technical supply available." }
+        {
+          "t": "Club nights",
+          "d": "Residencies, guest slots and weekly takeovers."
+        },
+        {
+          "t": "Weddings &amp; private",
+          "d": "Full-day coverage with sound and lighting if you need it."
+        },
+        {
+          "t": "Corporate &amp; brands",
+          "d": "Activations, launches and corporate functions."
+        },
+        {
+          "t": "Festivals",
+          "d": "Main and side-stage sets, with technical supply available."
+        }
       ],
       "faq": [
-        { "q": "How far ahead should I book?", "a": "Weekends fill early, especially in wedding season. Call 0789 191 660 with your date as soon as you have it." },
-        { "q": "Can I hear a set first?", "a": "Yes — over sixty mixes are published on Mixcloud and SoundCloud. Links are on the Mixes page." }
+        {
+          "q": "How far ahead should I book?",
+          "a": "Weekends fill early, especially in wedding season. Call 0789 191 660 with your date as soon as you have it."
+        },
+        {
+          "q": "Can I hear a set first?",
+          "a": "Yes — over sixty mixes are published on Mixcloud and SoundCloud. Links are on the Mixes page."
+        }
       ]
     }
   ],
-
   "mixes": {
     "intro": "More than sixty mixes published since 2019, moving between Afrobeats, Amapiano, Dancehall, Ragga, Kompa and R&amp;B — including the MixShot series and the long-running Rugby Chill franchise.",
-    "genres": ["Afrobeats", "Amapiano", "Dancehall", "Ragga", "Kompa", "R&amp;B"],
+    "genres": [
+      "Afrobeats",
+      "Amapiano",
+      "Dancehall",
+      "Ragga",
+      "Kompa",
+      "R&amp;B"
+    ],
     "items": [
-      { "title": "Rugby Chill Series", "desc": "The signature franchise — the most-played series in the catalogue.", "link": "https://www.mixcloud.com/derrickfiles/" },
-      { "title": "MixShot Series", "desc": "Numbered open-format sets: fast Afro, Zanku, Afro-dubbin, slow whine and more.", "link": "https://www.mixcloud.com/derrickfiles/" },
-      { "title": "Hype Dancehall &amp; Ragga Mashup", "desc": "Full-tilt dancehall, ragga and mashup open set.", "link": "https://www.mixcloud.com/derrickfiles/" },
-      { "title": "Riddims &amp; Tropical Vibes", "desc": "Slower, warmer, built for sundowners and open-air rooms.", "link": "https://www.mixcloud.com/derrickfiles/" }
+      {
+        "title": "Rugby Chill Series",
+        "desc": "The signature franchise — the most-played series in the catalogue.",
+        "link": "https://www.mixcloud.com/derrickfiles/"
+      },
+      {
+        "title": "MixShot Series",
+        "desc": "Numbered open-format sets: fast Afro, Zanku, Afro-dubbin, slow whine and more.",
+        "link": "https://www.mixcloud.com/derrickfiles/"
+      },
+      {
+        "title": "Hype Dancehall &amp; Ragga Mashup",
+        "desc": "Full-tilt dancehall, ragga and mashup open set.",
+        "link": "https://www.mixcloud.com/derrickfiles/"
+      },
+      {
+        "title": "Riddims &amp; Tropical Vibes",
+        "desc": "Slower, warmer, built for sundowners and open-air rooms.",
+        "link": "https://www.mixcloud.com/derrickfiles/"
+      }
     ]
   },
-
   "shop": {
     "intro": "Gear, accessories and digital packs from Derrick Files Studio. Payment by mobile money — call or WhatsApp 0789 191 660 to order.",
     "items": [
-      { "title": "DJ Controllers", "desc": "Pioneer, Denon and Numark controllers and mixers. Ask for current stock.", "price": "Enquire", "image": "/assets/img/derrick-4.jpg" },
-      { "title": "Accessories &amp; Cabling", "desc": "Cables, adaptors, stands, cases and the parts that always go missing.", "price": "Enquire", "image": "/assets/img/derrick-3.jpg" },
-      { "title": "Computers &amp; Peripherals", "desc": "Laptops, desktops and peripheral devices, sold and supported in-house.", "price": "Enquire", "image": "/assets/img/derrick-2.jpg" },
-      { "title": "Derrick Files Merch", "desc": "Studio tees and branded apparel.", "price": "Enquire", "image": "/assets/img/brand-tee.jpg" }
+      {
+        "title": "DJ Controllers",
+        "desc": "Pioneer, Denon and Numark controllers and mixers. Ask for current stock.",
+        "price": "Enquire",
+        "image": "/assets/img/derrick-4.jpg"
+      },
+      {
+        "title": "Accessories &amp; Cabling",
+        "desc": "Cables, adaptors, stands, cases and the parts that always go missing.",
+        "price": "Enquire",
+        "image": "/assets/img/derrick-3.jpg"
+      },
+      {
+        "title": "Computers &amp; Peripherals",
+        "desc": "Laptops, desktops and peripheral devices, sold and supported in-house.",
+        "price": "Enquire",
+        "image": "/assets/img/derrick-2.jpg"
+      },
+      {
+        "title": "Derrick Files Merch",
+        "desc": "Studio tees and branded apparel.",
+        "price": "Enquire",
+        "image": "/assets/img/brand-tee.jpg"
+      }
     ]
   },
-
   "gallery": {
     "intro": "Portraits, sessions, stage builds and events — Kampala and beyond.",
     "items": [
-      { "image": "/assets/img/derrick-hero.jpg", "caption": "Studio portrait" },
-      { "image": "/assets/img/live-1.jpg", "caption": "Live set, Mbale" },
-      { "image": "/assets/img/event-1.jpg", "caption": "KISU Prom" },
-      { "image": "/assets/img/derrick-2.jpg", "caption": "Studio session" },
-      { "image": "/assets/img/derrick-3.jpg", "caption": "Portrait session" },
-      { "image": "/assets/img/derrick-4.jpg", "caption": "In the room" },
-      { "image": "/assets/img/brand-tee.jpg", "caption": "Derrick Files brand" },
-      { "image": "/assets/img/derrick-portrait.jpg", "caption": "Portrait" }
+      {
+        "image": "/assets/img/derrick-hero.jpg",
+        "caption": "Studio portrait"
+      },
+      {
+        "image": "/assets/img/live-1.jpg",
+        "caption": "Live set, Mbale"
+      },
+      {
+        "image": "/assets/img/event-1.jpg",
+        "caption": "KISU Prom"
+      },
+      {
+        "image": "/assets/img/derrick-2.jpg",
+        "caption": "Studio session"
+      },
+      {
+        "image": "/assets/img/derrick-3.jpg",
+        "caption": "Portrait session"
+      },
+      {
+        "image": "/assets/img/derrick-4.jpg",
+        "caption": "In the room"
+      },
+      {
+        "image": "/assets/img/brand-tee.jpg",
+        "caption": "Derrick Files brand"
+      },
+      {
+        "image": "/assets/img/derrick-portrait.jpg",
+        "caption": "Portrait"
+      }
     ]
   },
-
   "youtube": {
     "intro": "Sets, tutorials, gear breakdowns and behind-the-scenes from Derrick Files Studio.",
     "channel": "https://www.youtube.com/c/derrickfiles",
     "videos": []
   },
-
   "blog": [
     {
       "slug": "how-to-choose-your-first-dj-controller",
@@ -314,7 +563,10 @@
       "author": "DJ Derrick Files",
       "cover": "/assets/img/derrick-4.jpg",
       "excerpt": "The honest version: most beginners overspend on the wrong features and underspend on the thing that actually matters.",
-      "tags": ["Gear", "Beginners"],
+      "tags": [
+        "Gear",
+        "Beginners"
+      ],
       "body": [
         "Every week someone walks into the studio at Plot 1 Bukoto Street holding a controller they bought online, asking why it does not feel like the one they saw in a video. Usually the answer is the same — they bought for the spec sheet instead of for the way they want to play.",
         "Start with the jog wheels. If you intend to scratch or do anything hands-on, wheel size and feel matter more than the number of pads. A small, light wheel will fight you for years. Spend your money there first.",
@@ -331,7 +583,10 @@
       "author": "DJ Derrick Files",
       "cover": "/assets/img/derrick-3.jpg",
       "excerpt": "Playing music is maybe a third of the job. The rest is timing, microphones and stopping the day from drifting.",
-      "tags": ["Weddings", "Events"],
+      "tags": [
+        "Weddings",
+        "Events"
+      ],
       "body": [
         "Couples book a wedding DJ thinking they are buying music. What they are actually buying is someone who holds the timeline together while a hundred things try to pull it apart.",
         "The music matters, of course. Reading a room full of three generations and finding the record that moves all of them is a real skill, and it is not the same skill as playing a club at 1am.",
@@ -347,7 +602,10 @@
       "author": "Derrick Files Studio",
       "cover": "/assets/img/derrick-2.jpg",
       "excerpt": "Most LED disasters are content problems, not hardware problems. Five questions that prevent them.",
-      "tags": ["Events", "LED"],
+      "tags": [
+        "Events",
+        "LED"
+      ],
       "body": [
         "An LED wall is the most visible thing at your event, which means when it goes wrong it goes wrong publicly. Almost every failure we get called to fix was avoidable a week earlier.",
         "First question: indoor or outdoor? Panels specified for a conference hall will disappear in Kampala daylight. Tell your supplier the environment before anything else.",
