@@ -1,0 +1,16 @@
+# Derrick Files Studio — Cloudflare Pages configuration
+#
+# Secrets (SITE_PASSWORD, AUTH_SECRET) are NOT here. They live only as
+# encrypted variables in the Cloudflare dashboard and must never be
+# committed to this repository.
+
+name = "derrickfiles-site"
+pages_build_output_dir = "dist"
+compatibility_date = "2026-09-18"
+
+# Contact capture: emails and phone numbers collected when someone
+# downloads a mix or signs up for the list.
+[[d1_databases]]
+binding = "DB"
+database_name = "dfs-contacts"
+database_id = "2044d58e-36d5-4113-a517-9c1b98e88059"
