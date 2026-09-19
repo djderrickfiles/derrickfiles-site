@@ -159,6 +159,9 @@ function layout({ title, desc, url, extraSchema = [], body, image, active }) {
 <link rel="canonical" href="${S.domain}${url}">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#000000">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="manifest" href="/site.webmanifest">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
@@ -265,7 +268,7 @@ const visitSection = () => `
       <div class="row"><span>Rating</span><b>${esc(S.rating)} &#9733; &middot; ${esc(S.reviews)} Google reviews</b></div>
     </div>
   </div>
-  <ul class="soc">${Object.entries(S.social).map(([k, v]) => `<li><a href="${esc(v)}" rel="me noopener" target="_blank">${k}</a></li>`).join('')}</ul>
+  ${socialList()}
 </div></section>`;
 
 /* ---------- pages ---------- */
@@ -665,6 +668,8 @@ C.blog.forEach(p => write(`blog/${p.slug}`, pagePost(p)));
 copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
 copyDir(path.join(ROOT, 'admin'), path.join(OUT, 'admin'));
 fs.copyFileSync(path.join(ROOT, 'content.json'), path.join(OUT, 'content.json'));
+fs.copyFileSync(path.join(ROOT, 'assets', 'favicon.svg'), path.join(OUT, 'favicon.svg'));
+fs.copyFileSync(path.join(ROOT, 'assets', 'site.webmanifest'), path.join(OUT, 'site.webmanifest'));
 
 /* sitemap + robots */
 const urls = ['/', '/about/', '/mixes/', '/shop/', '/gallery/', '/youtube/', '/blog/',
