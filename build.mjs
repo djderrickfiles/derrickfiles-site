@@ -135,7 +135,8 @@ function personNode() {
 function layout({ title, desc, url, extraSchema = [], body, image, active }) {
   const ads = C.adsense || {};
   const adsHead = ads.enabled && ads.client
-    ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ads.client)}" crossorigin="anonymous"></script>`
+    ? `<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${esc(ads.client)}" crossorigin="anonymous"></script>
+<script>(adsbygoogle=window.adsbygoogle||[]).push({google_ad_client:"${esc(ads.client)}",enable_page_level_ads:true});</script>`
     : '';
   const graph = [personNode(), schemaGraph(),
     { '@type': 'WebSite', '@id': `${S.domain}/#website`, url: `${S.domain}/`, name: S.brand, publisher: { '@id': `${S.domain}/#organization` } },
