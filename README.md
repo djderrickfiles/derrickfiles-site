@@ -86,6 +86,18 @@ What you can change without any code:
 **Pictures:** every picture field has an *Upload new picture* button. The file is
 committed into `assets/img/` when you press Save & publish. Keep uploads under 4MB.
 
+### Mix media and R2
+
+The Mixes editor can upload audio files directly to Cloudflare R2. Create an R2 bucket named
+`derrickfiles-media` and bind it to the Pages project with the `MEDIA_BUCKET` binding from
+`wrangler.toml`. The upload endpoint is admin-only; public media is streamed through
+`/api/media?key=...`, so the catalogue retains first-party play and download traffic.
+
+Free downloads open a newsletter signup gate and record play, download, favourite, buy and
+outbound-platform events in D1. Favourites are deliberately browser-local; no personal
+profile is created without consent. The platform tabs link to SoundCloud, Mixcloud and HearThis
+only after the visitor chooses to leave the site.
+
 ---
 
 ## 3. Adding a new service page
