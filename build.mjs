@@ -52,6 +52,7 @@ const NAV = [
   { t: 'Shop', u: '/shop/' },
   { t: 'Gallery', u: '/gallery/' },
   { t: 'YouTube', u: '/youtube/' },
+  { t: 'TikTok', u: '/tiktok/' },
   { t: 'Blog', u: '/blog/' },
 ];
 
@@ -549,6 +550,37 @@ function pageYouTube() {
     modal.hidden=false; document.body.style.overflow='hidden';
     document.getElementById('ytx').focus();
   }
+
+  function pageTikTok() {
+    const t = C.tiktok || {
+      handle: 'derrickfiles',
+      profile: S.social.tiktok,
+      intro: `Short-form sets, behind-the-scenes clips and studio updates from ${S.person}.`,
+    };
+    const inner = `
+  <section><div class="w">
+    <p class="eyeb"><i></i> TikTok</p>
+    <h2>Watch the latest clips</h2>
+    <p class="sub">${esc(t.intro)}</p>
+    <div class="tiktok-profile">
+      <blockquote class="tiktok-embed" cite="${esc(t.profile)}" data-unique-id="${esc(t.handle)}" data-embed-type="creator">
+        <section><a target="_blank" href="${esc(t.profile)}">@${esc(t.handle)}</a></section>
+      </blockquote>
+    </div>
+    <div class="btns">
+      <a class="bt bp" href="${esc(t.profile)}" rel="noopener" target="_blank">Follow @${esc(t.handle)}</a>
+    </div>
+  </div></section>
+  <script async src="https://www.tiktok.com/embed.js"></script>`;
+    return simplePage({
+      slug: '/tiktok/',
+      title: `TikTok — ${S.person} | ${S.brand}`,
+      h1: 'TikTok',
+      intro: t.intro,
+      inner,
+      desc: strip(t.intro),
+    });
+  }
   function close(){ modal.hidden=true; frame.innerHTML=''; document.body.style.overflow=''; }
 
   modal.addEventListener('click',function(e){ if(e.target.hasAttribute('data-close')) close(); });
@@ -661,6 +693,7 @@ write('mixes', pageMixes());
 write('shop', pageShop());
 write('gallery', pageGallery());
 write('youtube', pageYouTube());
+write('tiktok', pageTikTok());
 write('blog', pageBlogIndex());
 C.services.forEach(s => write(s.slug, pageService(s)));
 C.blog.forEach(p => write(`blog/${p.slug}`, pagePost(p)));
@@ -672,7 +705,7 @@ fs.copyFileSync(path.join(ROOT, 'assets', 'favicon.svg'), path.join(OUT, 'favico
 fs.copyFileSync(path.join(ROOT, 'assets', 'site.webmanifest'), path.join(OUT, 'site.webmanifest'));
 
 /* sitemap + robots */
-const urls = ['/', '/about/', '/mixes/', '/shop/', '/gallery/', '/youtube/', '/blog/',
+const urls = ['/', '/about/', '/mixes/', '/shop/', '/gallery/', '/youtube/', '/tiktok/', '/blog/',
   ...C.services.map(s => `/${s.slug}/`), ...C.blog.map(p => `/blog/${p.slug}/`)];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
