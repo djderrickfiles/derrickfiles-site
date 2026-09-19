@@ -103,7 +103,10 @@ the home grid, the footer, the sitemap and the structured data automatically.
 2. Create the ad units you want and copy the publisher ID (`ca-pub-…`) and slot IDs
 3. Panel → **Promo & ads** → paste them in → tick **Enable AdSense** → Save
 
-The AdSense script and the ad units are injected on every page automatically.
+The AdSense script and Auto ads bootstrap are injected on every page automatically.
+Auto ads lets Google select responsive in-page, anchor and vignette placements based
+on each page and device. Leave manual slot IDs blank unless you have created specific
+ad units in AdSense and want to add them as well.
 Leave it off until approval comes through.
 
 ---
