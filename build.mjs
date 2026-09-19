@@ -46,6 +46,8 @@ function socialList(only) {
 const NAV = [
   { t: 'Home', u: '/' },
   { t: 'About', u: '/about/' },
+  { t: 'DJ Course', u: '/dj-course/' },
+  { t: 'Repairs', u: '/dj-gear-repair/' },
   { t: 'Gear 4 Hire', u: '/gear-4-hire/' },
   { t: 'Maintenance', u: '/maintenance/' },
   { t: 'Mixes', u: '/mixes/' },
@@ -440,6 +442,7 @@ ${adSlot(C.adsense?.slotInArticle)}
     </a>`).join('')}
   </div>
 </div></section>
+${enquiryForm(strip(s.title), `Leave a number or email after reading the details and the studio will send a price or booking option.`)}
 ${visitSection()}
 </main>`;
   return layout({
@@ -460,6 +463,27 @@ ${visitSection()}
       }] : []),
     ],
   });
+}
+
+function enquiryForm(kind, intro) {
+  return `<section class="enquiry"><div class="w"><div class="enquiry-box"><p class="eyeb"><i></i> Get a quote</p><h2>${esc(kind)}</h2><p class="sub">${esc(intro)}</p><form class="enquiry-form" data-kind="${esc(kind)}"><div class="form-grid"><label>Name<input name="name" required autocomplete="name"></label><label>Email<input name="email" type="email" autocomplete="email"></label><label>Phone<input name="phone" autocomplete="tel"></label><label>What do you need?<select name="kind"><option>${esc(kind)}</option><option>DJ course</option><option>Gear repair</option><option>Gear swap or top-up</option><option>Gear hire</option><option>Studio consultation</option></select></label></div><label>Details<textarea name="message" required placeholder="Tell the studio what you need, the gear model or the dates."></textarea></label><button class="bt bp" type="submit">Send enquiry &rarr;</button><p class="form-status" aria-live="polite"></p></form></div></div></section><script>(function(){document.querySelectorAll('.enquiry-form').forEach(function(f){f.addEventListener('submit',function(e){e.preventDefault();var s=f.querySelector('.form-status');s.textContent='Sending…';var b=Object.fromEntries(new FormData(f));fetch('/api/enquire',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)}).then(function(r){return r.json().then(function(x){if(!r.ok||!x.ok)throw Error(x.error||'Could not send');return x;});}).then(function(x){s.textContent=x.message;f.reset();}).catch(function(x){s.textContent=x.message;});});});})();</script>`;
+}
+
+function pageCourse(c) {
+  const body = `<header class="phead"><div class="w"><p class="crumb"><a href="/">Home</a> / DJ Course</p><h1>${raw(c.title)}</h1><p class="lede">${raw(c.intro)}</p></div></header><main><section><div class="w"><div class="feats">${c.lessons.map(x => `<div class="feat"><h3>${raw(x.t)}</h3><p>${raw(x.d)}</p></div>`).join('')}</div><div class="platforms"><p class="meta">Explore the course</p>${(c.videoCategories || []).map(x => `<a class="platform-tab" href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.title)} <span>&rarr;</span></a>`).join('')}</div></div></section>${enquiryForm('DJ course', 'Leave your email or number and we will send the current price, schedule and next intake.')}${visitSection()}</main>`;
+  return layout({ title: `${strip(c.title)} in Kampala | ${S.brand}`, desc: strip(c.excerpt), url: `/${c.slug}/`, active: `/${c.slug}/`, body, image: c.image, extraSchema: [{ '@type':'Course', name:strip(c.title), description:strip(c.intro), provider:{'@id':`${S.domain}/#organization`}, url:`${S.domain}/${c.slug}/` }] });
+}
+
+function pageRepair(r) {
+  const body = `<header class="phead"><div class="w"><p class="crumb"><a href="/">Home</a> / Repairs</p><h1>${raw(r.title)}</h1><p class="lede">${raw(r.intro)}</p></div></header><main><section><div class="w"><h2>What we check</h2><div class="feats">${r.checks.map(x => `<div class="feat"><h3>${raw(x)}</h3><p>We inspect the fault, explain the options and confirm the quote before work starts.</p></div>`).join('')}</div>${r.faq?.length ? `<div class="faq">${r.faq.map(f => `<details><summary>${raw(f.q)}</summary><p>${raw(f.a)}</p></details>`).join('')}</div>` : ''}</div></section>${enquiryForm('Gear repair', 'Send the make, model and symptoms. Add your phone or email so the bench can call you back.')}${visitSection()}</main>`;
+  return layout({ title: `${strip(r.title)} in Kampala | ${S.brand}`, desc:strip(r.excerpt), url:`/${r.slug}/`, active:`/${r.slug}/`, body, image:r.image, extraSchema:[{'@type':'Service',name:strip(r.title),description:strip(r.intro),provider:{'@id':`${S.domain}/#organization`},url:`${S.domain}/${r.slug}/`}] });
+}
+
+function pageReviews() {
+  const reviews = C.reviewsList || [];
+  const cards = reviews.length ? reviews.map(r => `<blockquote class="review-card"><div class="stars">${'★'.repeat(Number(r.rating || 5))}</div><p>“${raw(r.quote)}”</p><cite>${esc(r.name)} · ${esc(r.source || 'Google review')}</cite></blockquote>`).join('') : '<p class="sub">Verified client reviews will appear here as they are added in the studio panel.</p>';
+  const body = `<header class="phead"><div class="w"><p class="crumb"><a href="/">Home</a> / Reviews</p><h1>Good work, said plainly</h1><p class="lede">A few words from people who have trained, booked, hired and repaired with the studio.</p></div></header><main><section><div class="w"><div class="review-grid">${cards}</div></div></section>${visitSection()}</main>`;
+  return layout({title:`Reviews | ${S.brand}`,desc:'Reviews from Derrick Files Studio clients and students in Kampala.',url:'/reviews/',active:'/reviews/',body,extraSchema:reviews.map(r=>({'@type':'Review',reviewBody:strip(r.quote),reviewRating:{'@type':'Rating',ratingValue:r.rating||5},author:{'@type':'Person',name:r.name||'Studio client'}}))});
 }
 
 function simplePage({ slug, title, h1, intro, inner, desc, nav, extraSchema = [] }) {
@@ -746,6 +770,9 @@ write('shop', pageShop());
 write('gallery', pageGallery());
 write('youtube', pageYouTube());
 write('tiktok', pageTikTok());
+write('dj-course', pageCourse(C.courses[0]));
+write('dj-gear-repair', pageRepair(C.repairs[0]));
+write('reviews', pageReviews());
 write('blog', pageBlogIndex());
 C.services.forEach(s => write(s.slug, pageService(s)));
 C.blog.forEach(p => write(`blog/${p.slug}`, pagePost(p)));
@@ -757,7 +784,7 @@ fs.copyFileSync(path.join(ROOT, 'assets', 'favicon.svg'), path.join(OUT, 'favico
 fs.copyFileSync(path.join(ROOT, 'assets', 'site.webmanifest'), path.join(OUT, 'site.webmanifest'));
 
 /* sitemap + robots */
-const urls = ['/', '/about/', '/mixes/', '/shop/', '/gallery/', '/youtube/', '/tiktok/', '/blog/',
+const urls = ['/', '/about/', '/mixes/', '/shop/', '/gallery/', '/youtube/', '/tiktok/', '/dj-course/', '/dj-gear-repair/', '/reviews/', '/blog/',
   ...C.services.map(s => `/${s.slug}/`), ...C.blog.map(p => `/blog/${p.slug}/`)];
 fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
   `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +

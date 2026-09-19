@@ -85,6 +85,14 @@
   ],
   "image": "/assets/img/derrick-2.jpg"
  },
+ "reviewsList": [],
+ "courses": [
+  {"slug":"dj-course","title":"DJ Course","tagline":"Learn the craft on real decks","excerpt":"Hands-on DJ training for beginners, working DJs and anyone ready to build confidence behind the booth.","image":"/assets/img/derrick-4.jpg","intro":"Start with the basics, practise on professional equipment and leave with a real set you are proud to play. Ask for the current course price and schedule.","lessons":[{"t":"Foundations","d":"Beatmatching, phrasing, EQ, cueing and a clean transition."},{"t":"Performance","d":"Reading a room, building energy and preparing a dependable set."},{"t":"Practice","d":"Guided time on Pioneer, Denon and Numark equipment."}],"videoCategories":[{"title":"Beginner tutorials","url":"https://www.youtube.com/c/derrickfiles"},{"title":"Studio walkthroughs","url":"https://www.youtube.com/c/derrickfiles"}]}
+ ],
+ "repairs": [
+  {"slug":"dj-gear-repair","title":"DJ Gear Repair &amp; Swaps","tagline":"Bring the problem. We will diagnose it.","excerpt":"Repair and maintenance for mixers, decks, controllers, laptops and the gear around them.","image":"/assets/img/derrick-portrait.jpg","intro":"Tell us what the gear is doing, what changed, and whether it has been opened or repaired before. Bring clear photos or the unit to Plot 1 Bukoto Street for a proper diagnosis before any work begins.","checks":["Faders, knobs and jog wheels","Audio channels, USB and power faults","Laptop performance and DJ software setup","Gear swaps, upgrades and top-ups"],"faq":[{"q":"What should I send first?","a":"The make and model, the exact fault, a phone number and photos or a short video if you can. We will reply with the next step."}]}
+ ],
+ "appointments": {"intro":"Book a class, repair drop-off, gear consultation or studio visit. Tell us what you need and we will call or WhatsApp you with availability and a quote.","success":"Thanks — the studio will get back to you with the next available time.","types":["DJ course","Gear repair","Gear swap or top-up","Gear hire","Studio consultation"]},
  "services": [
   {
    "slug": "dj-academy",

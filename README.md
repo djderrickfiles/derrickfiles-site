@@ -98,6 +98,14 @@ outbound-platform events in D1. Favourites are deliberately browser-local; no pe
 profile is created without consent. The platform tabs link to SoundCloud, Mixcloud and HearThis
 only after the visitor chooses to leave the site.
 
+### Courses, repairs, appointments and reviews
+
+The admin panel now edits course lessons/tutorial categories, repair and gear-swap checks,
+appointment copy, reviews, services, products and media metadata. The generated `/dj-course/`,
+`/dj-gear-repair/` and `/reviews/` landing pages include quote forms that collect a phone or
+email plus a client description in D1 through `/api/enquire`. Only publish genuine reviews that
+you have permission to quote; the starter review list is intentionally empty.
+
 ---
 
 ## 3. Adding a new service page
