@@ -1,620 +1,695 @@
 {
-  "site": {
-    "brand": "Derrick Files Studio",
-    "person": "DJ Derrick Files",
-    "roles": "DJ / Personality / Artiste / Producer / Events Tech / Stage Management",
-    "tagline": "Craft your sound every day",
-    "domain": "https://www.derrickfiles.com",
-    "phone": "+256789191660",
-    "phoneDisplay": "0789 191 660",
-    "whatsapp": "256789191660",
-    "email": "contact@derrickfiles.com",
-    "street": "Plot 1 Bukoto Street (next to Acacia Mall)",
-    "city": "Kampala",
-    "country": "Uganda",
-    "rating": "4.6",
-    "reviews": "24",
-    "founded": "2020",
-    "hours": [
-      {
-        "days": "Monday – Thursday",
-        "time": "8:00 am – 10:00 pm"
-      },
-      {
-        "days": "Friday",
-        "time": "8:00 am – 11:00 pm"
-      },
-      {
-        "days": "Saturday",
-        "time": "10:00 am – 11:00 pm"
-      },
-      {
-        "days": "Sunday",
-        "time": "12:00 pm – 8:00 pm"
-      }
-    ],
-    "social": {
-      "instagram": "https://www.instagram.com/derrickfiles/",
-      "tiktok": "https://www.tiktok.com/@derrickfiles",
-      "youtube": "https://www.youtube.com/c/derrickfiles",
-      "mixcloud": "https://www.mixcloud.com/derrickfiles/",
-      "soundcloud": "https://soundcloud.com/derrickfiles",
-      "facebook": "https://www.facebook.com/derrickfiles1/",
-      "x": "https://x.com/derrickfiles"
-    }
-  },
-  "promo": {
-    "enabled": true,
-    "kind": "Now open",
-    "text": "DJ Academy intake open — beginner to advanced classes at Plot 1 Bukoto Street.",
-    "ctaLabel": "Book a class",
-    "ctaLink": "/dj-academy/"
-  },
-  "adsense": {
-    "enabled": false,
-    "client": "ca-pub-XXXXXXXXXXXXXXXX",
-    "slotInArticle": "",
-    "slotFooter": ""
-  },
-  "home": {
-    "heroKicker": "Kampala, Uganda",
-    "heroTitle": "DJ Derrick",
-    "heroTitleAccent": "Files",
-    "heroText": "Ugandan DJ, producer and events technician — and the founder of Derrick Files Studio, the gear, training and event-solutions house on Plot 1 Bukoto Street, next to Acacia Mall.",
-    "heroImage": "/assets/img/derrick-hero.jpg",
-    "bandImage": "/assets/img/live-1.jpg",
-    "bandQuote": "Craft your sound<br><span>every day.</span>",
-    "introTitle": "The artist &amp; the company",
-    "introText": "Book the person for the set. Call the company for the gear, the stage or the training. Same address, same number — pick the lane you need.",
-    "laneDjImage": "/assets/img/derrick-portrait.jpg",
-    "laneCoImage": "/assets/img/brand-tee.jpg"
-  },
-  "about": {
-    "title": "About",
-    "lead": "DJ Derrick Files is a Ugandan DJ, personality, artiste, producer, events tech and stage manager based in Kampala, and the founder of Derrick Files Studio.",
-    "body": [
-      "Derrick Files Studio runs out of Plot 1 Bukoto Street, next to Acacia Mall, as a full-stack sound house — not a DJ with a laptop, but the whole chain. Performance, training, gear, repair, production, stage, sound and screens, under one roof and one operator.",
-      "That range is the point. A promoter can book the set, the PA, the stage and the LED wall in a single conversation. A brand can put an activation together end to end. A wedding client gets one team, not four vendors and a coordination problem.",
-      "The training side matters just as much. DJ classes at the studio put decks in front of people who would otherwise never get near a pair, and that is how the next generation of Kampala selectors actually gets made — in a room, on real gear, with someone watching your hands."
-    ],
-    "image": "/assets/img/derrick-2.jpg"
-  },
-  "services": [
-    {
-      "slug": "dj-academy",
-      "title": "DJ Academy",
-      "short": "Classes",
-      "tagline": "Learn to DJ on real gear",
-      "excerpt": "Professional DJ lessons and training, beginner to advanced, hands-on with working studio equipment.",
-      "image": "/assets/img/derrick-4.jpg",
-      "intro": "The Derrick Files DJ Academy puts you behind professional decks from day one. No simulators, no waiting your turn on a phone app — real controllers, real mixers, real monitoring, with someone watching your hands and correcting you in the moment.",
-      "features": [
-        {
-          "t": "Beginner track",
-          "d": "Beatmatching, phrasing, EQ and your first clean 30-minute set."
-        },
-        {
-          "t": "Advanced track",
-          "d": "Scratch technique, harmonic mixing, open-format transitions and crowd reading."
-        },
-        {
-          "t": "Real equipment",
-          "d": "Train on Pioneer, Denon and Numark gear — the same kit you will meet in a booth."
-        },
-        {
-          "t": "Studio access",
-          "d": "Practice time in the room between sessions, not just during lessons."
-        }
-      ],
-      "faq": [
-        {
-          "q": "Do I need my own equipment?",
-          "a": "No. All training happens on studio equipment. If you do own gear, bring it and we will set it up with you."
-        },
-        {
-          "q": "How long does a course take?",
-          "a": "It depends on the track and how often you come in. Call 0789 191 660 and we will map a schedule around you."
-        }
-      ]
-    },
-    {
-      "slug": "gear-4-hire",
-      "title": "Gear 4 Hire",
-      "short": "Gear 4 Hire",
-      "tagline": "DJ equipment, delivered and set up",
-      "excerpt": "Controllers, CDJs and mixers for hire — Pioneer, Denon, Numark and more, delivered and set up.",
-      "image": "/assets/img/derrick-3.jpg",
-      "intro": "A stocked hire floor for DJs, promoters and venues across Kampala. Book the kit you need for a night, a weekend or a season — delivered, set up and collected, with a technician on call if anything goes sideways mid-show.",
-      "features": [
-        {
-          "t": "Controllers &amp; CDJs",
-          "d": "Pioneer, Denon and Numark decks, mixers and all-in-one controllers."
-        },
-        {
-          "t": "Booth packages",
-          "d": "Deck, mixer, monitors, stands and cabling as one bookable unit."
-        },
-        {
-          "t": "Delivery &amp; setup",
-          "d": "We deliver, rig, line-check and collect. You just play."
-        },
-        {
-          "t": "Technician on call",
-          "d": "Support during the event, not just a handover at the door."
-        }
-      ],
-      "faq": [
-        {
-          "q": "Do you deliver outside Kampala?",
-          "a": "Yes — we supply events across Uganda and the wider East African region. Distance affects the quote, so call ahead."
-        },
-        {
-          "q": "Is a deposit required?",
-          "a": "Terms depend on the package and the length of hire. Call 0789 191 660 for a quote."
-        }
-      ]
-    },
-    {
-      "slug": "maintenance",
-      "title": "Maintenance &amp; Repair",
-      "short": "Maintenance",
-      "tagline": "Fix it properly, once",
-      "excerpt": "Diagnosis, repair and servicing of DJ equipment, plus computer sales, repair and maintenance.",
-      "image": "/assets/img/derrick-portrait.jpg",
-      "intro": "Jog wheels that drift, faders that crackle, channels that cut out, laptops that choke mid-set. The maintenance bench at Plot 1 Bukoto Street handles DJ equipment and the computers that run it — diagnosis first, honest quote second, repair third.",
-      "features": [
-        {
-          "t": "DJ gear repair",
-          "d": "Controllers, mixers and CDJs — faders, jog wheels, ports, power and audio paths."
-        },
-        {
-          "t": "Servicing",
-          "d": "Preventive cleaning and calibration so gear survives another season of gigs."
-        },
-        {
-          "t": "Computers",
-          "d": "Laptop and desktop repair, servicing, Windows and macOS installation."
-        },
-        {
-          "t": "Sales &amp; accessories",
-          "d": "Computers, peripherals, cables and the small parts that always go missing."
-        }
-      ],
-      "faq": [
-        {
-          "q": "Do you quote before repairing?",
-          "a": "Always. We diagnose, tell you what is wrong and what it costs, and you decide before any work starts."
-        },
-        {
-          "q": "Can you service gear you did not sell?",
-          "a": "Yes. Bring in any make — the bench is not limited to equipment bought from us."
-        }
-      ]
-    },
-    {
-      "slug": "sound-and-pa",
-      "title": "Sound &amp; PA",
-      "short": "Sound &amp; PA",
-      "tagline": "Clean sound, any room size",
-      "excerpt": "Clean sound systems and PA for hire, scaled from intimate rooms to open-air stages.",
-      "image": "/assets/img/live-1.jpg",
-      "intro": "Sound that suits the room instead of fighting it. We scale the system to the space and the crowd — an intimate launch, a full wedding, or an open-air stage — and we line-check it before anyone walks in.",
-      "features": [
-        {
-          "t": "Room-matched systems",
-          "d": "The rig is specified for your venue, not pulled off a shelf."
-        },
-        {
-          "t": "Full PA",
-          "d": "Tops, subs, amps, desks, monitoring, microphones and cabling."
-        },
-        {
-          "t": "Engineer on site",
-          "d": "Someone on the desk through the event, keeping the mix honest."
-        },
-        {
-          "t": "Bundled with stage",
-          "d": "Combine with stage, lighting and LED for one quote and one team."
-        }
-      ],
-      "faq": [
-        {
-          "q": "Can you cover outdoor events?",
-          "a": "Yes — open-air stages are a core part of what we supply, including power planning and weather cover."
-        },
-        {
-          "q": "Do you provide microphones for speeches?",
-          "a": "Yes, wired and wireless, along with a technician to manage handovers during the programme."
-        }
-      ]
-    },
-    {
-      "slug": "stage-lighting",
-      "title": "Stage, Truss &amp; Lighting",
-      "short": "Stage &amp; Lighting",
-      "tagline": "Build the stage, light the room",
-      "excerpt": "Stage build and rigging with moving heads, washers, blinders and floodlights.",
-      "image": "/assets/img/event-1.jpg",
-      "intro": "Truss, staging and a lighting rig that makes the room look like the event it is. We build it, focus it, program it and run it — then strike it and get out of your venue on time.",
-      "features": [
-        {
-          "t": "Truss &amp; staging",
-          "d": "Stage decks, truss structures and rigging built to the venue."
-        },
-        {
-          "t": "Moving heads",
-          "d": "Intelligent lighting programmed to the programme, not left on auto."
-        },
-        {
-          "t": "Washers &amp; blinders",
-          "d": "Colour wash, blinders and floodlights for crowd and stage coverage."
-        },
-        {
-          "t": "Build &amp; strike",
-          "d": "Full crew for load-in, show and load-out."
-        }
-      ],
-      "faq": [
-        {
-          "q": "How much notice do you need?",
-          "a": "The bigger the build, the earlier the better. Call 0789 191 660 with your date and we will tell you honestly if it is workable."
-        },
-        {
-          "q": "Can you work with our venue's existing rig?",
-          "a": "Yes — we regularly supplement house systems rather than replacing them."
-        }
-      ]
-    },
-    {
-      "slug": "led-screens",
-      "title": "LED Screens",
-      "short": "LED Screens",
-      "tagline": "Indoor and outdoor LED walls",
-      "excerpt": "Indoor and outdoor LED screens and walls for stages, brand activations and corporate events.",
-      "image": "/assets/img/derrick-2.jpg",
-      "intro": "LED walls for stage backdrops, brand activations, conferences and outdoor screenings — supplied, rigged, fed and operated. We handle the content pipeline too, so your visuals actually reach the panel in the right resolution.",
-      "features": [
-        {
-          "t": "Indoor screens",
-          "d": "High-resolution panels for conferences, launches and stage backdrops."
-        },
-        {
-          "t": "Outdoor screens",
-          "d": "Bright, weather-capable walls for open-air events and screenings."
-        },
-        {
-          "t": "Content &amp; playback",
-          "d": "Processors, playback and a operator running your visuals live."
-        },
-        {
-          "t": "Any configuration",
-          "d": "Sized and shaped to the stage — straight walls, side panels or custom builds."
-        }
-      ],
-      "faq": [
-        {
-          "q": "What content format should we send?",
-          "a": "Send us what you have and we will tell you what it needs to become. Getting this right early saves the show."
-        },
-        {
-          "q": "Can the screen run during daylight?",
-          "a": "Our outdoor panels are specified for daylight visibility. Indoor panels are not — tell us the environment when you enquire."
-        }
-      ]
-    },
-    {
-      "slug": "events-management",
-      "title": "Events Management",
-      "short": "Events",
-      "tagline": "Run the whole thing",
-      "excerpt": "Full event solutions — drafting and executing programmes, hiring acts and performers.",
-      "image": "/assets/img/event-1.jpg",
-      "intro": "One team from concept to strike. We draft the programme, book the acts, supply the technical, run the show on the day and hand you a venue back in the state we found it.",
-      "features": [
-        {
-          "t": "Programme design",
-          "d": "Drafting and executing a run-of-show that actually holds a crowd."
-        },
-        {
-          "t": "Acts &amp; performers",
-          "d": "Booking and coordinating DJs, MCs, live acts and dancers."
-        },
-        {
-          "t": "Technical supply",
-          "d": "Sound, stage, lighting and LED from the same house — one quote, one crew."
-        },
-        {
-          "t": "On-the-day delivery",
-          "d": "Stage management and technical operation through the event."
-        }
-      ],
-      "faq": [
-        {
-          "q": "Do you take on corporate events?",
-          "a": "Yes — corporate functions, launches and brand activations are a large part of the work."
-        },
-        {
-          "q": "Can you supply only part of the event?",
-          "a": "Yes. Plenty of clients book only the technical, or only the DJ. Take what you need."
-        }
-      ]
-    },
-    {
-      "slug": "wedding-planning",
-      "title": "Wedding Planning",
-      "short": "Weddings",
-      "tagline": "One team for the whole day",
-      "excerpt": "DJ, sound, lighting and coordination for the whole day, run by one team.",
-      "image": "/assets/img/derrick-3.jpg",
-      "intro": "Weddings punish bad coordination. Booking the DJ, the PA, the lighting and the coordinator from four different vendors is how a timeline falls apart. Here it is one team, one number and one person accountable for the day running to plan.",
-      "features": [
-        {
-          "t": "Wedding DJ",
-          "d": "Open-format sets read to the room, from the ceremony through the last dance."
-        },
-        {
-          "t": "Sound for speeches",
-          "d": "Microphones and a technician managing handovers so no toast gets lost."
-        },
-        {
-          "t": "Lighting &amp; decor support",
-          "d": "Uplighting, dance-floor lighting and stage wash."
-        },
-        {
-          "t": "Day coordination",
-          "d": "A run-of-show and someone holding the timeline together."
-        }
-      ],
-      "faq": [
-        {
-          "q": "Do you meet before the day?",
-          "a": "Yes — we plan the run-of-show and the music direction with you in advance. Surprises on the day are the enemy."
-        },
-        {
-          "q": "Can we give you a playlist?",
-          "a": "Absolutely. Bring must-plays and do-not-plays; the reading of the room is our job."
-        }
-      ]
-    },
-    {
-      "slug": "recording-production",
-      "title": "Recording &amp; Production",
-      "short": "Studio",
-      "tagline": "Record, mix, finish",
-      "excerpt": "Music recording, mixing, mashups and production in a purpose-built room.",
-      "image": "/assets/img/derrick-4.jpg",
-      "intro": "A production room built for finishing things. Recording, mixing, mashups, edits and bespoke mixtape work — for artists, for brands and for DJs who need a clean custom edit that nobody else has.",
-      "features": [
-        {
-          "t": "Recording",
-          "d": "Vocal and instrument tracking in a treated room."
-        },
-        {
-          "t": "Mixing",
-          "d": "Mixes finished to a standard that survives a club system."
-        },
-        {
-          "t": "Mashups &amp; edits",
-          "d": "Custom edits, bootlegs and transitions built for your set."
-        },
-        {
-          "t": "Content shoots",
-          "d": "The room doubles as a backdrop for artist and brand content."
-        }
-      ],
-      "faq": [
-        {
-          "q": "Do you work with new artists?",
-          "a": "Yes. Come in with an idea and we will tell you honestly what it needs."
-        },
-        {
-          "q": "Can you master as well?",
-          "a": "Tell us the destination — streaming, club play or radio — and we will advise on the right finishing chain."
-        }
-      ]
-    },
-    {
-      "slug": "dj-bookings",
-      "title": "DJ Bookings",
-      "short": "Book the DJ",
-      "tagline": "Book DJ Derrick Files",
-      "excerpt": "Club nights, weddings, corporate events, brand activations and festival sets.",
-      "image": "/assets/img/derrick-hero.jpg",
-      "intro": "Open-format sets across Afrobeats, Amapiano, Dancehall, Ragga, Kompa and R&amp;B, built for the room rather than for a pre-baked playlist. More than sixty mixes published since 2019 — listen first, then book.",
-      "features": [
-        {
-          "t": "Club nights",
-          "d": "Residencies, guest slots and weekly takeovers."
-        },
-        {
-          "t": "Weddings &amp; private",
-          "d": "Full-day coverage with sound and lighting if you need it."
-        },
-        {
-          "t": "Corporate &amp; brands",
-          "d": "Activations, launches and corporate functions."
-        },
-        {
-          "t": "Festivals",
-          "d": "Main and side-stage sets, with technical supply available."
-        }
-      ],
-      "faq": [
-        {
-          "q": "How far ahead should I book?",
-          "a": "Weekends fill early, especially in wedding season. Call 0789 191 660 with your date as soon as you have it."
-        },
-        {
-          "q": "Can I hear a set first?",
-          "a": "Yes — over sixty mixes are published on Mixcloud and SoundCloud. Links are on the Mixes page."
-        }
-      ]
-    }
+ "site": {
+  "brand": "Derrick Files Studio",
+  "person": "DJ Derrick Files",
+  "roles": "DJ / Personality / Artiste / Producer / Events Tech / Stage Management",
+  "tagline": "Craft your sound every day",
+  "domain": "https://www.derrickfiles.com",
+  "phone": "+256789191660",
+  "phoneDisplay": "0789 191 660",
+  "whatsapp": "256789191660",
+  "email": "contact@derrickfiles.com",
+  "street": "Plot 1 Bukoto Street (next to Acacia Mall)",
+  "city": "Kampala",
+  "country": "Uganda",
+  "rating": "4.6",
+  "reviews": "24",
+  "founded": "2020",
+  "hours": [
+   {
+    "days": "Monday – Thursday",
+    "time": "8:00 am – 10:00 pm"
+   },
+   {
+    "days": "Friday",
+    "time": "8:00 am – 11:00 pm"
+   },
+   {
+    "days": "Saturday",
+    "time": "10:00 am – 11:00 pm"
+   },
+   {
+    "days": "Sunday",
+    "time": "12:00 pm – 8:00 pm"
+   }
   ],
-  "mixes": {
-    "intro": "More than sixty mixes published since 2019, moving between Afrobeats, Amapiano, Dancehall, Ragga, Kompa and R&amp;B — including the MixShot series and the long-running Rugby Chill franchise.",
-    "genres": [
-      "Afrobeats",
-      "Amapiano",
-      "Dancehall",
-      "Ragga",
-      "Kompa",
-      "R&amp;B"
-    ],
-    "items": [
-      {
-        "title": "Rugby Chill Series",
-        "desc": "The signature franchise — the most-played series in the catalogue.",
-        "link": "https://www.mixcloud.com/derrickfiles/"
-      },
-      {
-        "title": "MixShot Series",
-        "desc": "Numbered open-format sets: fast Afro, Zanku, Afro-dubbin, slow whine and more.",
-        "link": "https://www.mixcloud.com/derrickfiles/"
-      },
-      {
-        "title": "Hype Dancehall &amp; Ragga Mashup",
-        "desc": "Full-tilt dancehall, ragga and mashup open set.",
-        "link": "https://www.mixcloud.com/derrickfiles/"
-      },
-      {
-        "title": "Riddims &amp; Tropical Vibes",
-        "desc": "Slower, warmer, built for sundowners and open-air rooms.",
-        "link": "https://www.mixcloud.com/derrickfiles/"
-      }
-    ]
-  },
-  "shop": {
-    "intro": "Gear, accessories and digital packs from Derrick Files Studio. Payment by mobile money — call or WhatsApp 0789 191 660 to order.",
-    "items": [
-      {
-        "title": "DJ Controllers",
-        "desc": "Pioneer, Denon and Numark controllers and mixers. Ask for current stock.",
-        "price": "Enquire",
-        "image": "/assets/img/derrick-4.jpg"
-      },
-      {
-        "title": "Accessories &amp; Cabling",
-        "desc": "Cables, adaptors, stands, cases and the parts that always go missing.",
-        "price": "Enquire",
-        "image": "/assets/img/derrick-3.jpg"
-      },
-      {
-        "title": "Computers &amp; Peripherals",
-        "desc": "Laptops, desktops and peripheral devices, sold and supported in-house.",
-        "price": "Enquire",
-        "image": "/assets/img/derrick-2.jpg"
-      },
-      {
-        "title": "Derrick Files Merch",
-        "desc": "Studio tees and branded apparel.",
-        "price": "Enquire",
-        "image": "/assets/img/brand-tee.jpg"
-      }
-    ]
-  },
-  "gallery": {
-    "intro": "Portraits, sessions, stage builds and events — Kampala and beyond.",
-    "items": [
-      {
-        "image": "/assets/img/derrick-hero.jpg",
-        "caption": "Studio portrait"
-      },
-      {
-        "image": "/assets/img/live-1.jpg",
-        "caption": "Live set, Mbale"
-      },
-      {
-        "image": "/assets/img/event-1.jpg",
-        "caption": "KISU Prom"
-      },
-      {
-        "image": "/assets/img/derrick-2.jpg",
-        "caption": "Studio session"
-      },
-      {
-        "image": "/assets/img/derrick-3.jpg",
-        "caption": "Portrait session"
-      },
-      {
-        "image": "/assets/img/derrick-4.jpg",
-        "caption": "In the room"
-      },
-      {
-        "image": "/assets/img/brand-tee.jpg",
-        "caption": "Derrick Files brand"
-      },
-      {
-        "image": "/assets/img/derrick-portrait.jpg",
-        "caption": "Portrait"
-      }
-    ]
-  },
-  "youtube": {
-    "intro": "Sets, tutorials, gear breakdowns and behind-the-scenes from Derrick Files Studio.",
-    "channel": "https://www.youtube.com/c/derrickfiles",
-    "videos": []
-  },
-  "blog": [
+  "social": {
+   "instagram": "https://www.instagram.com/derrickfiles/",
+   "tiktok": "https://www.tiktok.com/@derrickfiles",
+   "youtube": "https://www.youtube.com/c/derrickfiles",
+   "mixcloud": "https://www.mixcloud.com/derrickfiles/",
+   "soundcloud": "https://soundcloud.com/derrickfiles",
+   "facebook": "https://www.facebook.com/derrickfiles1/",
+   "x": "https://x.com/derrickfiles"
+  }
+ },
+ "promo": {
+  "enabled": true,
+  "kind": "Now open",
+  "text": "DJ Academy intake open — beginner to advanced classes at Plot 1 Bukoto Street.",
+  "ctaLabel": "Book a class",
+  "ctaLink": "/dj-academy/"
+ },
+ "adsense": {
+  "enabled": false,
+  "client": "ca-pub-3712510054149886",
+  "slotInArticle": "",
+  "slotFooter": ""
+ },
+ "home": {
+  "heroKicker": "Kampala, Uganda",
+  "heroTitle": "DJ Derrick",
+  "heroTitleAccent": "Files",
+  "heroText": "Ugandan DJ, producer and events technician — and the founder of Derrick Files Studio, the gear, training and event-solutions house on Plot 1 Bukoto Street, next to Acacia Mall.",
+  "heroImage": "/assets/img/derrick-hero.jpg",
+  "bandImage": "/assets/img/live-1.jpg",
+  "bandQuote": "Craft your sound<br><span>every day.</span>",
+  "introTitle": "The artist &amp; the company",
+  "introText": "Book the person for the set. Call the company for the gear, the stage or the training. Same address, same number — pick the lane you need.",
+  "laneDjImage": "/assets/img/derrick-portrait.jpg",
+  "laneCoImage": "/assets/img/brand-tee.jpg"
+ },
+ "about": {
+  "title": "About",
+  "lead": "DJ Derrick Files is a Ugandan DJ, personality, artiste, producer, events tech and stage manager based in Kampala, and the founder of Derrick Files Studio.",
+  "body": [
+   "Derrick Files Studio runs out of Plot 1 Bukoto Street, next to Acacia Mall, as a full-stack sound house — not a DJ with a laptop, but the whole chain. Performance, training, gear, repair, production, stage, sound and screens, under one roof and one operator.",
+   "That range is the point. A promoter can book the set, the PA, the stage and the LED wall in a single conversation. A brand can put an activation together end to end. A wedding client gets one team, not four vendors and a coordination problem.",
+   "The training side matters just as much. DJ classes at the studio put decks in front of people who would otherwise never get near a pair, and that is how the next generation of Kampala selectors actually gets made — in a room, on real gear, with someone watching your hands."
+  ],
+  "image": "/assets/img/derrick-2.jpg"
+ },
+ "services": [
+  {
+   "slug": "dj-academy",
+   "title": "DJ Academy",
+   "short": "Classes",
+   "tagline": "Learn to DJ on real gear",
+   "excerpt": "Professional DJ lessons and training, beginner to advanced, hands-on with working studio equipment.",
+   "image": "/assets/img/derrick-4.jpg",
+   "intro": "The Derrick Files DJ Academy puts you behind professional decks from day one. No simulators, no waiting your turn on a phone app — real controllers, real mixers, real monitoring, with someone watching your hands and correcting you in the moment.",
+   "features": [
     {
-      "slug": "how-to-choose-your-first-dj-controller",
-      "title": "How to choose your first DJ controller",
-      "date": "2026-09-01",
-      "author": "DJ Derrick Files",
-      "cover": "/assets/img/derrick-4.jpg",
-      "excerpt": "The honest version: most beginners overspend on the wrong features and underspend on the thing that actually matters.",
-      "tags": [
-        "Gear",
-        "Beginners"
-      ],
-      "body": [
-        "Every week someone walks into the studio at Plot 1 Bukoto Street holding a controller they bought online, asking why it does not feel like the one they saw in a video. Usually the answer is the same — they bought for the spec sheet instead of for the way they want to play.",
-        "Start with the jog wheels. If you intend to scratch or do anything hands-on, wheel size and feel matter more than the number of pads. A small, light wheel will fight you for years. Spend your money there first.",
-        "Then look at the mixer section. Two channels is enough to learn on and enough for most club work. Four channels only earns its price once you are genuinely layering more than two sources, and most people never get there.",
-        "Ignore the effects count. Every controller ships with more effects than you will ever use well, and a set carried by effects is a set that was not mixed properly underneath.",
-        "Finally — and this is the part nobody says — budget for stands, cables and a case. A controller sitting on a wobbly table with a borrowed cable will sound and feel worse than a cheaper setup that is properly rigged.",
-        "If you want to try before you buy, come to the studio. You can put your hands on Pioneer, Denon and Numark gear in the same afternoon and feel the difference for yourself."
-      ]
+     "t": "Beginner track",
+     "d": "Beatmatching, phrasing, EQ and your first clean 30-minute set."
     },
     {
-      "slug": "what-a-wedding-dj-actually-does",
-      "title": "What a wedding DJ actually does",
-      "date": "2026-08-18",
-      "author": "DJ Derrick Files",
-      "cover": "/assets/img/derrick-3.jpg",
-      "excerpt": "Playing music is maybe a third of the job. The rest is timing, microphones and stopping the day from drifting.",
-      "tags": [
-        "Weddings",
-        "Events"
-      ],
-      "body": [
-        "Couples book a wedding DJ thinking they are buying music. What they are actually buying is someone who holds the timeline together while a hundred things try to pull it apart.",
-        "The music matters, of course. Reading a room full of three generations and finding the record that moves all of them is a real skill, and it is not the same skill as playing a club at 1am.",
-        "But the parts that decide whether a wedding runs well are less glamorous. Who hands the microphone to the speaker and takes it back. Whether the sound is loud enough at the back without being painful at the top table. Whether the first dance starts at the right moment or twenty minutes late because nobody told the kitchen.",
-        "This is the argument for booking the DJ, the sound and the coordination from one place. Four separate vendors means four people each confident that the delay was somebody else's fault.",
-        "When we take a wedding, we build the run-of-show with the couple first, agree the must-plays and the do-not-plays, and put one person on the day whose entire job is keeping the programme moving."
-      ]
+     "t": "Advanced track",
+     "d": "Scratch technique, harmonic mixing, open-format transitions and crowd reading."
     },
     {
-      "slug": "led-walls-what-to-ask-before-you-book",
-      "title": "LED walls: what to ask before you book one",
-      "date": "2026-07-29",
-      "author": "Derrick Files Studio",
-      "cover": "/assets/img/derrick-2.jpg",
-      "excerpt": "Most LED disasters are content problems, not hardware problems. Five questions that prevent them.",
-      "tags": [
-        "Events",
-        "LED"
-      ],
-      "body": [
-        "An LED wall is the most visible thing at your event, which means when it goes wrong it goes wrong publicly. Almost every failure we get called to fix was avoidable a week earlier.",
-        "First question: indoor or outdoor? Panels specified for a conference hall will disappear in Kampala daylight. Tell your supplier the environment before anything else.",
-        "Second: what resolution is the content? A wall is not a TV — it has a native pixel dimension, and a logo exported for Instagram will look like a mosaic on it.",
-        "Third: who is operating it during the show? A wall with nobody on the processor is a wall showing a frozen slide while the MC talks over it.",
-        "Fourth: how is it rigged? Ground-stacked and flown builds have completely different requirements, timelines and costs.",
-        "Fifth: what is the power situation? LED walls draw real current, and venue circuits in the region are not always what the venue thinks they are.",
-        "Ask those five before you sign anything. Any supplier who cannot answer them clearly is going to learn the answers on your event."
-      ]
+     "t": "Real equipment",
+     "d": "Train on Pioneer, Denon and Numark gear — the same kit you will meet in a booth."
+    },
+    {
+     "t": "Studio access",
+     "d": "Practice time in the room between sessions, not just during lessons."
     }
+   ],
+   "faq": [
+    {
+     "q": "Do I need my own equipment?",
+     "a": "No. All training happens on studio equipment. If you do own gear, bring it and we will set it up with you."
+    },
+    {
+     "q": "How long does a course take?",
+     "a": "It depends on the track and how often you come in. Call 0789 191 660 and we will map a schedule around you."
+    }
+   ]
+  },
+  {
+   "slug": "gear-4-hire",
+   "title": "Gear 4 Hire",
+   "short": "Gear 4 Hire",
+   "tagline": "DJ equipment, delivered and set up",
+   "excerpt": "Controllers, CDJs and mixers for hire — Pioneer, Denon, Numark and more, delivered and set up.",
+   "image": "/assets/img/derrick-3.jpg",
+   "intro": "A stocked hire floor for DJs, promoters and venues across Kampala. Book the kit you need for a night, a weekend or a season — delivered, set up and collected, with a technician on call if anything goes sideways mid-show.",
+   "features": [
+    {
+     "t": "Controllers &amp; CDJs",
+     "d": "Pioneer, Denon and Numark decks, mixers and all-in-one controllers."
+    },
+    {
+     "t": "Booth packages",
+     "d": "Deck, mixer, monitors, stands and cabling as one bookable unit."
+    },
+    {
+     "t": "Delivery &amp; setup",
+     "d": "We deliver, rig, line-check and collect. You just play."
+    },
+    {
+     "t": "Technician on call",
+     "d": "Support during the event, not just a handover at the door."
+    }
+   ],
+   "faq": [
+    {
+     "q": "Do you deliver outside Kampala?",
+     "a": "Yes — we supply events across Uganda and the wider East African region. Distance affects the quote, so call ahead."
+    },
+    {
+     "q": "Is a deposit required?",
+     "a": "Terms depend on the package and the length of hire. Call 0789 191 660 for a quote."
+    }
+   ]
+  },
+  {
+   "slug": "maintenance",
+   "title": "Maintenance &amp; Repair",
+   "short": "Maintenance",
+   "tagline": "Fix it properly, once",
+   "excerpt": "Diagnosis, repair and servicing of DJ equipment, plus computer sales, repair and maintenance.",
+   "image": "/assets/img/derrick-portrait.jpg",
+   "intro": "Jog wheels that drift, faders that crackle, channels that cut out, laptops that choke mid-set. The maintenance bench at Plot 1 Bukoto Street handles DJ equipment and the computers that run it — diagnosis first, honest quote second, repair third.",
+   "features": [
+    {
+     "t": "DJ gear repair",
+     "d": "Controllers, mixers and CDJs — faders, jog wheels, ports, power and audio paths."
+    },
+    {
+     "t": "Servicing",
+     "d": "Preventive cleaning and calibration so gear survives another season of gigs."
+    },
+    {
+     "t": "Computers",
+     "d": "Laptop and desktop repair, servicing, Windows and macOS installation."
+    },
+    {
+     "t": "Sales &amp; accessories",
+     "d": "Computers, peripherals, cables and the small parts that always go missing."
+    }
+   ],
+   "faq": [
+    {
+     "q": "Do you quote before repairing?",
+     "a": "Always. We diagnose, tell you what is wrong and what it costs, and you decide before any work starts."
+    },
+    {
+     "q": "Can you service gear you did not sell?",
+     "a": "Yes. Bring in any make — the bench is not limited to equipment bought from us."
+    }
+   ]
+  },
+  {
+   "slug": "sound-and-pa",
+   "title": "Sound &amp; PA",
+   "short": "Sound &amp; PA",
+   "tagline": "Clean sound, any room size",
+   "excerpt": "Clean sound systems and PA for hire, scaled from intimate rooms to open-air stages.",
+   "image": "/assets/img/live-1.jpg",
+   "intro": "Sound that suits the room instead of fighting it. We scale the system to the space and the crowd — an intimate launch, a full wedding, or an open-air stage — and we line-check it before anyone walks in.",
+   "features": [
+    {
+     "t": "Room-matched systems",
+     "d": "The rig is specified for your venue, not pulled off a shelf."
+    },
+    {
+     "t": "Full PA",
+     "d": "Tops, subs, amps, desks, monitoring, microphones and cabling."
+    },
+    {
+     "t": "Engineer on site",
+     "d": "Someone on the desk through the event, keeping the mix honest."
+    },
+    {
+     "t": "Bundled with stage",
+     "d": "Combine with stage, lighting and LED for one quote and one team."
+    }
+   ],
+   "faq": [
+    {
+     "q": "Can you cover outdoor events?",
+     "a": "Yes — open-air stages are a core part of what we supply, including power planning and weather cover."
+    },
+    {
+     "q": "Do you provide microphones for speeches?",
+     "a": "Yes, wired and wireless, along with a technician to manage handovers during the programme."
+    }
+   ]
+  },
+  {
+   "slug": "stage-lighting",
+   "title": "Stage, Truss &amp; Lighting",
+   "short": "Stage &amp; Lighting",
+   "tagline": "Build the stage, light the room",
+   "excerpt": "Stage build and rigging with moving heads, washers, blinders and floodlights.",
+   "image": "/assets/img/event-1.jpg",
+   "intro": "Truss, staging and a lighting rig that makes the room look like the event it is. We build it, focus it, program it and run it — then strike it and get out of your venue on time.",
+   "features": [
+    {
+     "t": "Truss &amp; staging",
+     "d": "Stage decks, truss structures and rigging built to the venue."
+    },
+    {
+     "t": "Moving heads",
+     "d": "Intelligent lighting programmed to the programme, not left on auto."
+    },
+    {
+     "t": "Washers &amp; blinders",
+     "d": "Colour wash, blinders and floodlights for crowd and stage coverage."
+    },
+    {
+     "t": "Build &amp; strike",
+     "d": "Full crew for load-in, show and load-out."
+    }
+   ],
+   "faq": [
+    {
+     "q": "How much notice do you need?",
+     "a": "The bigger the build, the earlier the better. Call 0789 191 660 with your date and we will tell you honestly if it is workable."
+    },
+    {
+     "q": "Can you work with our venue's existing rig?",
+     "a": "Yes — we regularly supplement house systems rather than replacing them."
+    }
+   ]
+  },
+  {
+   "slug": "led-screens",
+   "title": "LED Screens",
+   "short": "LED Screens",
+   "tagline": "Indoor and outdoor LED walls",
+   "excerpt": "Indoor and outdoor LED screens and walls for stages, brand activations and corporate events.",
+   "image": "/assets/img/derrick-2.jpg",
+   "intro": "LED walls for stage backdrops, brand activations, conferences and outdoor screenings — supplied, rigged, fed and operated. We handle the content pipeline too, so your visuals actually reach the panel in the right resolution.",
+   "features": [
+    {
+     "t": "Indoor screens",
+     "d": "High-resolution panels for conferences, launches and stage backdrops."
+    },
+    {
+     "t": "Outdoor screens",
+     "d": "Bright, weather-capable walls for open-air events and screenings."
+    },
+    {
+     "t": "Content &amp; playback",
+     "d": "Processors, playback and a operator running your visuals live."
+    },
+    {
+     "t": "Any configuration",
+     "d": "Sized and shaped to the stage — straight walls, side panels or custom builds."
+    }
+   ],
+   "faq": [
+    {
+     "q": "What content format should we send?",
+     "a": "Send us what you have and we will tell you what it needs to become. Getting this right early saves the show."
+    },
+    {
+     "q": "Can the screen run during daylight?",
+     "a": "Our outdoor panels are specified for daylight visibility. Indoor panels are not — tell us the environment when you enquire."
+    }
+   ]
+  },
+  {
+   "slug": "events-management",
+   "title": "Events Management",
+   "short": "Events",
+   "tagline": "Run the whole thing",
+   "excerpt": "Full event solutions — drafting and executing programmes, hiring acts and performers.",
+   "image": "/assets/img/event-1.jpg",
+   "intro": "One team from concept to strike. We draft the programme, book the acts, supply the technical, run the show on the day and hand you a venue back in the state we found it.",
+   "features": [
+    {
+     "t": "Programme design",
+     "d": "Drafting and executing a run-of-show that actually holds a crowd."
+    },
+    {
+     "t": "Acts &amp; performers",
+     "d": "Booking and coordinating DJs, MCs, live acts and dancers."
+    },
+    {
+     "t": "Technical supply",
+     "d": "Sound, stage, lighting and LED from the same house — one quote, one crew."
+    },
+    {
+     "t": "On-the-day delivery",
+     "d": "Stage management and technical operation through the event."
+    }
+   ],
+   "faq": [
+    {
+     "q": "Do you take on corporate events?",
+     "a": "Yes — corporate functions, launches and brand activations are a large part of the work."
+    },
+    {
+     "q": "Can you supply only part of the event?",
+     "a": "Yes. Plenty of clients book only the technical, or only the DJ. Take what you need."
+    }
+   ]
+  },
+  {
+   "slug": "wedding-planning",
+   "title": "Wedding Planning",
+   "short": "Weddings",
+   "tagline": "One team for the whole day",
+   "excerpt": "DJ, sound, lighting and coordination for the whole day, run by one team.",
+   "image": "/assets/img/derrick-3.jpg",
+   "intro": "Weddings punish bad coordination. Booking the DJ, the PA, the lighting and the coordinator from four different vendors is how a timeline falls apart. Here it is one team, one number and one person accountable for the day running to plan.",
+   "features": [
+    {
+     "t": "Wedding DJ",
+     "d": "Open-format sets read to the room, from the ceremony through the last dance."
+    },
+    {
+     "t": "Sound for speeches",
+     "d": "Microphones and a technician managing handovers so no toast gets lost."
+    },
+    {
+     "t": "Lighting &amp; decor support",
+     "d": "Uplighting, dance-floor lighting and stage wash."
+    },
+    {
+     "t": "Day coordination",
+     "d": "A run-of-show and someone holding the timeline together."
+    }
+   ],
+   "faq": [
+    {
+     "q": "Do you meet before the day?",
+     "a": "Yes — we plan the run-of-show and the music direction with you in advance. Surprises on the day are the enemy."
+    },
+    {
+     "q": "Can we give you a playlist?",
+     "a": "Absolutely. Bring must-plays and do-not-plays; the reading of the room is our job."
+    }
+   ]
+  },
+  {
+   "slug": "recording-production",
+   "title": "Recording &amp; Production",
+   "short": "Studio",
+   "tagline": "Record, mix, finish",
+   "excerpt": "Music recording, mixing, mashups and production in a purpose-built room.",
+   "image": "/assets/img/derrick-4.jpg",
+   "intro": "A production room built for finishing things. Recording, mixing, mashups, edits and bespoke mixtape work — for artists, for brands and for DJs who need a clean custom edit that nobody else has.",
+   "features": [
+    {
+     "t": "Recording",
+     "d": "Vocal and instrument tracking in a treated room."
+    },
+    {
+     "t": "Mixing",
+     "d": "Mixes finished to a standard that survives a club system."
+    },
+    {
+     "t": "Mashups &amp; edits",
+     "d": "Custom edits, bootlegs and transitions built for your set."
+    },
+    {
+     "t": "Content shoots",
+     "d": "The room doubles as a backdrop for artist and brand content."
+    }
+   ],
+   "faq": [
+    {
+     "q": "Do you work with new artists?",
+     "a": "Yes. Come in with an idea and we will tell you honestly what it needs."
+    },
+    {
+     "q": "Can you master as well?",
+     "a": "Tell us the destination — streaming, club play or radio — and we will advise on the right finishing chain."
+    }
+   ]
+  },
+  {
+   "slug": "dj-bookings",
+   "title": "DJ Bookings",
+   "short": "Book the DJ",
+   "tagline": "Book DJ Derrick Files",
+   "excerpt": "Club nights, weddings, corporate events, brand activations and festival sets.",
+   "image": "/assets/img/derrick-hero.jpg",
+   "intro": "Open-format sets across Afrobeats, Amapiano, Dancehall, Ragga, Kompa and R&amp;B, built for the room rather than for a pre-baked playlist. More than sixty mixes published since 2019 — listen first, then book.",
+   "features": [
+    {
+     "t": "Club nights",
+     "d": "Residencies, guest slots and weekly takeovers."
+    },
+    {
+     "t": "Weddings &amp; private",
+     "d": "Full-day coverage with sound and lighting if you need it."
+    },
+    {
+     "t": "Corporate &amp; brands",
+     "d": "Activations, launches and corporate functions."
+    },
+    {
+     "t": "Festivals",
+     "d": "Main and side-stage sets, with technical supply available."
+    }
+   ],
+   "faq": [
+    {
+     "q": "How far ahead should I book?",
+     "a": "Weekends fill early, especially in wedding season. Call 0789 191 660 with your date as soon as you have it."
+    },
+    {
+     "q": "Can I hear a set first?",
+     "a": "Yes — over sixty mixes are published on Mixcloud and SoundCloud. Links are on the Mixes page."
+    }
+   ]
+  }
+ ],
+ "mixes": {
+  "intro": "More than sixty mixes published since 2019, moving between Afrobeats, Amapiano, Dancehall, Ragga, Kompa and R&amp;B — including the MixShot series and the long-running Rugby Chill franchise.",
+  "genres": [
+   "Afrobeats",
+   "Amapiano",
+   "Dancehall",
+   "Ragga",
+   "Kompa",
+   "R&amp;B"
+  ],
+  "items": [
+   {
+    "title": "Rugby Chill Series",
+    "desc": "The signature franchise — the most-played series in the catalogue.",
+    "link": "https://www.mixcloud.com/derrickfiles/"
+   },
+   {
+    "title": "MixShot Series",
+    "desc": "Numbered open-format sets: fast Afro, Zanku, Afro-dubbin, slow whine and more.",
+    "link": "https://www.mixcloud.com/derrickfiles/"
+   },
+   {
+    "title": "Hype Dancehall &amp; Ragga Mashup",
+    "desc": "Full-tilt dancehall, ragga and mashup open set.",
+    "link": "https://www.mixcloud.com/derrickfiles/"
+   },
+   {
+    "title": "Riddims &amp; Tropical Vibes",
+    "desc": "Slower, warmer, built for sundowners and open-air rooms.",
+    "link": "https://www.mixcloud.com/derrickfiles/"
+   }
   ]
+ },
+ "shop": {
+  "intro": "Gear, accessories and digital packs from Derrick Files Studio. Payment by mobile money — call or WhatsApp 0789 191 660 to order.",
+  "items": [
+   {
+    "title": "DJ Controllers",
+    "desc": "Pioneer, Denon and Numark controllers and mixers. Ask for current stock.",
+    "price": "Enquire",
+    "image": "/assets/img/derrick-4.jpg"
+   },
+   {
+    "title": "Accessories &amp; Cabling",
+    "desc": "Cables, adaptors, stands, cases and the parts that always go missing.",
+    "price": "Enquire",
+    "image": "/assets/img/derrick-3.jpg"
+   },
+   {
+    "title": "Computers &amp; Peripherals",
+    "desc": "Laptops, desktops and peripheral devices, sold and supported in-house.",
+    "price": "Enquire",
+    "image": "/assets/img/derrick-2.jpg"
+   },
+   {
+    "title": "Derrick Files Merch",
+    "desc": "Studio tees and branded apparel.",
+    "price": "Enquire",
+    "image": "/assets/img/brand-tee.jpg"
+   }
+  ]
+ },
+ "gallery": {
+  "intro": "Portraits, sessions, stage builds and events — Kampala and beyond.",
+  "items": [
+   {
+    "image": "/assets/img/derrick-hero.jpg",
+    "caption": "Studio portrait"
+   },
+   {
+    "image": "/assets/img/live-1.jpg",
+    "caption": "Live set, Mbale"
+   },
+   {
+    "image": "/assets/img/event-1.jpg",
+    "caption": "KISU Prom"
+   },
+   {
+    "image": "/assets/img/derrick-2.jpg",
+    "caption": "Studio session"
+   },
+   {
+    "image": "/assets/img/derrick-3.jpg",
+    "caption": "Portrait session"
+   },
+   {
+    "image": "/assets/img/derrick-4.jpg",
+    "caption": "In the room"
+   },
+   {
+    "image": "/assets/img/brand-tee.jpg",
+    "caption": "Derrick Files brand"
+   },
+   {
+    "image": "/assets/img/derrick-portrait.jpg",
+    "caption": "Portrait"
+   }
+  ]
+ },
+ "youtube": {
+  "intro": "Sets, tutorials, gear breakdowns and behind-the-scenes from Derrick Files Studio.",
+  "channel": "https://www.youtube.com/c/derrickfiles",
+  "videos": []
+ },
+ "blog": [
+  {
+   "slug": "why-i-dj-instead-of-the-career-i-studied-for",
+   "title": "Why I DJ instead of the career I studied for",
+   "date": "2026-09-19",
+   "author": "DJ Derrick Files",
+   "cover": "/assets/img/derrick-1.jpg",
+   "excerpt": "School gave me a certificate. The decks gave me a living, a name, and a studio on Bukoto Street. Here is the honest version of that choice.",
+   "tags": [
+    "Story",
+    "Career"
+   ],
+   "body": [
+    "People ask me this at almost every gig. You went to school, you have papers, why are you standing behind decks at two in the morning? It is a fair question and I have stopped giving the short answer, because the short answer makes it sound like I gave something up. I did not. I chose the thing that was already paying me attention.",
+    "Here is what actually happened. While I was still studying, the music was not a hobby I did on weekends. It was the thing I woke up thinking about. I would sit in lectures planning a set. I was learning two professions at the same time, and only one of them was teaching me something new every single day.",
+    "The difference is feedback. In a classroom you find out if you were right at the end of the semester. Behind decks you find out in four seconds. You drop a track, and the floor either moves or it does not. There is no arguing with it, no explaining yourself, no partial marks. That kind of feedback makes you improve fast, because it is honest and it is immediate.",
+    "The second reason is that this work compounds. Every mix I upload is still working for me a year later. Every wedding I play gets seen by two hundred people who might book me. Every student who comes through the academy tells somebody else. A salary does not do that. A salary stops the day you stop showing up.",
+    "I want to be clear about something, because young DJs read this and hear permission to drop out. That is not what I am saying. School taught me how to finish things I did not feel like finishing, how to plan, how to show up on time and explain myself to people who are paying me. When I started running Derrick Files Studio as a business, with clients and invoices and equipment that costs real money, that training is what kept it standing. The papers are not wasted. They just are not the job.",
+    "What I actually chose was ownership. As a DJ I own the brand, the catalogue, the relationships and the room. Nobody can restructure me out of that. When the studio has a slow month, I can go make something. That is a very different feeling from waiting for someone to decide your value.",
+    "The honest part is that the first years are hard. You play for small money in small rooms, you carry your own gear, and people who studied with you are already buying cars. Anyone who tells you otherwise is selling you a course. You do it anyway because you are building an asset, and assets take time to look like anything.",
+    "If you are sitting in that same position right now, deciding between the safe route and the decks, I will not tell you which to choose. But I will tell you this: do not choose based on what is comfortable to explain to relatives. Choose based on which one you are still thinking about at midnight. That is the one you will be good at.",
+    "I picked the decks. Seven years later that decision built a studio on Plot 1 Bukoto Street, a team, an academy and a name that gets me booked across borders. I have never once wished I had picked the other thing."
+   ]
+  },
+  {
+   "slug": "what-a-dj-school-gives-you-that-youtube-cannot",
+   "title": "What a DJ school gives you that YouTube cannot",
+   "date": "2026-09-19",
+   "author": "DJ Derrick Files",
+   "cover": "/assets/img/derrick-2.jpg",
+   "excerpt": "Everything about mixing is free online. So why do the DJs who get booked almost always have somebody who taught them? Here is the difference.",
+   "tags": [
+    "DJ Academy",
+    "Beginners"
+   ],
+   "body": [
+    "Let me start by agreeing with you. Every technique you need is on YouTube, for free, explained by people much more famous than me. Beat matching, EQ, looping, harmonic mixing, all of it. So the honest question is not whether the information is free. It is why so many people watch hundreds of hours and still cannot hold a floor.",
+    "The answer is that mixing is a physical skill, and you cannot learn a physical skill by watching. You learn it by doing it wrong in front of somebody who can see exactly what you are doing wrong.",
+    "1. Correction in real time. A tutorial cannot see your hands. When your transitions keep landing slightly late, you will not know why, because to you it sounds fine. An instructor standing next to you hears it once and tells you your cue point is on the wrong beat. That is a ten second fix that you might otherwise carry for two years.",
+    "2. Order. YouTube gives you everything at once, which feels generous and is actually the problem. You end up learning a flashy scratch before you can hold a steady mix, because the flashy video had more views. A school gives you sequence. Boring things first, in the right order, so each skill has something to stand on.",
+    "3. Real gear, under pressure. Most beginners practise on a controller in a quiet bedroom. Then they arrive at a club with a mixer they have never touched, monitors pointing the wrong way, and a crowd watching. In class you get put on proper equipment early, so the first time you meet a club setup is not the night you are being paid.",
+    "4. Reading a room. This is the whole job and no tutorial can teach it. Knowing that the floor is about to break and you have one track to save it. Knowing when to hold a groove instead of showing off. You only learn that by playing for actual people while somebody experienced tells you what they saw.",
+    "5. The network. This one gets underrated and it is probably worth the fee on its own. Your classmates become the people who call you when they cannot make a gig. Your instructor becomes the person promoters ask when they need a name. In Kampala almost every working DJ got their first real booking through somebody, not through an application. A school puts you inside that somebody.",
+    "6. Being forced to finish. Free means no consequence for stopping. Most people who teach themselves quit in month two, not because it was too hard but because nothing happened if they skipped a week. Paying for something and turning up for it is a commitment device, and commitment devices are why people finish.",
+    "7. Honest assessment. Your friends will tell you your mix is fire. They are being kind. You need somebody with no reason to flatter you telling you exactly where you are, so you know what to work on next.",
+    "I am not against self teaching. Some of the best DJs I know are self taught and they will be the first to tell you it took them far longer than it needed to. If you have years to spare, YouTube will get you there eventually.",
+    "If you want to be gig ready in months instead of years, get somebody to watch your hands. That is the entire difference, and it is bigger than it sounds.",
+    "We run beginner to advanced classes at Plot 1 Bukoto Street, next to Acacia Mall. Intake is open. Come and see the room before you decide."
+   ]
+  },
+  {
+   "slug": "build-a-dj-brand-that-gets-you-booked",
+   "title": "Build a DJ brand that actually gets you booked",
+   "date": "2026-09-19",
+   "author": "DJ Derrick Files",
+   "cover": "/assets/img/derrick-3.jpg",
+   "excerpt": "The number one factor in getting more and better gigs is your brand. It is what separates you from the millions of bedroom DJs. Here is how to build one.",
+   "tags": [
+    "Branding",
+    "Career"
+   ],
+   "body": [
+    "The number one success factor in getting more and better gigs is your DJ brand. Not your track collection, not your gear. Your brand is what distinguishes you from the millions of bedroom DJs and struggling artists out there, and the easiest way to build it is through content.",
+    "The good news is that you can start with no fanbase and no contacts at any club. I have watched DJs begin with six listeners on a first live podcast and grow to tens of thousands across platforms. It happens in a specific order, and this is that order.",
+    "1. Pick your niche. Ragga, dancehall, afrobeats, RnB, amapiano, whatever is genuinely yours. This lets your clientele understand what you produce best and what to expect every time you release something. A DJ who plays everything is a DJ nobody remembers to call.",
+    "2. Create an image. People follow people, not playlists. For your brand to work, people must be able to identify with you as a person and not only with your music. Talk to your followers regularly. Let them see the ordinary parts, not just the highlight reel.",
+    "3. Pay attention to how you look. Bookers are not only buying your sound. They are buying the emotion you create for their club guests, their corporate event, their private show. Your photos, your flyers and your stage presence are part of what they are paying for.",
+    "4. Make content, consistently. Mixtapes, radio shows, live podcasts, livestreams, vlogs, EPs, Mixcloud uploads. And consistently is the operative word. Look at any top DJ and you will find hundreds of episodes released on a schedule. One show every week beats five mixtapes in one week and then silence for three months.",
+    "5. Be everywhere your people are. YouTube, Mixcloud, Instagram, TikTok, Facebook, Twitch. It is your original content, so put it on every platform that will carry it and promote the posts that start moving on their own.",
+    "6. Own the home base. This is the step most DJs skip and it is the one that compounds. Social platforms rent you an audience and can change the rules any morning. A website you control is where the full catalogue lives, where bookers find your rates, and where you collect emails and numbers so you can reach people directly. Everything else should point here.",
+    "7. Stack your income. At the beginning, gigs are your number one income stream. Once you have a fanbase you can add merch, original tracks, streaming, classes and branded content deals. Do not try to monetise before there is an audience to monetise.",
+    "8. Join a team. In Uganda especially, DJs who team up grow faster than DJs who go it alone. Look at what movements like Route Entertainment and ATR Records have done for the people inside them. Shared audiences, shared bookings, shared equipment, and somebody to cover you when two gigs land on the same night.",
+    "One more thing I have learned running this as a business. Separate the person from the company early. DJ Derrick Files is the artist, Derrick Files Studio is the business, and keeping those two names clear has made both of them easier to book, easier to search for, and easier to grow.",
+    "Start with one. Pick your niche this week and release something. The rest of this list only works once there is something to build on."
+   ]
+  },
+  {
+   "slug": "how-to-choose-your-first-dj-controller",
+   "title": "How to choose your first DJ controller",
+   "date": "2026-09-01",
+   "author": "DJ Derrick Files",
+   "cover": "/assets/img/derrick-4.jpg",
+   "excerpt": "The honest version: most beginners overspend on the wrong features and underspend on the thing that actually matters.",
+   "tags": [
+    "Gear",
+    "Beginners"
+   ],
+   "body": [
+    "Every week someone walks into the studio at Plot 1 Bukoto Street holding a controller they bought online, asking why it does not feel like the one they saw in a video. Usually the answer is the same — they bought for the spec sheet instead of for the way they want to play.",
+    "Start with the jog wheels. If you intend to scratch or do anything hands-on, wheel size and feel matter more than the number of pads. A small, light wheel will fight you for years. Spend your money there first.",
+    "Then look at the mixer section. Two channels is enough to learn on and enough for most club work. Four channels only earns its price once you are genuinely layering more than two sources, and most people never get there.",
+    "Ignore the effects count. Every controller ships with more effects than you will ever use well, and a set carried by effects is a set that was not mixed properly underneath.",
+    "Finally — and this is the part nobody says — budget for stands, cables and a case. A controller sitting on a wobbly table with a borrowed cable will sound and feel worse than a cheaper setup that is properly rigged.",
+    "If you want to try before you buy, come to the studio. You can put your hands on Pioneer, Denon and Numark gear in the same afternoon and feel the difference for yourself."
+   ]
+  },
+  {
+   "slug": "what-a-wedding-dj-actually-does",
+   "title": "What a wedding DJ actually does",
+   "date": "2026-08-18",
+   "author": "DJ Derrick Files",
+   "cover": "/assets/img/derrick-3.jpg",
+   "excerpt": "Playing music is maybe a third of the job. The rest is timing, microphones and stopping the day from drifting.",
+   "tags": [
+    "Weddings",
+    "Events"
+   ],
+   "body": [
+    "Couples book a wedding DJ thinking they are buying music. What they are actually buying is someone who holds the timeline together while a hundred things try to pull it apart.",
+    "The music matters, of course. Reading a room full of three generations and finding the record that moves all of them is a real skill, and it is not the same skill as playing a club at 1am.",
+    "But the parts that decide whether a wedding runs well are less glamorous. Who hands the microphone to the speaker and takes it back. Whether the sound is loud enough at the back without being painful at the top table. Whether the first dance starts at the right moment or twenty minutes late because nobody told the kitchen.",
+    "This is the argument for booking the DJ, the sound and the coordination from one place. Four separate vendors means four people each confident that the delay was somebody else's fault.",
+    "When we take a wedding, we build the run-of-show with the couple first, agree the must-plays and the do-not-plays, and put one person on the day whose entire job is keeping the programme moving."
+   ]
+  },
+  {
+   "slug": "led-walls-what-to-ask-before-you-book",
+   "title": "LED walls: what to ask before you book one",
+   "date": "2026-07-29",
+   "author": "Derrick Files Studio",
+   "cover": "/assets/img/derrick-2.jpg",
+   "excerpt": "Most LED disasters are content problems, not hardware problems. Five questions that prevent them.",
+   "tags": [
+    "Events",
+    "LED"
+   ],
+   "body": [
+    "An LED wall is the most visible thing at your event, which means when it goes wrong it goes wrong publicly. Almost every failure we get called to fix was avoidable a week earlier.",
+    "First question: indoor or outdoor? Panels specified for a conference hall will disappear in Kampala daylight. Tell your supplier the environment before anything else.",
+    "Second: what resolution is the content? A wall is not a TV — it has a native pixel dimension, and a logo exported for Instagram will look like a mosaic on it.",
+    "Third: who is operating it during the show? A wall with nobody on the processor is a wall showing a frozen slide while the MC talks over it.",
+    "Fourth: how is it rigged? Ground-stacked and flown builds have completely different requirements, timelines and costs.",
+    "Fifth: what is the power situation? LED walls draw real current, and venue circuits in the region are not always what the venue thinks they are.",
+    "Ask those five before you sign anything. Any supplier who cannot answer them clearly is going to learn the answers on your event."
+   ]
+  }
+ ]
 }
