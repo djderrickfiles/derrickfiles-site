@@ -523,7 +523,8 @@ function pageMixes() {
         ${i.audio ? `<audio controls preload="none" data-track="${esc(i.title)}" src="${esc(i.audio)}">Your browser cannot play this audio.</audio>` : ''}
         <div class="sound-actions">
           ${i.downloadUrl && (i.free !== false) ? `<a class="bt bs gate-download" href="${esc(i.downloadUrl)}" data-item="${esc(i.title)}" download>Free download &darr;</a>` : ''}
-          ${i.free === false ? `<a class="bt bp" href="${wa}?text=${encodeURIComponent(`I want ${strip(i.title)} (${i.price || 'price on request'})`)}" data-track-buy="${esc(i.title)}" rel="noopener" target="_blank">${esc(i.price || 'Get this pack')} &rarr;</a>` : ''}
+          ${i.free === false && !i.paymentEnabled ? `<a class="bt bp" href="${wa}?text=${encodeURIComponent(`I want ${strip(i.title)} (${i.price || 'price on request'})`)}" data-track-buy="${esc(i.title)}" rel="noopener" target="_blank">${esc(i.price || 'Get this pack')} &rarr;</a>` : ''}
+          ${i.paymentEnabled && i.price ? `<button class="bt bp pay-button" type="button" data-pay-item="${esc(i.title)}" data-pay-amount="${i.price}">Buy ${i.price} UGX &rarr;</button>` : ''}
           ${i.link ? `<a class="sound-link platform-outbound" href="${esc(i.link)}" data-track-outbound="${esc(i.title)}" rel="noopener" target="_blank">Open source &rarr;</a>` : ''}
         </div>
       </div>
@@ -542,16 +543,29 @@ function pageMixes() {
     <div class="gate-socials">${[['Instagram',S.social.instagram],['TikTok',S.social.tiktok],['YouTube',S.social.youtube],['SoundCloud',S.social.soundcloud]].map(x => `<a href="${esc(x[1])}" target="_blank" rel="noopener">${esc(x[0])}</a>`).join('')}</div>
   </div>
 </div>
+<div class="gate-modal" id="pay-modal" hidden>
+  <div class="gate-shade" data-pay-close></div>
+  <div class="gate-box" role="dialog" aria-modal="true" aria-labelledby="pay-title">
+    <button class="gate-close" type="button" data-pay-close aria-label="Close">&times;</button>
+    <p class="eyeb"><i></i> Mobile money payment</p><h2 id="pay-title">Complete your purchase</h2>
+    <form id="payment-form"><input id="pay-item" name="item" type="hidden"><input id="pay-amount" name="amount" type="hidden"><label for="pay-phone">Mobile money number</label><input id="pay-phone" name="phone" type="tel" required placeholder="07XX XXXXXX" pattern="[0-9\\-\\s+]{9,}"><label for="pay-network">Network</label><select id="pay-network" name="network"><option value="MTN">MTN Mobile Money</option><option value="Airtel">Airtel Money</option><option value="Stanbic">Stanbic Loans</option><option value="Other">Other</option></select><button class="bt bp" type="submit">Send payment request &rarr;</button><p class="gate-status" id="pay-status" aria-live="polite"></p></form>
+  </div>
+</div>
 <script>
 (function(){
-  var modal=document.getElementById('gate-modal'), form=document.getElementById('download-gate'), status=document.getElementById('gate-status'), active=null;
+  var gateModal=document.getElementById('gate-modal'), payModal=document.getElementById('pay-modal'), form=document.getElementById('download-gate'), payForm=document.getElementById('payment-form'), status=document.getElementById('gate-status'), payStatus=document.getElementById('pay-status'), active=null;
   function track(event,item){fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:event,item:item})}).catch(function(){});}
   document.querySelectorAll('[data-favorite]').forEach(function(b){var k='dfs-fav-'+b.dataset.favorite, on=localStorage.getItem(k)==='1'; b.setAttribute('aria-pressed',on); b.classList.toggle('is-fav',on); b.addEventListener('click',function(){on=!on;localStorage.setItem(k,on?'1':'0');b.setAttribute('aria-pressed',on);b.classList.toggle('is-fav',on);track('favorite',b.dataset.favorite);});});
   document.querySelectorAll('audio[data-track]').forEach(function(a){a.addEventListener('play',function(){track('play',a.dataset.track);},{once:true});});
   document.querySelectorAll('[data-track-buy],[data-track-outbound]').forEach(function(a){a.addEventListener('click',function(){track(a.dataset.trackBuy?'buy':'outbound',a.dataset.trackBuy||a.dataset.trackOutbound);});});
-  document.querySelectorAll('.gate-download').forEach(function(a){a.addEventListener('click',function(e){if(localStorage.getItem('dfs-subscriber')==='1')return; e.preventDefault();active=a;document.getElementById('gate-item').value=a.dataset.item;modal.hidden=false;document.getElementById('gate-email').focus();});});
-  function close(){modal.hidden=true;active=null;} document.querySelectorAll('[data-gate-close]').forEach(function(x){x.addEventListener('click',close);}); document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)close();});
-  form.addEventListener('submit',function(e){e.preventDefault();status.textContent='Saving your signup…';var data={email:document.getElementById('gate-email').value,item:document.getElementById('gate-item').value,source:'mix-download'};fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(function(r){return r.json().then(function(x){if(!r.ok||!x.ok)throw new Error(x.error||'Could not subscribe');return x;});}).then(function(){localStorage.setItem('dfs-subscriber','1');track('download',data.item);status.textContent='Unlocked — starting your download.';if(active){var href=active.href;active=null;setTimeout(function(){close();location.href=href;},350);}}).catch(function(err){status.textContent=err.message;});});
+  document.querySelectorAll('.gate-download').forEach(function(a){a.addEventListener('click',function(e){if(localStorage.getItem('dfs-subscriber')==='1')return; e.preventDefault();active=a;document.getElementById('gate-item').value=a.dataset.item;gateModal.hidden=false;document.getElementById('gate-email').focus();});});
+  document.querySelectorAll('.pay-button').forEach(function(b){b.addEventListener('click',function(){payModal.hidden=false;document.getElementById('pay-item').value=b.dataset.payItem;document.getElementById('pay-amount').value=b.dataset.payAmount;document.getElementById('pay-phone').focus();});});
+  function closeGate(){gateModal.hidden=true;active=null;} function closePay(){payModal.hidden=true;} 
+  document.querySelectorAll('[data-gate-close]').forEach(function(x){x.addEventListener('click',closeGate);}); 
+  document.querySelectorAll('[data-pay-close]').forEach(function(x){x.addEventListener('click',closePay);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(!gateModal.hidden)closeGate();if(!payModal.hidden)closePay();}});
+  form.addEventListener('submit',function(e){e.preventDefault();status.textContent='Saving your signup…';var data={email:document.getElementById('gate-email').value,item:document.getElementById('gate-item').value,source:'mix-download'};fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(function(r){return r.json().then(function(x){if(!r.ok||!x.ok)throw new Error(x.error||'Could not subscribe');return x;});}).then(function(){localStorage.setItem('dfs-subscriber','1');track('download',data.item);status.textContent='Unlocked — starting your download.';if(active){var href=active.href;active=null;setTimeout(function(){closeGate();location.href=href;},350);}}).catch(function(err){status.textContent=err.message;});});
+  payForm.addEventListener('submit',function(e){e.preventDefault();payStatus.textContent='Processing payment…';var data={item:document.getElementById('pay-item').value,amount:parseInt(document.getElementById('pay-amount').value),phone:document.getElementById('pay-phone').value,network:document.getElementById('pay-network').value};fetch('/api/pay',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(function(r){return r.json().then(function(x){if(!r.ok||!x.ok)throw new Error(x.error||'Could not process payment');return x;});}).then(function(x){track('buy',data.item);payStatus.innerHTML='✓ <strong>Payment received!</strong> The studio will send you confirmation via '+data.phone+'. Reference: <code>'+x.reference+'</code>';setTimeout(function(){closePay();document.getElementById('pay-phone').value='';payStatus.textContent='';},2500);}).catch(function(err){payStatus.textContent=err.message;});});
 })();
 </script>`;
   return simplePage({ slug: '/mixes/', title: `Mixes, mashups &amp; sound packs — ${S.person} | ${S.brand}`, h1: 'Mixes &amp; downloads', intro: m.intro, inner: inner + gate, desc: strip(m.intro), nav: '/mixes/',
@@ -571,7 +585,8 @@ function pageShop() {
       <div class="cbody"><p class="meta">${raw(i.category || 'Studio shop')} ${i.sku ? `&middot; ${esc(i.sku)}` : ''}</p><h3>${raw(i.title)}</h3><p>${raw(i.desc)}</p>
       ${i.details ? `<div class="product-details">${raw(i.details)}</div>` : ''}
       <div class="product-meta"><b>${raw(i.price || 'Enquire')}</b><span>${esc(i.availability || 'Ask for current stock')}</span></div>
-      <a class="go" href="${wa}?text=${encodeURIComponent(`I want to enquire about ${strip(i.title)}`)}" rel="noopener" target="_blank">Enquire / pay by mobile money &rarr;</a></div>
+      ${i.paymentEnabled && i.price ? `<button class="bt bp pay-button" type="button" data-pay-item="${esc(i.title)}" data-pay-amount="${i.price}">Buy ${i.price} UGX &rarr;</button>` : ''}
+      ${!i.paymentEnabled ? `<a class="go" href="${wa}?text=${encodeURIComponent(`I want to enquire about ${strip(i.title)}`)}" rel="noopener" target="_blank">Enquire / pay by mobile money &rarr;</a>` : ''}</div>
     </article>`).join('')}
   </div>
 </div></section>`;

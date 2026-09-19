@@ -35,3 +35,16 @@ CREATE TABLE IF NOT EXISTS media_events (
 );
 
 CREATE INDEX IF NOT EXISTS media_events_item_idx ON media_events(item, event);
+
+CREATE TABLE IF NOT EXISTS payments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  item TEXT NOT NULL,
+  amount INTEGER NOT NULL,
+  currency TEXT DEFAULT 'UGX',
+  phone TEXT NOT NULL,
+  network TEXT,
+  status TEXT DEFAULT 'pending',
+  reference TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  processed_at TEXT
+);

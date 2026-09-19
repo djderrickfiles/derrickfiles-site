@@ -479,22 +479,30 @@
    {
     "title": "Rugby Chill Series",
     "desc": "The signature franchise — the most-played series in the catalogue.",
-    "link": "https://www.mixcloud.com/derrickfiles/"
+    "link": "https://www.mixcloud.com/derrickfiles/",
+    "price": null,
+    "paymentEnabled": false
    },
    {
     "title": "MixShot Series",
     "desc": "Numbered open-format sets: fast Afro, Zanku, Afro-dubbin, slow whine and more.",
-    "link": "https://www.mixcloud.com/derrickfiles/"
+    "link": "https://www.mixcloud.com/derrickfiles/",
+    "price": null,
+    "paymentEnabled": false
    },
    {
     "title": "Hype Dancehall &amp; Ragga Mashup",
     "desc": "Full-tilt dancehall, ragga and mashup open set.",
-    "link": "https://www.mixcloud.com/derrickfiles/"
+    "link": "https://www.mixcloud.com/derrickfiles/",
+    "price": null,
+    "paymentEnabled": false
    },
    {
     "title": "Riddims &amp; Tropical Vibes",
     "desc": "Slower, warmer, built for sundowners and open-air rooms.",
-    "link": "https://www.mixcloud.com/derrickfiles/"
+    "link": "https://www.mixcloud.com/derrickfiles/",
+    "price": null,
+    "paymentEnabled": false
    }
   ]
  },
@@ -504,26 +512,30 @@
    {
     "title": "DJ Controllers",
     "desc": "Pioneer, Denon and Numark controllers and mixers. Ask for current stock.",
-    "price": "Enquire",
-    "image": "/assets/img/derrick-4.jpg"
+    "price": 0,
+    "image": "/assets/img/derrick-4.jpg",
+    "paymentEnabled": false
    },
    {
     "title": "Accessories &amp; Cabling",
     "desc": "Cables, adaptors, stands, cases and the parts that always go missing.",
-    "price": "Enquire",
-    "image": "/assets/img/derrick-3.jpg"
+    "price": 0,
+    "image": "/assets/img/derrick-3.jpg",
+    "paymentEnabled": false
    },
    {
     "title": "Computers &amp; Peripherals",
     "desc": "Laptops, desktops and peripheral devices, sold and supported in-house.",
-    "price": "Enquire",
-    "image": "/assets/img/derrick-2.jpg"
+    "price": 0,
+    "image": "/assets/img/derrick-2.jpg",
+    "paymentEnabled": false
    },
    {
     "title": "Derrick Files Merch",
     "desc": "Studio tees and branded apparel.",
-    "price": "Enquire",
-    "image": "/assets/img/brand-tee.jpg"
+    "price": 0,
+    "image": "/assets/img/brand-tee.jpg",
+    "paymentEnabled": false
    }
   ]
  },
