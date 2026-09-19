@@ -80,7 +80,7 @@ export async function onRequestPost(context) {
     return json({ ok: false, error: 'Could not save that. Try again.' }, 500);
   }
 
-  return json({ ok: true, message: 'Check your email for the link.' });
+  return json({ ok: true, message: 'You are on the list. Your download is ready.' });
 }
 
 // Anything other than POST gets a flat no.

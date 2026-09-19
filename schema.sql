@@ -20,3 +20,13 @@ CREATE TABLE IF NOT EXISTS downloads (
 );
 
 CREATE INDEX IF NOT EXISTS downloads_contact_id_idx ON downloads(contact_id);
+
+CREATE TABLE IF NOT EXISTS media_events (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  item TEXT NOT NULL,
+  event TEXT NOT NULL,
+  country TEXT,
+  created_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE INDEX IF NOT EXISTS media_events_item_idx ON media_events(item, event);
