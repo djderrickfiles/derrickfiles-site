@@ -362,3 +362,17 @@ footer{background:#050505;border-top:2px solid var(--gold)}
   font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
   color:#cfcfd4;background:var(--s1);transition:.18s}
 .soc-links a:hover{border-color:var(--gold);color:var(--gold)}
+
+/* ---------- SOUND LIBRARY ---------- */
+.sound-list{display:grid;gap:14px;margin:30px 0 34px}
+.sound-card{display:grid;grid-template-columns:112px 1fr;gap:20px;background:var(--s1);border:1px solid var(--line);padding:16px}
+.sound-cover{width:112px;height:112px;object-fit:cover;background:var(--s2)}
+.sound-cover-fallback{display:grid;place-items:center;color:var(--gold);font:900 30px var(--d)}
+.sound-main h3{font-size:21px;margin:0 0 5px}.sound-main p{color:var(--ash);margin:0 0 12px}
+.sound-main audio{width:100%;height:38px;margin:4px 0 14px;accent-color:var(--gold)}
+.sound-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.sound-actions .bt{padding:11px 15px;font-size:10.5px}
+.sound-link{font:700 11px var(--d);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.product-details{color:#b7b7bd;font-size:13.5px;line-height:1.65;margin:-2px 0 16px;white-space:pre-line}
+.product-meta{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:12px 0 16px;font-size:13px}
+.product-meta b{color:var(--gold)}.product-meta span{color:var(--steel);text-align:right}
+@media(max-width:560px){.sound-card{grid-template-columns:78px 1fr;gap:13px}.sound-cover{width:78px;height:78px}.sound-main h3{font-size:17px}}

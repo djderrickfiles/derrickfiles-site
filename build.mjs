@@ -454,7 +454,7 @@ ${visitSection()}
   });
 }
 
-function simplePage({ slug, title, h1, intro, inner, desc, nav }) {
+function simplePage({ slug, title, h1, intro, inner, desc, nav, extraSchema = [] }) {
   const body = `
 <header class="phead"><div class="w">
   <p class="crumb"><a href="/">Home</a> / ${esc(h1)}</p>
@@ -463,28 +463,38 @@ function simplePage({ slug, title, h1, intro, inner, desc, nav }) {
 </div></header>
 ${credStrip()}
 <main>${inner}${visitSection()}</main>`;
-  return layout({ title, desc, url: slug, active: nav || slug, body });
+  return layout({ title, desc, url: slug, active: nav || slug, body, extraSchema });
 }
 
 function pageMixes() {
   const m = C.mixes;
+  const items = m.items || [];
   const inner = `
 <section><div class="w">
   <p class="eyeb"><i></i> The sound</p>
-  <h2>Sixty-plus mixes</h2>
+  <h2>Mixes, mashups &amp; downloads</h2>
+  <p class="sub">${raw(m.intro)}</p>
   <ul class="tags">${m.genres.map(g => `<li>${raw(g)}</li>`).join('')}</ul>
-  <div class="grid">
-    ${m.items.map(i => `
-    <a class="card" href="${esc(i.link)}" rel="noopener" target="_blank">
-      <div class="cbody"><p class="meta">Series</p><h3>${raw(i.title)}</h3><p>${raw(i.desc)}</p><span class="go">Listen &rarr;</span></div>
-    </a>`).join('')}
+  <div class="sound-list">
+    ${items.map((i, n) => `
+    <article class="sound-card">
+      ${i.cover ? `<img class="sound-cover" src="${esc(i.cover)}" alt="${strip(i.title)}" loading="lazy">` : '<div class="sound-cover sound-cover-fallback">DF</div>'}
+      <div class="sound-main">
+        <p class="meta">${esc(i.type || 'Mix')} ${i.genre ? `&middot; ${esc(i.genre)}` : ''}</p>
+        <h3>${raw(i.title)}</h3><p>${raw(i.desc || '')}</p>
+        ${i.audio ? `<audio controls preload="none" src="${esc(i.audio)}">Your browser cannot play this audio.</audio>` : ''}
+        <div class="sound-actions">
+          ${i.downloadUrl && (i.free !== false) ? `<a class="bt bs" href="${esc(i.downloadUrl)}" download>Free download &darr;</a>` : ''}
+          ${i.free === false ? `<a class="bt bp" href="${wa}?text=${encodeURIComponent(`I want ${strip(i.title)} (${i.price || 'price on request'})`)}" rel="noopener" target="_blank">${esc(i.price || 'Get this pack')} &rarr;</a>` : ''}
+          ${i.link ? `<a class="sound-link" href="${esc(i.link)}" rel="noopener" target="_blank">Open source &rarr;</a>` : ''}
+        </div>
+      </div>
+    </article>`).join('')}
   </div>
-  <ul class="soc">
-    <li><a href="${esc(S.social.mixcloud)}" rel="noopener" target="_blank">All mixes on Mixcloud</a></li>
-    <li><a href="${esc(S.social.soundcloud)}" rel="noopener" target="_blank">SoundCloud</a></li>
-  </ul>
+  <div class="btns"><a class="bt bp" href="${esc(S.social.soundcloud)}" rel="noopener" target="_blank">Open SoundCloud</a><a class="bt bs" href="${esc(S.social.mixcloud)}" rel="noopener" target="_blank">Open Mixcloud</a></div>
 </div></section>`;
-  return simplePage({ slug: '/mixes/', title: `Mixes — ${S.person} | Afrobeats, Amapiano, Dancehall`, h1: 'Mixes', intro: m.intro, inner, desc: strip(m.intro) });
+  return simplePage({ slug: '/mixes/', title: `Mixes, mashups &amp; sound packs — ${S.person} | ${S.brand}`, h1: 'Mixes &amp; downloads', intro: m.intro, inner, desc: strip(m.intro), nav: '/mixes/',
+    extraSchema: items.map(i => ({ '@type': 'AudioObject', name: strip(i.title), description: strip(i.desc || ''), contentUrl: i.audio || undefined, url: i.link || `${S.domain}/mixes/` })) });
 }
 
 function pageShop() {
@@ -492,16 +502,20 @@ function pageShop() {
   const inner = `
 <section><div class="w">
   <p class="eyeb"><i></i> Shop</p>
-  <h2>Gear &amp; merch</h2>
+  <h2>Gear, software &amp; merch</h2>
   <div class="grid">
     ${sh.items.map(i => `
-    <a class="card" href="${wa}" rel="noopener" target="_blank">
+    <article class="card product-card">
       <div class="cpic"><img src="${esc(i.image)}" alt="${strip(i.title)}" loading="lazy"></div>
-      <div class="cbody"><p class="meta">${raw(i.price)}</p><h3>${raw(i.title)}</h3><p>${raw(i.desc)}</p><span class="go">Enquire on WhatsApp &rarr;</span></div>
-    </a>`).join('')}
+      <div class="cbody"><p class="meta">${raw(i.category || 'Studio shop')} ${i.sku ? `&middot; ${esc(i.sku)}` : ''}</p><h3>${raw(i.title)}</h3><p>${raw(i.desc)}</p>
+      ${i.details ? `<div class="product-details">${raw(i.details)}</div>` : ''}
+      <div class="product-meta"><b>${raw(i.price || 'Enquire')}</b><span>${esc(i.availability || 'Ask for current stock')}</span></div>
+      <a class="go" href="${wa}?text=${encodeURIComponent(`I want to enquire about ${strip(i.title)}`)}" rel="noopener" target="_blank">Enquire / pay by mobile money &rarr;</a></div>
+    </article>`).join('')}
   </div>
 </div></section>`;
-  return simplePage({ slug: '/shop/', title: `Shop — DJ gear, computers & merch | ${S.brand}`, h1: 'Shop', intro: sh.intro, inner, desc: strip(sh.intro) });
+  return simplePage({ slug: '/shop/', title: `Shop — DJ gear, software & merch | ${S.brand}`, h1: 'Shop', intro: sh.intro, inner, desc: strip(sh.intro), nav: '/shop/',
+    extraSchema: sh.items.map(i => ({ '@type': 'Product', name: strip(i.title), description: strip(i.desc || ''), image: i.image ? `${S.domain}${i.image}` : undefined, brand: { '@type': 'Brand', name: S.brand }, offers: { '@type': 'Offer', priceCurrency: 'UGX', price: String(i.price || '').replace(/[^0-9.]/g, '') || undefined, availability: 'https://schema.org/InStock', url: `${S.domain}/shop/` } })) });
 }
 
 function pageGallery() {
