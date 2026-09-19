@@ -280,3 +280,74 @@ footer{background:#050505;border-top:2px solid var(--gold)}
 @media(max-width:520px){.fgrid{grid-template-columns:1fr}}
 
 @media(max-width:560px){section{padding-block:56px}.w{padding-inline:18px}}
+
+
+/* ---------- SMART FOOTER ---------- */
+.fsoc{border-top:1px solid var(--line);margin-top:34px;padding-top:26px}
+.fsoc-t{font-family:var(--d);font-size:10.5px;font-weight:700;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:14px}
+.fsoc .soc{margin-top:0}
+.fbot-l{display:flex;gap:20px;flex-wrap:wrap}
+.fbot-l a{color:var(--steel);font-size:13px}
+.fbot-l a:hover{color:var(--gold)}
+
+/* ---------- YOUTUBE: IN-PAGE PLAYER ---------- */
+.yt-card{display:block;width:100%;text-align:left;border:1px solid var(--line);
+  background:var(--s1);color:inherit;padding:0;cursor:pointer;font:inherit;
+  transition:border-color .2s ease,transform .2s ease}
+.yt-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+.yt-card .cpic{position:relative;overflow:hidden}
+.yt-card .cpic img{display:block;width:100%;aspect-ratio:16/9;object-fit:cover}
+.yt-play{position:absolute;inset:0;margin:auto;width:56px;height:56px;
+  background:rgba(0,0,0,.62);border:1px solid rgba(255,255,255,.35);
+  display:grid;place-items:center;transition:background .2s ease,border-color .2s ease}
+.yt-play::after{content:"";width:0;height:0;margin-left:4px;
+  border-left:15px solid #fff;border-top:9px solid transparent;border-bottom:9px solid transparent}
+.yt-card:hover .yt-play{background:var(--gold);border-color:var(--gold)}
+.yt-card:hover .yt-play::after{border-left-color:#000}
+.yt-card:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.ytm{position:fixed;inset:0;z-index:90;display:grid;place-items:center;padding:20px}
+.ytm[hidden]{display:none}
+.ytm-bg{position:absolute;inset:0;background:rgba(0,0,0,.9)}
+.ytm-box{position:relative;width:min(1040px,100%)}
+.ytm-frame{position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--line)}
+.ytm-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.ytm-cap{color:#cfcfd4;font-size:15px;margin:14px 2px 0}
+.ytm-x{position:absolute;top:-46px;right:-2px;width:38px;height:38px;background:transparent;
+  border:1px solid var(--line);color:#fff;font-size:24px;line-height:1;cursor:pointer}
+.ytm-x:hover{border-color:var(--gold);color:var(--gold)}
+@media(max-width:620px){.ytm-x{top:-44px}}
+
+/* ---------- SOCIAL ICON TILES ---------- */
+.soc{display:flex;flex-wrap:wrap;gap:12px;padding:0;margin:28px 0 0;list-style:none}
+.soc a{width:46px;height:46px;display:grid;place-items:center;
+  border:1px solid var(--line);background:var(--s1);color:#a4a4ab;
+  transition:color .22s ease,border-color .22s ease,background .22s ease,transform .22s ease}
+.soc a svg{width:19px;height:19px;fill:currentColor;display:block;
+  animation:socFloat 5.5s ease-in-out infinite}
+.soc li:nth-child(2) a svg{animation-delay:-.7s}
+.soc li:nth-child(3) a svg{animation-delay:-1.4s}
+.soc li:nth-child(4) a svg{animation-delay:-2.1s}
+.soc li:nth-child(5) a svg{animation-delay:-2.8s}
+.soc li:nth-child(6) a svg{animation-delay:-3.5s}
+.soc li:nth-child(7) a svg{animation-delay:-4.2s}
+.soc a:hover,.soc a:focus-visible{
+  color:var(--gold);border-color:var(--gold);background:#141310;transform:translateY(-4px)}
+.soc a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.soc a:has(.soc-txt){width:auto;padding-inline:18px}
+.soc-txt{font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;white-space:nowrap}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0,0,0,0);white-space:nowrap;border:0}
+@keyframes socFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){
+  .soc a svg{animation:none}
+  .soc a:hover,.soc a:focus-visible{transform:none}
+}
+/* text link row (listen / read CTAs) */
+.soc-links{display:flex;flex-wrap:wrap;gap:9px;padding:0;margin:26px 0 0;list-style:none}
+.soc-links a{display:block;border:1px solid var(--line);padding:12px 19px;font-family:var(--d);
+  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+  color:#cfcfd4;background:var(--s1);transition:.18s}
+.soc-links a:hover{border-color:var(--gold);color:var(--gold)}
