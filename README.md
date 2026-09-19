@@ -98,6 +98,19 @@ outbound-platform events in D1. Favourites are deliberately browser-local; no pe
 profile is created without consent. The platform tabs link to SoundCloud, Mixcloud and HearThis
 only after the visitor chooses to leave the site.
 
+### Contacts and email updates
+
+Signup emails are stored privately in the Cloudflare D1 database `dfs-contacts`.
+The password-protected admin panel now has **Audience → Contacts**, including a
+count of subscribers who explicitly opted into updates and a CSV export for
+event or ticket campaigns. The signup consent covers new mixes, DJ school
+updates, discounts and event news.
+
+D1 stores the audience; it does not send email by itself. To send automatic
+campaigns, connect an email provider such as Resend, Brevo or Mailgun using an
+encrypted Cloudflare API secret. Publishing a blog post alone does not yet send
+email automatically, and marketing messages should include an unsubscribe link.
+
 ### Courses, repairs, appointments and reviews
 
 The admin panel now edits course lessons/tutorial categories, repair and gear-swap checks,

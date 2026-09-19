@@ -55,20 +55,25 @@ export async function onRequestPost(context) {
   const phone   = clean(body.phone, 32);
   const source  = clean(body.source, 40) || 'newsletter';
   const item    = clean(body.item, 160);
+  const marketingOptIn = body.marketingOptIn === true || body.marketingOptIn === 'true' ? 1 : 0;
   const country = request.headers.get('CF-IPCountry') || null;
 
   try {
+    await env.DB.prepare(
+      'ALTER TABLE contacts ADD COLUMN marketing_opt_in INTEGER NOT NULL DEFAULT 0'
+    ).run().catch(() => {});
     // One row per person. Coming back for a second mix bumps the
     // counter and refreshes anything they left blank the first time.
     await env.DB.prepare(
-      `INSERT INTO contacts (email, name, phone, country, source, first_item)
-       VALUES (?, ?, ?, ?, ?, ?)
+      `INSERT INTO contacts (email, name, phone, country, source, marketing_opt_in, first_item)
+       VALUES (?, ?, ?, ?, ?, ?, ?)
        ON CONFLICT(email) DO UPDATE SET
          downloads = downloads + 1,
          last_seen = datetime('now'),
          name  = COALESCE(excluded.name,  contacts.name),
-         phone = COALESCE(excluded.phone, contacts.phone)`
-    ).bind(email, name, phone, country, source, item).run();
+         phone = COALESCE(excluded.phone, contacts.phone),
+         marketing_opt_in = MAX(contacts.marketing_opt_in, excluded.marketing_opt_in)`
+    ).bind(email, name, phone, country, source, marketingOptIn, item).run();
 
     if (item) {
       const row = await env.DB.prepare('SELECT id FROM contacts WHERE email = ?')

@@ -584,12 +584,30 @@ const VIEWS = {
         '</tbody></table></div>';
     })).catch(err => { box.innerHTML = `<p class="sub">${esc(err.message)}</p>`; });
   },
+
+  contacts: () => {
+    const v = $('view');
+    v.appendChild(head('Contacts', 'Private subscriber list captured from downloads and enquiries.'));
+    const box = document.createElement('div');
+    box.className = 'card';
+    box.innerHTML = '<p class="sub">Loading contacts…</p>';
+    v.appendChild(box);
+    fetch('/api/contacts').then(r => r.json().then(x => {
+      if (!r.ok || !x.ok) throw new Error(x.error || 'Could not load contacts');
+      const opted = x.contacts.filter(c => Number(c.marketing_opt_in) === 1).length;
+      if (!x.contacts.length) { box.innerHTML = '<p class="sub">No contacts yet.</p>'; return; }
+      box.innerHTML = `<p class="sub">${x.count} contacts · ${opted} opted in for marketing updates</p><p><a class="btn btn-s" href="/api/contacts?format=csv">Download CSV</a></p><div class="table-wrap"><table><thead><tr><th>Email</th><th>Name</th><th>Phone</th><th>Updates</th><th>Source</th><th>Last seen</th></tr></thead><tbody>` +
+        x.contacts.map(c => `<tr><td>${esc(c.email)}</td><td>${esc(c.name || '')}</td><td>${esc(c.phone || '')}</td><td>${Number(c.marketing_opt_in) === 1 ? 'Yes' : 'No'}</td><td>${esc(c.source || '')}</td><td>${esc(c.last_seen || '')}</td></tr>`).join('') +
+        '</tbody></table></div>';
+    })).catch(err => { box.innerHTML = `<p class="sub">${esc(err.message)}</p>`; });
+  },
 };
 
 const MENU = [
   ['Site', [['site', 'Studio details'], ['promo', 'Promo &amp; ads']]],
   ['Pages', [['home', 'Home'], ['about', 'About'], ['services', 'Services'], ['courses', 'DJ courses'], ['repairs', 'Repairs'], ['reviews', 'Reviews'], ['appointments', 'Appointments'], ['blog', 'Blog']]],
-  ['Content', [['mixes', 'Mixes'], ['shop', 'Shop'], ['gallery', 'Gallery'], ['youtube', 'YouTube'], ['payments', 'Payment requests']]],
+  ['Audience', [['contacts', 'Contacts'], ['payments', 'Payment requests']]],
+  ['Content', [['mixes', 'Mixes'], ['shop', 'Shop'], ['gallery', 'Gallery'], ['youtube', 'YouTube']]],
 ];
 
 function renderNav() {

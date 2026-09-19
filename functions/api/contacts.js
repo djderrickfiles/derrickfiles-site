@@ -50,6 +50,9 @@ export async function onRequestGet(context) {
   const { request, env } = context;
 
   if (!env.AUTH_SECRET || !env.DB) return unauthorized();
+  await env.DB.prepare(
+    'ALTER TABLE contacts ADD COLUMN marketing_opt_in INTEGER NOT NULL DEFAULT 0'
+  ).run().catch(() => {});
 
   const cookie = request.headers.get('Cookie') || '';
   let token = null;
@@ -60,7 +63,7 @@ export async function onRequestGet(context) {
   if (!(await validCookie(env.AUTH_SECRET, token))) return unauthorized();
 
   const { results } = await env.DB.prepare(
-    `SELECT email, name, phone, country, source, first_item,
+    `SELECT email, name, phone, country, source, marketing_opt_in, first_item,
             downloads, created_at, last_seen
        FROM contacts
       ORDER BY created_at DESC
@@ -69,7 +72,7 @@ export async function onRequestGet(context) {
 
   const url = new URL(request.url);
   if (url.searchParams.get('format') === 'csv') {
-    const cols = ['email', 'name', 'phone', 'country', 'source',
+    const cols = ['email', 'name', 'phone', 'country', 'source', 'marketing_opt_in',
                   'first_item', 'downloads', 'created_at', 'last_seen'];
     const lines = [cols.join(',')];
     for (const r of results) lines.push(cols.map(c => csvCell(r[c])).join(','));

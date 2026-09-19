@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS contacts (
   phone TEXT,
   country TEXT,
   source TEXT NOT NULL DEFAULT 'newsletter',
+  marketing_opt_in INTEGER NOT NULL DEFAULT 0,
   first_item TEXT,
   downloads INTEGER NOT NULL DEFAULT 1,
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
