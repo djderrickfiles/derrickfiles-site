@@ -17,6 +17,32 @@ const wa = `https://wa.me/${S.whatsapp}`;
 const tel = `tel:${S.phone}`;
 
 /* ---------- navigation ---------- */
+/* ---------- social icons ----------
+   assets/icons.json is a flat map of "instagram": "<svg path d>" entries
+   (official marks from Simple Icons). A missing file or key falls back to
+   a plain text label, so the site never breaks waiting on it. */
+const ICONS = (() => {
+  const p = path.join(ROOT, 'assets', 'icons.json');
+  try { return fs.existsSync(p) ? JSON.parse(fs.readFileSync(p, 'utf8')) : {}; }
+  catch { return {}; }
+})();
+
+const NICE = { x: 'X', tiktok: 'TikTok', youtube: 'YouTube', soundcloud: 'SoundCloud',
+  mixcloud: 'Mixcloud', instagram: 'Instagram', facebook: 'Facebook', whatsapp: 'WhatsApp' };
+const sname = k => NICE[k] || (k.charAt(0).toUpperCase() + k.slice(1));
+
+function socialList(only) {
+  const entries = Object.entries(S.social).filter(([k]) => !only || only.includes(k));
+  return '<ul class="soc">' + entries.map(([k, v]) => {
+    const inner = ICONS[k]
+      ? '<svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="' + ICONS[k] + '"/></svg>'
+      : '<span class="soc-txt">' + esc(sname(k)) + '</span>';
+    return '<li><a href="' + esc(v) + '" rel="me noopener" target="_blank"' +
+      ' aria-label="' + esc(S.person) + ' on ' + esc(sname(k)) + '">' + inner +
+      '<span class="sr">' + esc(sname(k)) + '</span></a></li>';
+  }).join('') + '</ul>';
+}
+
 const NAV = [
   { t: 'Home', u: '/' },
   { t: 'About', u: '/about/' },
@@ -152,7 +178,7 @@ ${adsHead}
 <body>
 ${promo}
 <nav class="nav"><div class="w">
-  <a class="lgo" href="/">DERRICK<b>FILES</b><small>STUDIO</small></a>
+  ${S.logo ? `<a class="lgo lgo-img" href="/"><img src="${esc(S.logo)}" alt="${esc(S.brand)}"></a>` : `<a class="lgo" href="/">DERRICK<b>FILES</b><small>STUDIO</small></a>`}
   <ul class="nl" id="nl">
     ${NAV.map(n => `<li><a href="${n.u}"${active === n.u ? ' class="on"' : ''}>${esc(n.t)}</a></li>`).join('\n    ')}
   </ul>
@@ -179,9 +205,17 @@ ${body}
         <ul>${NAV.map(n => `<li><a href="${n.u}">${esc(n.t)}</a></li>`).join('')}</ul>
       </div>
     </div>
+    <div class="fsoc">
+      <div class="fsoc-t">Follow the studio</div>
+      ${socialList()}
+    </div>
     <div class="fbot">
       <span>&copy; ${new Date().getFullYear()} ${esc(S.brand)}. All rights reserved.</span>
-      <span>${Object.entries(S.social).map(([k, v]) => `<a href="${esc(v)}" rel="me noopener" target="_blank">${k}</a>`).join(' &middot; ')}</span>
+      <span class="fbot-l">
+        <a href="/about/">About</a>
+        <a href="/blog/">Blog</a>
+        <a href="${tel}">Bookings</a>
+      </span>
     </div>
   </div>
 </footer>
@@ -482,14 +516,62 @@ function pageYouTube() {
 <section><div class="w">
   <p class="eyeb"><i></i> YouTube</p>
   <h2>Watch</h2>
-  ${y.videos.length ? `<div class="grid">${y.videos.map(v => `
-    <a class="card" href="https://www.youtube.com/watch?v=${esc(v.id)}" rel="noopener" target="_blank">
-      <div class="cpic"><img src="https://i.ytimg.com/vi/${esc(v.id)}/hqdefault.jpg" alt="${esc(v.title)}" loading="lazy"></div>
-      <div class="cbody"><h3>${esc(v.title)}</h3><span class="go">Watch &rarr;</span></div>
-    </a>`).join('')}</div>`
-      : `<p class="sub">New uploads land on the channel first — subscribe to catch sets, tutorials and gear breakdowns as they drop.</p>`}
-  <div class="btns"><a class="bt bp" href="${esc(y.channel)}" rel="noopener" target="_blank">Open the channel</a></div>
-</div></section>`;
+  <div id="ytgrid" class="grid yt-grid" data-loading="1">
+    <p class="sub" id="ytmsg">Loading the latest from the channel&hellip;</p>
+  </div>
+  <div class="btns"><a class="bt bp" href="${esc(y.channel)}" rel="noopener" target="_blank">Subscribe on YouTube</a></div>
+</div></section>
+
+<div class="ytm" id="ytm" hidden>
+  <div class="ytm-bg" data-close></div>
+  <div class="ytm-box" role="dialog" aria-modal="true" aria-label="Video player">
+    <button class="ytm-x" id="ytx" aria-label="Close player">&times;</button>
+    <div class="ytm-frame" id="ytframe"></div>
+    <p class="ytm-cap" id="ytcap"></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var grid=document.getElementById('ytgrid'), msg=document.getElementById('ytmsg');
+  var modal=document.getElementById('ytm'), frame=document.getElementById('ytframe'), cap=document.getElementById('ytcap');
+  function esc(s){var e=document.createElement('div');e.textContent=s||'';return e.innerHTML;}
+
+  function open(id,title){
+    frame.innerHTML='<iframe src="https://www.youtube-nocookie.com/embed/'+encodeURIComponent(id)+
+      '?autoplay=1&rel=0&modestbranding=1" title="'+esc(title)+
+      '" allow="accelerometer; autoplay; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>';
+    cap.textContent=title||'';
+    modal.hidden=false; document.body.style.overflow='hidden';
+    document.getElementById('ytx').focus();
+  }
+  function close(){ modal.hidden=true; frame.innerHTML=''; document.body.style.overflow=''; }
+
+  modal.addEventListener('click',function(e){ if(e.target.hasAttribute('data-close')) close(); });
+  document.getElementById('ytx').addEventListener('click',close);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape'&&!modal.hidden) close(); });
+
+  fetch('/api/youtube').then(function(r){return r.json();}).then(function(data){
+    grid.removeAttribute('data-loading');
+    if(!data.videos||!data.videos.length){
+      msg.textContent='New uploads land on the channel first. Subscribe to catch sets, tutorials and gear breakdowns as they drop.';
+      return;
+    }
+    grid.innerHTML=data.videos.map(function(v){
+      return '<button class="card yt-card" data-id="'+esc(v.id)+'" data-title="'+esc(v.title)+'">'+
+        '<div class="cpic"><img src="'+esc(v.thumb)+'" alt="" loading="lazy">'+
+        '<span class="yt-play" aria-hidden="true"></span></div>'+
+        '<div class="cbody"><h3>'+esc(v.title)+'</h3><span class="go">Play here &rarr;</span></div></button>';
+    }).join('');
+    grid.querySelectorAll('.yt-card').forEach(function(b){
+      b.addEventListener('click',function(){ open(b.dataset.id, b.dataset.title); });
+    });
+  }).catch(function(){
+    grid.removeAttribute('data-loading');
+    msg.textContent='Could not load the feed right now. The channel link below still works.';
+  });
+})();
+</script>`;
   return simplePage({ slug: '/youtube/', title: `YouTube — ${S.person} | ${S.brand}`, h1: 'YouTube', intro: y.intro, inner, desc: strip(y.intro) });
 }
 
