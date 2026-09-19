@@ -325,6 +325,11 @@ footer{background:#050505;border-top:2px solid var(--gold)}
 .ytm-x:hover{border-color:var(--gold);color:var(--gold)}
 @media(max-width:620px){.ytm-x{top:-44px}}
 
+/* ---------- TIKTOK ---------- */
+.tiktok-profile{max-width:780px;min-height:420px;margin:30px 0 34px;background:var(--s1);
+  border:1px solid var(--line);display:grid;place-items:center;overflow:hidden}
+.tiktok-profile .tiktok-embed{margin:0!important;max-width:780px!important;min-width:280px!important;width:100%}
+
 /* ---------- SOCIAL ICON TILES ---------- */
 .soc{display:flex;flex-wrap:wrap;gap:12px;padding:0;margin:28px 0 0;list-style:none}
 .soc a{width:46px;height:46px;display:grid;place-items:center;
