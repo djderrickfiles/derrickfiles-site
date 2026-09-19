@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS contacts (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  email TEXT NOT NULL UNIQUE,
+  name TEXT,
+  phone TEXT,
+  country TEXT,
+  source TEXT NOT NULL DEFAULT 'newsletter',
+  first_item TEXT,
+  downloads INTEGER NOT NULL DEFAULT 1,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  last_seen TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+CREATE TABLE IF NOT EXISTS downloads (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  contact_id INTEGER,
+  item TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  FOREIGN KEY (contact_id) REFERENCES contacts(id)
+);
+
+CREATE INDEX IF NOT EXISTS downloads_contact_id_idx ON downloads(contact_id);
