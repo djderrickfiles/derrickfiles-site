@@ -683,7 +683,7 @@ fs.writeFileSync(path.join(OUT, 'robots.txt'),
 fs.writeFileSync(path.join(OUT, 'ads.txt'),
   `google.com, ${C.adsense?.client?.replace(/^ca-/, '') || ''}, DIRECT, f08c47fec0942fa0\n`);
 fs.writeFileSync(path.join(OUT, '_headers'),
-  `/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/admin/*\n  X-Robots-Tag: noindex\n`);
+  `/*\n  Cache-Control: no-cache\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/admin/*\n  X-Robots-Tag: noindex\n`);
 
 console.log(`✅ Built ${urls.length} pages → dist/`);
 urls.forEach(u => console.log('   ' + u));
