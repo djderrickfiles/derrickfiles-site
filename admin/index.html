@@ -423,6 +423,34 @@ const VIEWS = {
     ]));
   },
 
+  courses: () => {
+    const v = $('view');
+    v.appendChild(head('DJ courses', 'Edit course details, lessons, tutorial categories and the enquiry CTA.'));
+    v.appendChild(list(C.courses || (C.courses = []), { title:'title', sub:'excerpt', img:'image',
+      blank:{slug:'dj-course',title:'DJ Course',tagline:'',excerpt:'',image:'/assets/img/derrick-4.jpg',intro:'',lessons:[],videoCategories:[]}, addLabel:'+ Add a course',
+      fields:c=>[row(text('Title',c,'title'),text('URL slug',c,'slug')),text('Summary',c,'excerpt','',true),text('Full details',c,'intro','',true),image('Course picture',c,'image'),card('Lessons',[list(c.lessons,{title:'t',sub:'d',blank:{t:'',d:''},fields:x=>[text('Lesson',x,'t'),text('Details',x,'d','',true)],addLabel:'+ Add lesson'})]),card('Tutorial categories',[list(c.videoCategories,{title:'title',sub:'url',blank:{title:'',url:''},fields:x=>[text('Category',x,'title'),text('Video/channel URL',x,'url')],addLabel:'+ Add category'})])]
+    }));
+  },
+
+  repairs: () => {
+    const v = $('view');
+    v.appendChild(head('Repairs & swaps', 'Explain what you fix so clients know what to bring and what details to send.'));
+    v.appendChild(list(C.repairs || (C.repairs = []), {title:'title',sub:'excerpt',img:'image',blank:{slug:'dj-gear-repair',title:'DJ Gear Repair & Swaps',tagline:'',excerpt:'',image:'/assets/img/derrick-portrait.jpg',intro:'',checks:[],faq:[]},addLabel:'+ Add repair service',
+      fields:r=>[row(text('Title',r,'title'),text('URL slug',r,'slug')),text('Summary',r,'excerpt','',true),text('Repair page details',r,'intro','',true),image('Picture',r,'image'),card('What we check',[list(r.checks,{title:'',sub:'',blank:'',fields:(x,i)=>text('Check '+(i+1),r.checks,i,'',true),addLabel:'+ Add check'})])]}));
+  },
+
+  reviews: () => {
+    const v = $('view'); v.appendChild(head('Reviews', 'Quote verified client feedback carefully — only publish real reviews you have permission to use.'));
+    v.appendChild(list(C.reviewsList || (C.reviewsList = []), {title:'name',sub:'quote',blank:{quote:'',name:'',source:'Google review',rating:5},addLabel:'+ Add a review',fields:r=>[row(text('Name',r,'name'),text('Source',r,'source')),text('Quote',r,'quote','',true),text('Rating (1–5)',r,'rating')]}));
+  },
+
+  appointments: () => {
+    const v = $('view'); const a = C.appointments || (C.appointments = { intro:'', success:'', types:[] });
+    v.appendChild(head('Appointments & enquiries', 'Control the booking form copy and the types of work clients can ask about.'));
+    v.appendChild(card('Booking form', [text('Intro',a,'intro','',true),text('Success message',a,'success','',true),csv('Enquiry types',a,'types','comma separated')]));
+    v.appendChild(document.createElement('div')).className = 'note';
+  },
+
   services: () => {
     const v = $('view');
     v.appendChild(head('Services', 'Each one becomes its own landing page at /slug/ with its own search listing.'));
@@ -535,7 +563,7 @@ const VIEWS = {
 
 const MENU = [
   ['Site', [['site', 'Studio details'], ['promo', 'Promo &amp; ads']]],
-  ['Pages', [['home', 'Home'], ['about', 'About'], ['services', 'Services'], ['blog', 'Blog']]],
+  ['Pages', [['home', 'Home'], ['about', 'About'], ['services', 'Services'], ['courses', 'DJ courses'], ['repairs', 'Repairs'], ['reviews', 'Reviews'], ['appointments', 'Appointments'], ['blog', 'Blog']]],
   ['Content', [['mixes', 'Mixes'], ['shop', 'Shop'], ['gallery', 'Gallery'], ['youtube', 'YouTube']]],
 ];
 
