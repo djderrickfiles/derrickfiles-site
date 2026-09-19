@@ -507,12 +507,13 @@ const VIEWS = {
       csv('Genres', C.mixes, 'genres', 'comma separated'),
     ]));
     v.appendChild(card('Featured series', [list(C.mixes.items, {
-      title: 'title', sub: 'desc', blank: { title: '', type: 'Mix', genre: '', price: 0, desc: '', audio: '', downloadUrl: '', cover: '', link: 'https://www.mixcloud.com/derrickfiles/', free: true, paymentEnabled: false },
+      title: 'title', sub: 'desc', blank: { title: '', type: 'Mix', genre: '', price: 0, desc: '', audio: '', downloadUrl: '', paymentUrl: 'https://wallet.wearemarz.com/p/mixes-driu8x', cover: '', link: 'https://www.mixcloud.com/derrickfiles/', free: true, paymentEnabled: false },
       fields: m => [
         row(text('Title', m, 'title'), text('Type', m, 'type', 'Mix, mashup, pack, effect or software')),
         row(text('Genre', m, 'genre'), text('Price / label', m, 'price', 'Free or UGX amount')),
         text('Description', m, 'desc', '', true),
-        row(audio('Audio preview / file', m, 'audio'), text('Download URL', m, 'downloadUrl', 'Optional free download link')),
+        row(audio('Audio preview / file', m, 'audio'), text('Download URL', m, 'downloadUrl', 'Optional direct download link')),
+        text('Custom payment link', m, 'paymentUrl', 'Optional checkout URL, e.g. MarzPay product link'),
         row(image('Cover art', m, 'cover'), text('Source link', m, 'link')),
         row(toggle('Free download', m, 'free'), toggle('Enable paid purchase', m, 'paymentEnabled'))
       ],
@@ -526,7 +527,7 @@ const VIEWS = {
     v.appendChild(card('', [text('Intro', C.shop, 'intro', '', true)]));
     v.appendChild(list(C.shop.items, {
       title: 'title', sub: 'desc', img: 'image',
-      blank: { title: '', category: 'Studio shop', sku: '', desc: '', details: '', price: 0, paymentEnabled: false, availability: 'Ask for current stock', image: '/assets/img/derrick-2.jpg' },
+      blank: { title: '', category: 'Studio shop', sku: '', desc: '', details: '', price: 0, paymentUrl: '', paymentEnabled: false, availability: 'Ask for current stock', image: '/assets/img/derrick-2.jpg' },
       addLabel: '+ Add an item',
       fields: i => [
         row(text('Title', i, 'title'), text('Category', i, 'category')),
@@ -534,6 +535,7 @@ const VIEWS = {
         text('Short description', i, 'desc', '', true),
         text('Full product details', i, 'details', 'specifications, condition, what is included, delivery and warranty', true),
         row(image('Picture', i, 'image'), text('Availability', i, 'availability')),
+        text('Custom payment link', i, 'paymentUrl', 'Optional checkout URL for this product'),
         toggle('Enable mobile money payment', i, 'paymentEnabled')
       ]
     }));
