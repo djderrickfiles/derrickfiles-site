@@ -73,8 +73,7 @@ export async function onRequestGet(context) {
                   'first_item', 'downloads', 'created_at', 'last_seen'];
     const lines = [cols.join(',')];
     for (const r of results) lines.push(cols.map(c => csvCell(r[c])).join(','));
-    return new Response(lines.join('
-'), {
+    return new Response(lines.join('\n'), {
       headers: {
         'Content-Type': 'text/csv; charset=utf-8',
         'Content-Disposition': 'attachment; filename="derrickfiles-contacts.csv"',
