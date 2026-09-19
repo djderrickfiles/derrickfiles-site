@@ -181,6 +181,7 @@ ${adsHead}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
 <body>
+<div class="cursor-ring" aria-hidden="true"></div>
 ${promo}
 <nav class="nav"><div class="w">
   ${S.logo ? `<a class="lgo lgo-img" href="/"><img src="${esc(S.logo)}" alt="${esc(S.brand)}"></a>` : `<a class="lgo" href="/">DERRICK<b>FILES</b><small>STUDIO</small></a>`}
@@ -228,6 +229,13 @@ ${body}
 document.getElementById('burger')?.addEventListener('click',function(){
   document.getElementById('nl').classList.toggle('open');
 });
+(function(){
+  var ring=document.querySelector('.cursor-ring');
+  if(!ring || matchMedia('(pointer: coarse)').matches) return;
+  document.addEventListener('pointermove',function(e){ring.style.transform='translate3d('+(e.clientX-16)+'px,'+(e.clientY-16)+'px,0)';});
+  document.addEventListener('pointerdown',function(){ring.classList.add('active');});
+  document.addEventListener('pointerup',function(){ring.classList.remove('active');});
+})();
 </script>
 </body>
 </html>`;
@@ -469,6 +477,11 @@ ${credStrip()}
 function pageMixes() {
   const m = C.mixes;
   const items = m.items || [];
+  const platforms = [
+    ['SoundCloud', S.social.soundcloud],
+    ['Mixcloud', S.social.mixcloud],
+    ['HearThis', S.social.hearthis],
+  ].filter(x => x[1]);
   const inner = `
 <section><div class="w">
   <p class="eyeb"><i></i> The sound</p>
@@ -477,23 +490,47 @@ function pageMixes() {
   <ul class="tags">${m.genres.map(g => `<li>${raw(g)}</li>`).join('')}</ul>
   <div class="sound-list">
     ${items.map((i, n) => `
-    <article class="sound-card">
+    <article class="sound-card" data-media-item="${esc(i.title)}">
       ${i.cover ? `<img class="sound-cover" src="${esc(i.cover)}" alt="${strip(i.title)}" loading="lazy">` : '<div class="sound-cover sound-cover-fallback">DF</div>'}
       <div class="sound-main">
         <p class="meta">${esc(i.type || 'Mix')} ${i.genre ? `&middot; ${esc(i.genre)}` : ''}</p>
-        <h3>${raw(i.title)}</h3><p>${raw(i.desc || '')}</p>
-        ${i.audio ? `<audio controls preload="none" src="${esc(i.audio)}">Your browser cannot play this audio.</audio>` : ''}
+        <div class="sound-title"><h3>${raw(i.title)}</h3><button class="fav" type="button" aria-label="Favourite ${esc(i.title)}" aria-pressed="false" data-favorite="${esc(i.title)}">&#9733;</button></div>
+        <p>${raw(i.desc || '')}</p>
+        ${i.audio ? `<audio controls preload="none" data-track="${esc(i.title)}" src="${esc(i.audio)}">Your browser cannot play this audio.</audio>` : ''}
         <div class="sound-actions">
-          ${i.downloadUrl && (i.free !== false) ? `<a class="bt bs" href="${esc(i.downloadUrl)}" download>Free download &darr;</a>` : ''}
-          ${i.free === false ? `<a class="bt bp" href="${wa}?text=${encodeURIComponent(`I want ${strip(i.title)} (${i.price || 'price on request'})`)}" rel="noopener" target="_blank">${esc(i.price || 'Get this pack')} &rarr;</a>` : ''}
-          ${i.link ? `<a class="sound-link" href="${esc(i.link)}" rel="noopener" target="_blank">Open source &rarr;</a>` : ''}
+          ${i.downloadUrl && (i.free !== false) ? `<a class="bt bs gate-download" href="${esc(i.downloadUrl)}" data-item="${esc(i.title)}" download>Free download &darr;</a>` : ''}
+          ${i.free === false ? `<a class="bt bp" href="${wa}?text=${encodeURIComponent(`I want ${strip(i.title)} (${i.price || 'price on request'})`)}" data-track-buy="${esc(i.title)}" rel="noopener" target="_blank">${esc(i.price || 'Get this pack')} &rarr;</a>` : ''}
+          ${i.link ? `<a class="sound-link platform-outbound" href="${esc(i.link)}" data-track-outbound="${esc(i.title)}" rel="noopener" target="_blank">Open source &rarr;</a>` : ''}
         </div>
       </div>
     </article>`).join('')}
   </div>
-  <div class="btns"><a class="bt bp" href="${esc(S.social.soundcloud)}" rel="noopener" target="_blank">Open SoundCloud</a><a class="bt bs" href="${esc(S.social.mixcloud)}" rel="noopener" target="_blank">Open Mixcloud</a></div>
+  <div class="platforms"><p class="meta">Listen on your favourite platform — you stay on our catalogue until you choose to leave</p>${platforms.map(x => `<a class="platform-tab" href="${esc(x[1])}" data-track-outbound="${esc(x[0])}" rel="noopener" target="_blank">${esc(x[0])}<span>&rarr;</span></a>`).join('')}</div>
 </div></section>`;
-  return simplePage({ slug: '/mixes/', title: `Mixes, mashups &amp; sound packs — ${S.person} | ${S.brand}`, h1: 'Mixes &amp; downloads', intro: m.intro, inner, desc: strip(m.intro), nav: '/mixes/',
+  const gate = `
+<div class="gate-modal" id="gate-modal" hidden>
+  <div class="gate-shade" data-gate-close></div>
+  <div class="gate-box" role="dialog" aria-modal="true" aria-labelledby="gate-title">
+    <button class="gate-close" type="button" data-gate-close aria-label="Close">&times;</button>
+    <p class="eyeb"><i></i> Free studio download</p><h2 id="gate-title">Join the list first</h2>
+    <p class="sub">Get the mix link, new uploads and studio news. Follow our socials too — that is how you keep up with the next drop.</p>
+    <form id="download-gate"><label for="gate-email">Email address</label><input id="gate-email" name="email" type="email" required autocomplete="email" placeholder="you@example.com"><input id="gate-item" name="item" type="hidden"><button class="bt bp" type="submit">Unlock download &rarr;</button><p class="gate-status" id="gate-status" aria-live="polite"></p></form>
+    <div class="gate-socials">${[['Instagram',S.social.instagram],['TikTok',S.social.tiktok],['YouTube',S.social.youtube],['SoundCloud',S.social.soundcloud]].map(x => `<a href="${esc(x[1])}" target="_blank" rel="noopener">${esc(x[0])}</a>`).join('')}</div>
+  </div>
+</div>
+<script>
+(function(){
+  var modal=document.getElementById('gate-modal'), form=document.getElementById('download-gate'), status=document.getElementById('gate-status'), active=null;
+  function track(event,item){fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:event,item:item})}).catch(function(){});}
+  document.querySelectorAll('[data-favorite]').forEach(function(b){var k='dfs-fav-'+b.dataset.favorite, on=localStorage.getItem(k)==='1'; b.setAttribute('aria-pressed',on); b.classList.toggle('is-fav',on); b.addEventListener('click',function(){on=!on;localStorage.setItem(k,on?'1':'0');b.setAttribute('aria-pressed',on);b.classList.toggle('is-fav',on);track('favorite',b.dataset.favorite);});});
+  document.querySelectorAll('audio[data-track]').forEach(function(a){a.addEventListener('play',function(){track('play',a.dataset.track);},{once:true});});
+  document.querySelectorAll('[data-track-buy],[data-track-outbound]').forEach(function(a){a.addEventListener('click',function(){track(a.dataset.trackBuy?'buy':'outbound',a.dataset.trackBuy||a.dataset.trackOutbound);});});
+  document.querySelectorAll('.gate-download').forEach(function(a){a.addEventListener('click',function(e){if(localStorage.getItem('dfs-subscriber')==='1')return; e.preventDefault();active=a;document.getElementById('gate-item').value=a.dataset.item;modal.hidden=false;document.getElementById('gate-email').focus();});});
+  function close(){modal.hidden=true;active=null;} document.querySelectorAll('[data-gate-close]').forEach(function(x){x.addEventListener('click',close);}); document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!modal.hidden)close();});
+  form.addEventListener('submit',function(e){e.preventDefault();status.textContent='Saving your signup…';var data={email:document.getElementById('gate-email').value,item:document.getElementById('gate-item').value,source:'mix-download'};fetch('/api/subscribe',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(function(r){return r.json().then(function(x){if(!r.ok||!x.ok)throw new Error(x.error||'Could not subscribe');return x;});}).then(function(){localStorage.setItem('dfs-subscriber','1');track('download',data.item);status.textContent='Unlocked — starting your download.';if(active){var href=active.href;active=null;setTimeout(function(){close();location.href=href;},350);}}).catch(function(err){status.textContent=err.message;});});
+})();
+</script>`;
+  return simplePage({ slug: '/mixes/', title: `Mixes, mashups &amp; sound packs — ${S.person} | ${S.brand}`, h1: 'Mixes &amp; downloads', intro: m.intro, inner: inner + gate, desc: strip(m.intro), nav: '/mixes/',
     extraSchema: items.map(i => ({ '@type': 'AudioObject', name: strip(i.title), description: strip(i.desc || ''), contentUrl: i.audio || undefined, url: i.link || `${S.domain}/mixes/` })) });
 }
 

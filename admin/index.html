@@ -279,20 +279,25 @@ function image(label, obj, key) {
 }
 function audio(label, obj, key) {
   const el = document.createElement('div'); el.className = 'fld';
-  el.innerHTML = `<label>${label} <span class="hint">MP3, WAV or M4A, under 20MB</span></label>
+  el.innerHTML = `<label>${label} <span class="hint">MP3, WAV or M4A, under 100MB · stored in R2</span></label>
     <input type="text" value="${obj[key] || ''}" placeholder="https://... or /assets/audio/...">
     <input type="file" accept="audio/*" style="margin-top:8px">`;
   const path = el.querySelector('input[type=text]'), file = el.querySelector('input[type=file]');
   path.oninput = () => { obj[key] = path.value; mark(); };
   file.onchange = async () => {
     const f = file.files[0]; if (!f) return;
-    if (f.size > 20e6) return toast('Audio too large — keep it under 20MB', true);
-    const name = f.name.toLowerCase().replace(/[^a-z0-9.]+/g, '-');
-    const p = `assets/audio/${Date.now().toString(36)}-${name}`;
-    const b = new Uint8Array(await f.arrayBuffer()); let bin = '';
-    for (let i = 0; i < b.length; i++) bin += String.fromCharCode(b[i]);
-    pending[p] = btoa(bin); obj[key] = '/' + p; path.value = obj[key];
-    mark(); toast('Audio staged — hit Save & publish');
+    if (f.size > 100e6) return toast('Media too large — keep it under 100MB', true);
+    const form = new FormData(); form.append('file', f);
+    file.disabled = true; toast('Uploading to R2…');
+    try {
+      const r = await fetch('/api/media-upload', { method: 'POST', body: form });
+      const data = await r.json();
+      if (!r.ok || !data.ok) throw new Error(data.error || 'R2 upload failed');
+      obj[key] = data.url;
+      if (key === 'audio' && !obj.downloadUrl) obj.downloadUrl = data.url;
+      path.value = data.url; mark(); toast('Uploaded to R2 — hit Save & publish');
+    } catch (e) { toast(e.message, true); }
+    file.disabled = false;
   };
   return el;
 }

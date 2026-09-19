@@ -1,6 +1,6 @@
 /* ============================================================
    DERRICK FILES STUDIO — design system
-   Black + Gold. Zero radius. Uppercase display. Surface layering.
+   Black + Gold. Soft radius. Uppercase display. Surface layering.
    ============================================================ */
 :root{
   --black:#000000;
@@ -29,6 +29,8 @@ a{color:var(--gold);text-decoration:none}
 h1,h2,h3,h4,.dsp{font-family:var(--d);text-transform:uppercase;margin:0}
 .w{max-width:var(--max);margin:0 auto;padding-inline:24px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.cursor-ring{position:fixed;z-index:200;top:0;left:0;width:32px;height:32px;border:1px solid rgba(255,201,30,.75);border-radius:50%;pointer-events:none;transform:translate3d(-100px,-100px,0);transition:transform .08s ease-out,width .18s,height .18s,background .18s;box-shadow:0 0 18px rgba(255,201,30,.28)}
+.cursor-ring.active{width:42px;height:42px;background:rgba(255,201,30,.12)}
 
 /* ---------- PROMO BAR ---------- */
 .promo{background:var(--gold);color:#000;font-size:13.5px;font-weight:600}
@@ -53,7 +55,7 @@ h1,h2,h3,h4,.dsp{font-family:var(--d);text-transform:uppercase;margin:0}
 .nl a:hover,.nl a.on{color:var(--gold)}
 .nb{background:var(--gold);color:#000;font-family:var(--d);font-weight:800;font-size:11.5px;
   letter-spacing:.12em;text-transform:uppercase;padding:13px 20px;white-space:nowrap;
-  transition:background .18s}
+  transition:background .18s;border-radius:999px}
 .nb:hover{background:var(--white)}
 .burger{display:none;background:none;border:1px solid var(--s3);color:#fff;
   font-family:var(--d);font-size:11px;letter-spacing:.16em;padding:11px 14px;cursor:pointer}
@@ -70,7 +72,7 @@ h1,h2,h3,h4,.dsp{font-family:var(--d);text-transform:uppercase;margin:0}
 /* ---------- BUTTONS ---------- */
 .bt{display:inline-flex;align-items:center;gap:9px;padding:17px 30px;
   font-family:var(--d);font-weight:800;font-size:12.5px;letter-spacing:.12em;
-  text-transform:uppercase;transition:.18s;border:0;cursor:pointer}
+  text-transform:uppercase;transition:.18s;border:0;border-radius:999px;cursor:pointer}
 .bp{background:var(--gold);color:#000}
 .bp:hover{background:var(--white)}
 .bs{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.4)}
@@ -172,7 +174,7 @@ h3{font-size:20px;font-weight:800;letter-spacing:-.02em}
 .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:16px}
 .grid.g4{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
 .card{background:var(--s1);border:1px solid var(--line);display:flex;flex-direction:column;
-  transition:.22s;overflow:hidden}
+  transition:.22s;overflow:hidden;border-radius:18px}
 .card:hover{border-color:#3d3722;background:var(--s2)}
 .cpic{aspect-ratio:3/2;overflow:hidden;background:var(--s2)}
 .cpic img{width:100%;height:100%;object-fit:cover;filter:grayscale(.3) contrast(1.05);transition:.4s}
@@ -366,13 +368,26 @@ footer{background:#050505;border-top:2px solid var(--gold)}
 /* ---------- SOUND LIBRARY ---------- */
 .sound-list{display:grid;gap:14px;margin:30px 0 34px}
 .sound-card{display:grid;grid-template-columns:112px 1fr;gap:20px;background:var(--s1);border:1px solid var(--line);padding:16px}
+.sound-card{border-radius:18px;transition:border-color .22s,transform .22s,box-shadow .22s}
+.sound-card:hover{border-color:var(--line2);transform:translateY(-3px) rotate(.15deg);box-shadow:0 12px 34px rgba(0,0,0,.28)}
 .sound-cover{width:112px;height:112px;object-fit:cover;background:var(--s2)}
+.sound-cover{border-radius:12px}
 .sound-cover-fallback{display:grid;place-items:center;color:var(--gold);font:900 30px var(--d)}
 .sound-main h3{font-size:21px;margin:0 0 5px}.sound-main p{color:var(--ash);margin:0 0 12px}
+.sound-title{display:flex;align-items:center;justify-content:space-between;gap:12px}.sound-title h3{margin:0}
+.fav{border:1px solid var(--line);background:transparent;color:var(--steel);border-radius:50%;width:34px;height:34px;cursor:pointer;font-size:18px;transition:.2s}
+.fav:hover,.fav.is-fav{color:var(--gold);border-color:var(--gold);box-shadow:0 0 16px rgba(255,201,30,.2)}
 .sound-main audio{width:100%;height:38px;margin:4px 0 14px;accent-color:var(--gold)}
 .sound-actions{display:flex;align-items:center;flex-wrap:wrap;gap:10px}.sound-actions .bt{padding:11px 15px;font-size:10.5px}
 .sound-link{font:700 11px var(--d);letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.platforms{display:flex;align-items:center;flex-wrap:wrap;gap:10px;margin-top:30px}.platforms .meta{width:100%;margin-bottom:2px}
+.platform-tab{display:flex;gap:18px;align-items:center;padding:13px 16px;border:1px solid var(--line);border-radius:999px;color:var(--white);font:700 11px var(--d);letter-spacing:.1em;text-transform:uppercase;transition:.2s}
+.platform-tab span{color:var(--gold)}.platform-tab:hover{border-color:var(--gold);transform:translateY(-2px)}
+.gate-modal[hidden]{display:none}.gate-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:20px}
+.gate-shade{position:absolute;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px)}.gate-box{position:relative;width:min(100%,520px);background:var(--s1);border:1px solid var(--line2);border-radius:24px;padding:34px;box-shadow:0 24px 90px rgba(0,0,0,.55)}
+.gate-box h2{font-size:30px;margin:0 0 10px}.gate-box .sub{margin-bottom:22px}.gate-box label{display:block;color:var(--gold);font:700 11px var(--d);letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}.gate-box input{width:100%;padding:14px 16px;background:var(--s2);border:1px solid var(--line);border-radius:12px;color:#fff;font:inherit;margin-bottom:12px}.gate-box input:focus{outline:2px solid var(--gold);outline-offset:2px}.gate-close{position:absolute;right:16px;top:12px;background:none;border:0;color:var(--ash);font-size:28px;cursor:pointer}.gate-status{min-height:24px;color:var(--gold);font-size:13px}.gate-socials{display:flex;flex-wrap:wrap;gap:8px;border-top:1px solid var(--line);padding-top:18px;margin-top:14px}.gate-socials a{border:1px solid var(--line);border-radius:999px;padding:7px 11px;color:var(--ash);font-size:12px}.gate-socials a:hover{color:var(--gold);border-color:var(--gold)}
 .product-details{color:#b7b7bd;font-size:13.5px;line-height:1.65;margin:-2px 0 16px;white-space:pre-line}
 .product-meta{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:12px 0 16px;font-size:13px}
 .product-meta b{color:var(--gold)}.product-meta span{color:var(--steel);text-align:right}
 @media(max-width:560px){.sound-card{grid-template-columns:78px 1fr;gap:13px}.sound-cover{width:78px;height:78px}.sound-main h3{font-size:17px}}
+@media(pointer:coarse){.cursor-ring{display:none}}
