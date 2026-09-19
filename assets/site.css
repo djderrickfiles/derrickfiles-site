@@ -252,11 +252,17 @@ h3{font-size:20px;font-weight:800;letter-spacing:-.02em}
 .artcover{margin:0 0 40px;border:1px solid var(--line)}
 
 /* ---------- SOCIAL ---------- */
-.soc{display:flex;flex-wrap:wrap;gap:9px;padding:0;margin:26px 0 0;list-style:none}
-.soc a{display:block;border:1px solid var(--line);padding:12px 19px;font-family:var(--d);
-  font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
-  color:#cfcfd4;background:var(--s1);transition:.18s}
-.soc a:hover{border-color:var(--gold);color:var(--gold)}
+.soc{display:flex;flex-wrap:wrap;gap:12px;padding:0;margin:28px 0 0;list-style:none}
+.soc a{width:46px;height:46px;display:grid;place-items:center;
+  border:1px solid var(--line);background:var(--s1);color:#a4a4ab;
+  transition:color .22s ease,border-color .22s ease,background .22s ease,transform .22s ease}
+.soc a svg{width:19px;height:19px;display:block;fill:currentColor}
+.soc a:hover,.soc a:focus-visible{
+  color:var(--gold);border-color:var(--gold);background:#141310;transform:translateY(-4px)}
+.soc a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.soc a:has(.soc-txt){width:auto;padding-inline:18px}
+.soc-txt{font-family:var(--d);font-size:11px;font-weight:700;letter-spacing:.12em;
+  text-transform:uppercase;white-space:nowrap}
 
 /* ---------- ADS ---------- */
 .adslot{margin:40px auto;max-width:var(--max);padding-inline:24px;min-height:0}
