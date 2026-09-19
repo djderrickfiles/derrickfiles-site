@@ -110,14 +110,14 @@ code{background:var(--s2);padding:2px 6px;font-size:12.5px;color:var(--gold)}
     with <b>Contents: Read and write</b> on this repository only. The token is stored in this browser
     only — it is never sent anywhere except GitHub.
   </div>
-  <div class="fld"><label>GitHub owner <span class="hint">your username or org</span></label>
-    <input type="text" id="s_owner" placeholder="djderrickfiles"></div>
+  <div class="fld"><label>GitHub owner</label>
+    <input type="text" id="s_owner" value="djderrickfiles" autocomplete="username"></div>
   <div class="fld"><label>Repository name</label>
-    <input type="text" id="s_repo" placeholder="derrickfiles-main"></div>
-  <div class="fld"><label>Branch</label><input type="text" id="s_branch" value="main"></div>
+    <input type="text" id="s_repo" value="derrickfiles-site" autocomplete="organization"></div>
+  <div class="fld"><label>Branch</label><input type="text" id="s_branch" value="main" autocomplete="off"></div>
   <div class="fld"><label>Access token</label>
     <input type="text" id="s_token" placeholder="github_pat_..." autocomplete="off"></div>
-  <button class="btn btn-p" id="connect">Connect</button>
+  <button class="btn btn-p" id="connect">Connect &amp; open studio</button>
   <button class="btn btn-s" id="demo">Preview without saving</button>
 </div>
 
@@ -534,7 +534,7 @@ $('connect').onclick = () => {
     owner: $('s_owner').value.trim(), repo: $('s_repo').value.trim(),
     branch: $('s_branch').value.trim() || 'main', token: $('s_token').value.trim()
   };
-  if (!cfg.owner || !cfg.repo || !cfg.token) return toast('Fill in every field', true);
+  if (!cfg.owner || !cfg.repo || !cfg.token) return toast('Paste your GitHub token to continue', true);
   localStorage.setItem(LS, JSON.stringify(cfg));
   demoMode = false; start();
 };
