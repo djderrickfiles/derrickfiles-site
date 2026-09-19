@@ -51,7 +51,7 @@
   "ctaLink": "/dj-academy/"
  },
  "adsense": {
-  "enabled": false,
+  "enabled": true,
   "client": "ca-pub-3712510054149886",
   "slotInArticle": "",
   "slotFooter": ""
