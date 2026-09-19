@@ -523,9 +523,10 @@ function pageMixes() {
         <p>${raw(i.desc || '')}</p>
         ${i.audio ? `<audio controls preload="none" data-track="${esc(i.title)}" src="${esc(i.audio)}">Your browser cannot play this audio.</audio>` : ''}
         <div class="sound-actions">
-          <a class="bt bs mix-payment-link" href="${MIX_PAYMENT_URL}" data-track-buy="${esc(i.title)}" rel="noopener" target="_blank">Get this mix &rarr;</a>
+          <a class="bt bs mix-payment-link" href="${esc(i.paymentUrl || i.downloadUrl || MIX_PAYMENT_URL)}" data-track-buy="${esc(i.title)}" rel="noopener" target="_blank">Get this mix &rarr;</a>
           ${i.free === false && !i.paymentEnabled ? `<a class="bt bp" href="${wa}?text=${encodeURIComponent(`I want ${strip(i.title)} (${i.price || 'price on request'})`)}" data-track-buy="${esc(i.title)}" rel="noopener" target="_blank">${esc(i.price || 'Get this pack')} &rarr;</a>` : ''}
-          ${i.paymentEnabled && i.price ? `<button class="bt bp pay-button" type="button" data-pay-item="${esc(i.title)}" data-pay-amount="${i.price}">Buy ${i.price} UGX &rarr;</button>` : ''}
+          ${i.paymentEnabled && i.price && i.paymentUrl ? `<a class="bt bp" href="${esc(i.paymentUrl)}" data-track-buy="${esc(i.title)}" rel="noopener" target="_blank">Buy ${i.price} UGX &rarr;</a>` : ''}
+          ${i.paymentEnabled && i.price && !i.paymentUrl ? `<button class="bt bp pay-button" type="button" data-pay-item="${esc(i.title)}" data-pay-amount="${i.price}">Buy ${i.price} UGX &rarr;</button>` : ''}
           ${i.link ? `<a class="sound-link platform-outbound" href="${esc(i.link)}" data-track-outbound="${esc(i.title)}" rel="noopener" target="_blank">Open source &rarr;</a>` : ''}
         </div>
       </div>
