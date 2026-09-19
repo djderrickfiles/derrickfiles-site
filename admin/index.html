@@ -153,6 +153,9 @@ let demoMode = false;
 let view = 'site';
 
 const $ = id => document.getElementById(id);
+const esc = value => String(value ?? '').replace(/[&<>"']/g, ch => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+}[ch]));
 const toast = (m, bad) => { const t = $('toast'); t.textContent = m; t.className = 'show' + (bad ? ' bad' : ''); setTimeout(() => t.className = '', 3200); };
 const mark = () => { dirty = true; $('save').disabled = false; $('stat').className = 'dot dirty'; $('statx').textContent = 'Unsaved changes'; };
 const clean = () => { dirty = false; pending = {}; $('save').disabled = true; $('stat').className = 'dot on'; $('statx').textContent = 'Published'; };
@@ -504,14 +507,14 @@ const VIEWS = {
       csv('Genres', C.mixes, 'genres', 'comma separated'),
     ]));
     v.appendChild(card('Featured series', [list(C.mixes.items, {
-      title: 'title', sub: 'desc', blank: { title: '', type: 'Mix', genre: '', price: 'Free', desc: '', audio: '', downloadUrl: '', cover: '', link: 'https://www.mixcloud.com/derrickfiles/', free: true },
+      title: 'title', sub: 'desc', blank: { title: '', type: 'Mix', genre: '', price: 0, desc: '', audio: '', downloadUrl: '', cover: '', link: 'https://www.mixcloud.com/derrickfiles/', free: true, paymentEnabled: false },
       fields: m => [
         row(text('Title', m, 'title'), text('Type', m, 'type', 'Mix, mashup, pack, effect or software')),
         row(text('Genre', m, 'genre'), text('Price / label', m, 'price', 'Free or UGX amount')),
         text('Description', m, 'desc', '', true),
         row(audio('Audio preview / file', m, 'audio'), text('Download URL', m, 'downloadUrl', 'Optional free download link')),
         row(image('Cover art', m, 'cover'), text('Source link', m, 'link')),
-        toggle('Free download', m, 'free')
+        row(toggle('Free download', m, 'free'), toggle('Enable paid purchase', m, 'paymentEnabled'))
       ],
       addLabel: '+ Add a series'
     })]));
@@ -523,14 +526,15 @@ const VIEWS = {
     v.appendChild(card('', [text('Intro', C.shop, 'intro', '', true)]));
     v.appendChild(list(C.shop.items, {
       title: 'title', sub: 'desc', img: 'image',
-      blank: { title: '', category: 'Studio shop', sku: '', desc: '', details: '', price: 'Enquire', availability: 'Ask for current stock', image: '/assets/img/derrick-2.jpg' },
+      blank: { title: '', category: 'Studio shop', sku: '', desc: '', details: '', price: 0, paymentEnabled: false, availability: 'Ask for current stock', image: '/assets/img/derrick-2.jpg' },
       addLabel: '+ Add an item',
       fields: i => [
         row(text('Title', i, 'title'), text('Category', i, 'category')),
-        row(text('Price', i, 'price'), text('SKU / model', i, 'sku')),
+        row(text('Price (UGX)', i, 'price', '0 to use WhatsApp inquiry'), text('SKU / model', i, 'sku')),
         text('Short description', i, 'desc', '', true),
         text('Full product details', i, 'details', 'specifications, condition, what is included, delivery and warranty', true),
-        row(text('Availability', i, 'availability'), image('Picture', i, 'image'))
+        row(image('Picture', i, 'image'), text('Availability', i, 'availability')),
+        toggle('Enable mobile money payment', i, 'paymentEnabled')
       ]
     }));
   },
@@ -559,12 +563,31 @@ const VIEWS = {
       fields: y => [row(text('Video ID', y, 'id', 'e.g. dQw4w9WgXcQ'), text('Title', y, 'title'))]
     }));
   },
+
+  payments: () => {
+    const v = $('view');
+    v.appendChild(head('Payment requests', 'Private queue of mobile money purchase requests.'));
+    const box = document.createElement('div');
+    box.className = 'card';
+    box.innerHTML = '<p class="sub">Loading payment requests…</p>';
+    v.appendChild(box);
+    fetch('/api/payments').then(r => r.json().then(x => {
+      if (!r.ok || !x.ok) throw new Error(x.error || 'Could not load payments');
+      if (!x.payments.length) {
+        box.innerHTML = '<p class="sub">No payment requests yet.</p>';
+        return;
+      }
+      box.innerHTML = '<div class="table-wrap"><table><thead><tr><th>Item</th><th>Amount</th><th>Mobile money</th><th>Status</th><th>Reference</th><th>Received</th></tr></thead><tbody>' +
+        x.payments.map(p => `<tr><td>${esc(p.item)}</td><td>${esc(p.amount)} ${esc(p.currency || 'UGX')}</td><td>${esc(p.network || '')} ${esc(p.phone)}</td><td>${esc(p.status)}</td><td><code>${esc(p.reference || '')}</code></td><td>${esc(p.created_at)}</td></tr>`).join('') +
+        '</tbody></table></div>';
+    })).catch(err => { box.innerHTML = `<p class="sub">${esc(err.message)}</p>`; });
+  },
 };
 
 const MENU = [
   ['Site', [['site', 'Studio details'], ['promo', 'Promo &amp; ads']]],
   ['Pages', [['home', 'Home'], ['about', 'About'], ['services', 'Services'], ['courses', 'DJ courses'], ['repairs', 'Repairs'], ['reviews', 'Reviews'], ['appointments', 'Appointments'], ['blog', 'Blog']]],
-  ['Content', [['mixes', 'Mixes'], ['shop', 'Shop'], ['gallery', 'Gallery'], ['youtube', 'YouTube']]],
+  ['Content', [['mixes', 'Mixes'], ['shop', 'Shop'], ['gallery', 'Gallery'], ['youtube', 'YouTube'], ['payments', 'Payment requests']]],
 ];
 
 function renderNav() {

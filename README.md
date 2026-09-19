@@ -106,6 +106,38 @@ appointment copy, reviews, services, products and media metadata. The generated 
 email plus a client description in D1 through `/api/enquire`. Only publish genuine reviews that
 you have permission to quote; the starter review list is intentionally empty.
 
+### Mobile money purchases
+
+Mixes, effects packs and shop products can each have a UGX price and a
+`paymentEnabled` switch in the admin panel. When enabled, the customer enters a
+mobile-money number and network; the request is stored in D1 and appears under
+**Payment requests** in the private admin panel with a reference and `pending`
+status. No payment is described as successful until the studio confirms it.
+
+The current flow is a secure payment-request queue, not an automatic debit.
+Automatic deductions require a supported provider account and server-side
+credentials (for example MTN MoMo, Airtel Money, Flutterwave or Pesapal), plus
+their API/webhook configuration. Never place those credentials in
+`content.json`, `admin/index.html`, or the browser. Once a provider is chosen,
+its encrypted Cloudflare secret can be wired into `/api/pay` and the webhook
+can update `payments.status` from `pending` to `paid` or `failed`.
+
+### Mobile money purchases
+
+Mixes, effects packs and shop products can each have a UGX price and a
+`paymentEnabled` switch in the admin panel. When enabled, the customer enters a
+mobile-money number and network; the request is stored in D1 and appears under
+**Payment requests** in the private admin panel with a reference and `pending`
+status. No payment is described as successful until the studio confirms it.
+
+The current flow is a secure payment-request queue, not an automatic debit.
+Automatic deductions require a supported provider account and server-side
+credentials (for example MTN MoMo, Airtel Money, Flutterwave or Pesapal), plus
+their API/webhook configuration. Never place those credentials in
+`content.json`, `admin/index.html`, or the browser. Once a provider is chosen,
+its encrypted Cloudflare secret can be wired into `/api/pay` and the webhook
+can update `payments.status` from `pending` to `paid` or `failed`.
+
 ---
 
 ## 3. Adding a new service page
