@@ -18,4 +18,4 @@ database_id = "2044d58e-36d5-4113-a517-9c1b98e88059"
 # Create this bucket in Cloudflare R2 and bind it to the Pages project as MEDIA_BUCKET.
 [[r2_buckets]]
 binding = "MEDIA_BUCKET"
-bucket_name = "derrickfiles-media""
+bucket_name = "derrickfiles-media"

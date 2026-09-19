@@ -35,7 +35,8 @@ export async function onRequestPost({ request, env }) {
     return json({
       ok: true,
       reference: ref,
-      message: `Payment request created. The studio will process this shortly. Amount: ${amount} UGX to ${network} ${phone}`
+      status: 'pending',
+      message: `Payment request received. The studio will confirm ${amount} UGX to ${network} ${phone} shortly.`
     });
   } catch (err) {
     return json({ ok: false, error: 'Payment could not be saved. Try again.' }, 500);
