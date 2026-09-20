@@ -561,26 +561,15 @@
         "paymentEnabled": false
       },
       {
-        "title": "Riddims &amp; Tropical Vibes",
-        "desc": "Slower, warmer, built for sundowners and open-air rooms.",
-        "link": "https://www.mixcloud.com/derrickfiles/",
+        "title": "Talk To Me Nuh Mix (Derrick Files Mixed)",
+        "desc": "High Vibrations",
+        "link": "https://www.mixcloud.com/derrickfiles/mixshot-2-sweat-afro-dance-mainstream-derrick-files/?utm_medium=share&utm_source=clipboard&utm_content=show&utm_term=VXNlcjoxNDI1NzQyNA%3D%3D",
         "downloadUrl": "https://wallet.wearemarz.com/p/mixes-driu8x",
-        "price": null,
-        "paymentEnabled": false
-      },
-      {
-        "title": "",
-        "type": "Mix",
-        "genre": "",
-        "price": 0,
-        "desc": "",
-        "audio": "",
-        "downloadUrl": "",
-        "paymentUrl": "https://wallet.wearemarz.com/p/mixes-driu8x",
-        "cover": "",
-        "link": "https://www.mixcloud.com/derrickfiles/",
-        "free": false,
-        "paymentEnabled": false
+        "price": "$10",
+        "paymentEnabled": true,
+        "type": "mixtape",
+        "genre": "Dancehall",
+        "cover": "/assets/img/mu9oa0se-cvrt.png"
       }
     ]
   },
