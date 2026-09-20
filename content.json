@@ -577,11 +577,12 @@
     "intro": "Gear, accessories and digital packs from Derrick Files Studio. Payment by mobile money — call or WhatsApp 0789 191 660 to order.",
     "items": [
       {
-        "title": "DJ Controllers",
+        "title": "Pioneer DDJ REV 5",
         "desc": "Pioneer, Denon and Numark controllers and mixers. Ask for current stock.",
-        "price": 0,
-        "image": "/assets/img/derrick-4.jpg",
-        "paymentEnabled": false
+        "price": "100K",
+        "image": "/assets/img/mu9op9eg-rev-1-.png",
+        "paymentEnabled": false,
+        "category": "DJ Controllers"
       },
       {
         "title": "Accessories &amp; Cabling",
