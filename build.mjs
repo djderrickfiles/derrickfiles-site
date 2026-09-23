@@ -179,7 +179,7 @@ function layout({ title, desc, url, extraSchema = [], body, image, active }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20260923-player">
+<link rel="stylesheet" href="/assets/site.css?v=20260923-tabs">
 ${adsHead}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
@@ -507,6 +507,66 @@ function pageMixes() {
     ['Mixcloud', S.social.mixcloud],
     ['HearThis', S.social.hearthis],
   ].filter(x => x[1]);
+  const ch = m.channels || {};
+  const yt = id => {
+    const r = /(?:v=|youtu\.be\/|embed\/|shorts\/)([A-Za-z0-9_-]{6,})/.exec(id || '');
+    return r ? r[1] : '';
+  };
+  const spotifyEmbed = u => String(u || '').replace('open.spotify.com/', 'open.spotify.com/embed/');
+
+  const packBody = (ch.premium && ch.premium.items || []).map(p => `
+    <article class="pk">
+      ${p.cover ? `<img class="pk-art" src="${esc(p.cover)}" alt="" loading="lazy">` : '<div class="pk-art"></div>'}
+      <div>
+        <h3>${raw(p.title)}</h3>
+        ${p.price ? `<p class="pk-price">${esc(p.price)}</p>` : ''}
+        ${p.desc ? `<p>${raw(p.desc)}</p>` : ''}
+        ${p.audio ? `<audio controls preload="none" src="${esc(p.audio)}${p.preview === false ? '' : (p.audio.indexOf('?') > 0 ? '&' : '?') + 'preview=1'}" data-track="${esc(p.title)}"></audio>` : ''}
+        ${p.audio && p.preview !== false ? '<p class="pk-note">30 second preview. Buy to keep the full mix.</p>' : ''}
+        ${p.paymentUrl ? `<div class="sound-actions"><a class="bt bp" href="${esc(p.paymentUrl)}" data-track-buy="${esc(p.title)}" rel="noopener" target="_blank">Buy this pack &rarr;</a></div>` : ''}
+      </div>
+    </article>`).join('') || '<p class="sub">Premium packs are coming. Check back soon.</p>';
+
+  const embedList = (arr, render) => (arr || []).map(x => `
+    <div class="embed-card">
+      <div class="embed-head"><h3>${raw(x.title || '')}</h3>${x.desc ? `<p>${raw(x.desc)}</p>` : ''}</div>
+      ${render(x)}
+    </div>`).join('');
+
+  const mixcloudBody = embedList(ch.mixcloud && ch.mixcloud.items, x =>
+    `<iframe height="120" loading="lazy" title="${esc(x.title || 'Mixcloud set')}" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=0&feed=${encodeURIComponent(new URL(x.url, 'https://www.mixcloud.com').pathname)}"></iframe>`
+  ) || '<p class="sub">No Mixcloud sets added yet.</p>';
+
+  const soundcloudBody = embedList(ch.soundcloud && ch.soundcloud.items, x =>
+    `<iframe height="166" loading="lazy" title="${esc(x.title || 'SoundCloud set')}" src="https://w.soundcloud.com/player/?url=${encodeURIComponent(x.url)}&color=%23ffc91e&hide_related=true&show_comments=false&show_teaser=false"></iframe>`
+  ) || '<p class="sub">No SoundCloud sets added yet.</p>';
+
+  const spotifyBody = embedList(ch.spotify && ch.spotify.items, x =>
+    `<iframe height="380" loading="lazy" title="${esc(x.title || 'Spotify playlist')}" src="${esc(spotifyEmbed(x.url))}" allow="encrypted-media"></iframe>`
+  ) || '<p class="sub">Playlists are coming. Check back soon.</p>';
+
+  const videoBody = embedList(ch.video && ch.video.items, x =>
+    x.video
+      ? `<video controls preload="none" playsinline style="width:100%;display:block" ${x.cover ? `poster="${esc(x.cover)}"` : ''} src="${esc(x.video)}"></video>`
+      : (yt(x.url)
+        ? `<iframe height="380" loading="lazy" title="${esc(x.title || 'Video mix')}" src="https://www.youtube-nocookie.com/embed/${esc(yt(x.url))}?rel=0&modestbranding=1" allow="accelerometer; clipboard-write; encrypted-media; picture-in-picture" allowfullscreen></iframe>`
+        : '')
+  ) || '<p class="sub">Video mixes are coming. Check back soon.</p>';
+
+  const lbl = (k, fb) => (ch[k] && ch[k].label) || fb;
+  const blb = k => (ch[k] && ch[k].blurb) || '';
+  const cnt = k => ((ch[k] && ch[k].items) || []).length;
+
+  const TABS = [
+    { key: 'hearthis', label: lbl('hearthis', 'HearThis'), blurb: blb('hearthis'), count: 0,
+      body: '<div id="mxlist" class="mx-list"><p class="sub" id="mxmsg">Loading the catalogue&hellip;</p></div>' },
+    { key: 'premium', label: lbl('premium', 'Premium Packs'), blurb: blb('premium'), count: cnt('premium'), body: packBody },
+    { key: 'mixcloud', label: lbl('mixcloud', 'Mixcloud'), blurb: blb('mixcloud'), count: cnt('mixcloud'), body: mixcloudBody },
+    { key: 'soundcloud', label: lbl('soundcloud', 'SoundCloud'), blurb: blb('soundcloud'), count: cnt('soundcloud'), body: soundcloudBody },
+    { key: 'spotify', label: lbl('spotify', 'Spotify'), blurb: blb('spotify'), count: cnt('spotify'), body: spotifyBody },
+    { key: 'video', label: lbl('video', 'Video Mixes'), blurb: blb('video'), count: cnt('video'), body: videoBody },
+  ];
+
   const inner = `
 <section><div class="w">
   <p class="eyeb"><i></i> The sound</p>
@@ -545,12 +605,26 @@ function pageMixes() {
       }).join('')}</ul>
     </div>
   </div>
-  <div id="mxlist" class="mx-list"><p class="sub" id="mxmsg">Loading the catalogue&hellip;</p></div>
+
+  <ul class="mxtabs" role="tablist">${TABS.map((t, n) => 
+    '<li><button class="mxtab" role="tab" id="tab-' + t.key + '" aria-controls="panel-' + t.key + '"' +
+    ' aria-selected="' + (n === 0 ? 'true' : 'false') + '" data-tab="' + t.key + '">' + esc(t.label) +
+    (t.count ? '<span class="n">' + t.count + '</span>' : '') + '</button></li>'
+  ).join('')}</ul>
+
+${TABS.map((t, n) => 
+  '<section class="mxpanel" role="tabpanel" id="panel-' + t.key + '" aria-labelledby="tab-' + t.key + '"' +
+  (n === 0 ? '' : ' hidden') + '>' +
+  (t.blurb ? '<p class="mxblurb">' + esc(t.blurb) + '</p>' : '') +
+  t.body + '</section>'
+).join('')}
+
 </div></section>
 
 <div class="mxdock" id="mxdock" hidden>
   <div class="mxdock-in">
     <img class="mxdock-art" id="mxdart" src="" alt="">
+    <span class="wave" id="mxwave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <div class="mxdock-meta"><strong id="mxdtitle"></strong><span id="mxdsub"></span></div>
     <div class="mxdock-frame" id="mxdframe"></div>
     <button class="mxdock-x" id="mxdx" aria-label="Close player">&times;</button>
@@ -631,6 +705,42 @@ function pageMixes() {
     if(!data.mixes||!data.mixes.length){ msg.textContent='Catalogue is loading slowly. The platform links above still work.'; return; }
     ALL=data.mixes; render(ALL);
   }).catch(function(){ msg.textContent='Could not reach the catalogue. The platform links above still work.'; });
+
+  // ---- channel tabs ----
+  var tabs=[].slice.call(document.querySelectorAll('.mxtab'));
+  function show(key){
+    tabs.forEach(function(b){
+      var on=b.dataset.tab===key;
+      b.setAttribute('aria-selected', on?'true':'false');
+      var p=document.getElementById('panel-'+b.dataset.tab);
+      if(p) p.hidden=!on;
+    });
+    try{ history.replaceState(null,'','#'+key); }catch(e){}
+  }
+  tabs.forEach(function(b){
+    b.addEventListener('click',function(){ show(b.dataset.tab); track('tab', b.dataset.tab); });
+    b.addEventListener('keydown',function(e){
+      var n=tabs.indexOf(b);
+      if(e.key==='ArrowRight'){ e.preventDefault(); tabs[(n+1)%tabs.length].focus(); tabs[(n+1)%tabs.length].click(); }
+      if(e.key==='ArrowLeft'){ e.preventDefault(); var p=(n-1+tabs.length)%tabs.length; tabs[p].focus(); tabs[p].click(); }
+    });
+  });
+  var fromHash=(location.hash||'').replace('#','');
+  if(fromHash && document.getElementById('panel-'+fromHash)) show(fromHash);
+
+  // ---- waveform reacts to any audio on the page ----
+  var wave=document.getElementById('mxwave');
+  function waveOn(on){ if(wave) wave.classList.toggle('is-paused', !on); }
+  waveOn(false);
+  document.querySelectorAll('audio,video').forEach(function(a){
+    a.addEventListener('play',function(){
+      document.querySelectorAll('audio,video').forEach(function(o){ if(o!==a) o.pause(); });
+      waveOn(true);
+    });
+    a.addEventListener('pause',function(){ waveOn(false); });
+  });
+  var _play = play;
+  play = function(mx){ _play(mx); waveOn(true); };
 })();
 </script>`;
   const gate = `
