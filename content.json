@@ -575,7 +575,40 @@
     "cover": "/assets/img/mu9oa0se-cvrt.png",
     "free": true
    }
-  ]
+  ],
+  "channels": {
+   "premium": {
+    "label": "Premium Packs",
+    "blurb": "Studio-mastered packs. Preview 30 seconds, buy to keep the full mix.",
+    "items": []
+   },
+   "mixcloud": {
+    "label": "Mixcloud",
+    "blurb": "Long-form sets hosted on Mixcloud.",
+    "items": []
+   },
+   "hearthis": {
+    "label": "HearThis",
+    "blurb": "The full catalogue, pulled live from the channel.",
+    "auto": true,
+    "items": []
+   },
+   "soundcloud": {
+    "label": "SoundCloud",
+    "blurb": "Selected sets on SoundCloud.",
+    "items": []
+   },
+   "spotify": {
+    "label": "Spotify",
+    "blurb": "Playlists I curate — trending and current Ugandan sounds.",
+    "items": []
+   },
+   "video": {
+    "label": "Video Mixes",
+    "blurb": "Visual sets. YouTube or hosted video.",
+    "items": []
+   }
+  }
  },
  "shop": {
   "intro": "Gear, accessories and digital packs from Derrick Files Studio. Payment by mobile money — call or WhatsApp 0789 191 660 to order.",
