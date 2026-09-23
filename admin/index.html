@@ -519,6 +519,72 @@ const VIEWS = {
       ],
       addLabel: '+ Add a series'
     })]));
+
+    // ---------- channel tabs ----------
+    const ch = C.mixes.channels = C.mixes.channels || {};
+    const def = (k, label, blurb) => (ch[k] = ch[k] || { label, blurb, items: [] });
+    def('premium', 'Premium Packs', 'Studio-mastered packs. Preview 30 seconds, buy to keep the full mix.');
+    def('mixcloud', 'Mixcloud', 'Long-form sets hosted on Mixcloud.');
+    def('hearthis', 'HearThis', 'The full catalogue, pulled live from the channel.');
+    def('soundcloud', 'SoundCloud', 'Selected sets on SoundCloud.');
+    def('spotify', 'Spotify', 'Playlists I curate.');
+    def('video', 'Video Mixes', 'Visual sets. YouTube or hosted video.');
+
+    v.appendChild(head('Premium Packs', 'Your own files. Visitors hear 30 seconds, then pay to keep the full mix.'));
+    v.appendChild(card('', [
+      row(text('Tab label', ch.premium, 'label'), text('Blurb', ch.premium, 'blurb')),
+      list(ch.premium.items, {
+        title: 'title', sub: 'price',
+        blank: { title: '', desc: '', price: '', audio: '', cover: '', paymentUrl: '', preview: true },
+        fields: m => [
+          row(text('Title', m, 'title'), text('Price', m, 'price', 'e.g. 20,000 UGX')),
+          text('Description', m, 'desc', '', true),
+          audio('Full audio file', m, 'audio'),
+          row(image('Cover art', m, 'cover'), text('MarzPay link', m, 'paymentUrl', 'Checkout URL for this pack')),
+          toggle('Limit non-buyers to a 30 second preview', m, 'preview')
+        ],
+        addLabel: '+ Add a premium pack'
+      })
+    ]));
+
+    const linkTab = (key, hint, placeholder) => {
+      const t = ch[key];
+      v.appendChild(head(t.label, hint));
+      v.appendChild(card('', [
+        row(text('Tab label', t, 'label'), text('Blurb', t, 'blurb')),
+        list(t.items, {
+          title: 'title', sub: 'url',
+          blank: { title: '', url: '', desc: '' },
+          fields: m => [
+            row(text('Title', m, 'title'), text('Link', m, 'url', placeholder)),
+            text('Description', m, 'desc')
+          ],
+          addLabel: '+ Add'
+        })
+      ]));
+    };
+
+    linkTab('mixcloud', 'Paste the page link for each set. It plays on the site and still counts as a Mixcloud play.', 'https://www.mixcloud.com/derrickfiles/...');
+    linkTab('soundcloud', 'Paste the track or set link. Plays count on SoundCloud.', 'https://soundcloud.com/...');
+    linkTab('spotify', 'Paste a public playlist link. No Spotify login needed and the link never expires.', 'https://open.spotify.com/playlist/...');
+
+    v.appendChild(head('HearThis', 'This tab fills itself from your HearThis channel. Nothing to enter here.'));
+    v.appendChild(card('', [ row(text('Tab label', ch.hearthis, 'label'), text('Blurb', ch.hearthis, 'blurb')) ]));
+
+    v.appendChild(head('Video Mixes', 'A YouTube link, or a video file you upload.'));
+    v.appendChild(card('', [
+      row(text('Tab label', ch.video, 'label'), text('Blurb', ch.video, 'blurb')),
+      list(ch.video.items, {
+        title: 'title', sub: 'url',
+        blank: { title: '', url: '', video: '', cover: '', desc: '' },
+        fields: m => [
+          row(text('Title', m, 'title'), text('YouTube link', m, 'url', 'https://www.youtube.com/watch?v=...')),
+          audio('Or upload a video file', m, 'video'),
+          row(image('Thumbnail', m, 'cover'), text('Description', m, 'desc'))
+        ],
+        addLabel: '+ Add a video mix'
+      })
+    ]));
   },
 
   shop: () => {
