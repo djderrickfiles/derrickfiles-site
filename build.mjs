@@ -532,8 +532,107 @@ function pageMixes() {
       </div>
     </article>`).join('')}
   </div>
-  <div class="platforms"><p class="meta">Listen on your favourite platform — you stay on our catalogue until you choose to leave</p>${platforms.map(x => `<a class="platform-tab" href="${esc(x[1])}" data-track-outbound="${esc(x[0])}" rel="noopener" target="_blank">${esc(x[0])}<span>&rarr;</span></a>`).join('')}</div>
-</div></section>`;
+  <div class="mx-head">
+    <h2>The full catalogue</h2>
+    <div class="mx-bar">
+      <input type="search" id="mxq" class="mx-search" placeholder="Search the catalogue" aria-label="Search mixes">
+      <ul class="soc mx-plat">${platforms.map(x => {
+        const key = x[0].toLowerCase() === 'mixcloud' ? 'mixcloud' : 'soundcloud';
+        const glyph = ICONS[key]
+          ? '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="' + ICONS[key] + '"/></svg>'
+          : '<span class="soc-txt">' + esc(x[0]) + '</span>';
+        return '<li><a href="' + esc(x[1]) + '" data-track-outbound="' + esc(x[0]) + '" rel="me noopener" target="_blank" aria-label="' + esc(S.person) + ' on ' + esc(x[0]) + '">' + glyph + '<span class="sr">' + esc(x[0]) + '</span></a></li>';
+      }).join('')}</ul>
+    </div>
+  </div>
+  <div id="mxlist" class="mx-list"><p class="sub" id="mxmsg">Loading the catalogue&hellip;</p></div>
+</div></section>
+
+<div class="mxdock" id="mxdock" hidden>
+  <div class="mxdock-in">
+    <img class="mxdock-art" id="mxdart" src="" alt="">
+    <div class="mxdock-meta"><strong id="mxdtitle"></strong><span id="mxdsub"></span></div>
+    <div class="mxdock-frame" id="mxdframe"></div>
+    <button class="mxdock-x" id="mxdx" aria-label="Close player">&times;</button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var list=document.getElementById('mxlist'), msg=document.getElementById('mxmsg'), q=document.getElementById('mxq');
+  var dock=document.getElementById('mxdock'), dframe=document.getElementById('mxdframe');
+  var dart=document.getElementById('mxdart'), dtitle=document.getElementById('mxdtitle'), dsub=document.getElementById('mxdsub');
+  var ALL=[], FAV={};
+  try{ FAV=JSON.parse(localStorage.getItem('dfs_fav')||'{}'); }catch(e){ FAV={}; }
+  function saveFav(){ try{ localStorage.setItem('dfs_fav',JSON.stringify(FAV)); }catch(e){} }
+  function esc(s){var e=document.createElement('div');e.textContent=s==null?'':s;return e.innerHTML;}
+  function track(ev,item){ fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:ev,item:item})}).catch(function(){}); }
+
+  function play(mx){
+    dframe.innerHTML='<iframe src="'+esc(mx.embed)+'&autoplay=1" title="'+esc(mx.title)+'" allow="autoplay" scrolling="no"></iframe>';
+    dart.src=mx.artwork||''; dtitle.textContent=mx.title;
+    dsub.textContent=mx.length+(mx.played?'  \u00b7  '+mx.played+' plays':'');
+    dock.hidden=false; document.body.classList.add('has-dock');
+    track('play', mx.title);
+  }
+  document.getElementById('mxdx').addEventListener('click',function(){
+    dock.hidden=true; dframe.innerHTML=''; document.body.classList.remove('has-dock');
+  });
+
+  function share(mx,btn){
+    var url=mx.permalink||location.href;
+    if(navigator.share){ navigator.share({title:mx.title,url:url}).catch(function(){}); return; }
+    navigator.clipboard.writeText(url).then(function(){
+      btn.classList.add('ok'); setTimeout(function(){btn.classList.remove('ok');},1600);
+    }).catch(function(){ window.prompt('Copy this link', url); });
+  }
+
+  function row(mx){
+    var fav=!!FAV[mx.id];
+    return '<article class="mx" data-id="'+esc(mx.id)+'">'+
+      '<button class="mx-play" aria-label="Play '+esc(mx.title)+'">'+
+        (mx.artwork?'<img src="'+esc(mx.artwork)+'" alt="" loading="lazy">':'<span class="mx-noart"></span>')+
+        '<span class="mx-tri" aria-hidden="true"></span></button>'+
+      '<div class="mx-info"><h3>'+esc(mx.title)+'</h3>'+
+      '<p class="mx-sub">'+esc(mx.length)+(mx.played?' &middot; '+mx.played+' plays':'')+'</p></div>'+
+      '<div class="mx-acts">'+
+        '<button class="mx-ico mx-fav'+(fav?' on':'')+'" data-act="fav" aria-label="Favourite" title="Favourite">'+
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.5 12c-2 4.4-9.5 9-9.5 9z"/></svg></button>'+
+        '<button class="mx-ico" data-act="share" aria-label="Copy link" title="Copy link">'+
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></button>'+
+        '<a class="mx-ico" href="'+esc(mx.permalink)+'" data-track-outbound="'+esc(mx.title)+'" rel="noopener" target="_blank" aria-label="Open on HearThis" title="Open on HearThis">'+
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></a>'+
+      '</div></article>';
+  }
+
+  function render(items){
+    if(!items.length){ list.innerHTML='<p class="sub">Nothing matches that search.</p>'; return; }
+    list.innerHTML=items.map(row).join('');
+    list.querySelectorAll('.mx').forEach(function(el){
+      var mx=ALL.filter(function(x){return x.id===el.dataset.id;})[0];
+      if(!mx) return;
+      el.querySelector('.mx-play').addEventListener('click',function(){ play(mx); });
+      el.querySelectorAll('[data-act]').forEach(function(b){
+        b.addEventListener('click',function(){
+          if(b.dataset.act==='share') return share(mx,b);
+          FAV[mx.id]=!FAV[mx.id]; saveFav(); b.classList.toggle('on',!!FAV[mx.id]);
+        });
+      });
+    });
+  }
+
+  function filter(){
+    var v=(q.value||'').toLowerCase().trim();
+    render(!v?ALL:ALL.filter(function(x){return x.title.toLowerCase().indexOf(v)>=0;}));
+  }
+  q.addEventListener('input',filter);
+
+  fetch('/api/mixes').then(function(r){return r.json();}).then(function(data){
+    if(!data.mixes||!data.mixes.length){ msg.textContent='Catalogue is loading slowly. The platform links above still work.'; return; }
+    ALL=data.mixes; render(ALL);
+  }).catch(function(){ msg.textContent='Could not reach the catalogue. The platform links above still work.'; });
+})();
+</script>`;
   const gate = `
 <div class="gate-modal" id="gate-modal" hidden>
   <div class="gate-shade" data-gate-close></div>
