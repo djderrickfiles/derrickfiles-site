@@ -1023,5 +1023,30 @@ fs.writeFileSync(path.join(OUT, 'ads.txt'),
 fs.writeFileSync(path.join(OUT, '_headers'),
   `/*\n  Cache-Control: no-cache\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/admin/*\n  X-Robots-Tag: noindex\n`);
 
+/* A real 404. Cloudflare Pages serves dist/404.html for unknown paths.
+   Without it every junk URL answered 200 with the homepage, which lets Google
+   index endless duplicate copies of the front page. */
+fs.writeFileSync(path.join(OUT, '404.html'), layout({
+  title: `Page not found — ${S.brand}`,
+  desc: 'That page has moved or never existed. Here is the way back.',
+  url: '/404.html',
+  body: `<header class="phead"><div class="w">
+    <h1>Page not found</h1>
+    <p class="lede">That link is dead or the page has moved. Everything below still works.</p>
+    <div class="btns" style="margin-top:28px">
+      <a class="bt bp" href="/">Home</a>
+      <a class="bt bs" href="/dj-bookings/">Book a DJ</a>
+      <a class="bt bs" href="/gear-4-hire/">Gear 4 Hire</a>
+      <a class="bt bs" href="/dj-academy/">DJ Academy</a>
+    </div>
+  </div></header>`
+}).replace('<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">',
+           '<meta name="robots" content="noindex,follow">'));
+
+/* the old placeholder slug now points at the post that owns that content */
+fs.writeFileSync(path.join(OUT, '_redirects'),
+  `/blog/new-post/ /blog/the-ultimate-plug-derrick-files-studio/ 301\n` +
+  `/blog/new-post /blog/the-ultimate-plug-derrick-files-studio/ 301\n`);
+
 console.log(`✅ Built ${urls.length} pages → dist/`);
 urls.forEach(u => console.log('   ' + u));
