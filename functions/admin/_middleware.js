@@ -122,13 +122,13 @@ export async function onRequest(context) {
   }
 
   if (url.searchParams.has('logout')) {
-    return new Response(null, {
-      status: 302,
-      headers: {
-        Location: '/admin/',
-        'Set-Cookie': COOKIE + '=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'
-      }
-    });
+    // Clear both paths. Older sessions were issued with Path=/admin and a
+    // Path=/ delete will not remove them, which would strand the panel in a
+    // state where /admin/ opens but every /api/ call is rejected.
+    var out = new Headers({ Location: '/admin/' });
+    out.append('Set-Cookie', COOKIE + '=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0');
+    out.append('Set-Cookie', COOKIE + '=; Path=/admin; HttpOnly; Secure; SameSite=Lax; Max-Age=0');
+    return new Response(null, { status: 302, headers: out });
   }
 
   if (request.method === 'POST') {
@@ -137,13 +137,10 @@ export async function onRequest(context) {
     if (samePassword(given, env.SITE_PASSWORD)) {
       var exp = Math.floor(Date.now() / 1000) + MAX_AGE;
       var token = await sign(env.AUTH_SECRET, exp);
-      return new Response(null, {
-        status: 302,
-        headers: {
-          Location: url.pathname,
-          'Set-Cookie': COOKIE + '=' + token + '; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=' + MAX_AGE
-        }
-      });
+      var hdrs = new Headers({ Location: url.pathname });
+      hdrs.append('Set-Cookie', COOKIE + '=; Path=/admin; HttpOnly; Secure; SameSite=Lax; Max-Age=0');
+      hdrs.append('Set-Cookie', COOKIE + '=' + token + '; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=' + MAX_AGE);
+      return new Response(null, { status: 302, headers: hdrs });
     }
     await new Promise(function (r) { setTimeout(r, 900); });
     return htmlResponse(loginPage('Wrong password.'), 401);
