@@ -179,7 +179,7 @@ function layout({ title, desc, url, extraSchema = [], body, image, active }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20260923-tabs">
+<link rel="stylesheet" href="/assets/site.css?v=20260924-blog">
 ${adsHead}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
@@ -923,12 +923,22 @@ function pageBlogIndex() {
 <section><div class="w">
   <p class="eyeb"><i></i> Journal</p>
   <h2>Studio notes</h2>
-  <div class="grid">
-    ${C.blog.map(p => `
-    <a class="card" href="/blog/${p.slug}/">
-      <div class="cpic"><img src="${esc(p.cover)}" alt="${esc(p.title)}" loading="lazy"></div>
-      <div class="cbody"><p class="meta">${esc(fmtDate(p.date))}</p><h3>${esc(p.title)}</h3><p>${esc(p.excerpt)}</p><span class="go">Read &rarr;</span></div>
-    </a>`).join('')}
+  <div class="bgrid">
+    ${C.blog.map((p, n) => {
+      const cycle = n % 6;
+      const size = cycle === 0 ? 'b-lg' : (cycle === 3 ? 'b-wide' : 'b-sm');
+      const tag = (p.tags && p.tags[0]) ? p.tags[0] : 'Studio notes';
+      return `
+    <a class="bcard ${size}" href="/blog/${p.slug}/">
+      <div class="bpic"><img src="${esc(p.cover)}" alt="" loading="lazy"><span class="btag">${esc(tag)}</span></div>
+      <div class="bbody">
+        <p class="meta">${esc(fmtDate(p.date))}</p>
+        <h3>${esc(p.title)}</h3>
+        <p class="bx">${esc(p.excerpt)}</p>
+        <span class="go">Read &rarr;</span>
+      </div>
+    </a>`;
+    }).join('')}
   </div>
 </div></section>
 ${adSlot(C.adsense?.slotFooter)}`;
