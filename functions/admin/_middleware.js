@@ -126,7 +126,7 @@ export async function onRequest(context) {
       status: 302,
       headers: {
         Location: '/admin/',
-        'Set-Cookie': COOKIE + '=; Path=/admin; HttpOnly; Secure; SameSite=Lax; Max-Age=0'
+        'Set-Cookie': COOKIE + '=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0'
       }
     });
   }
@@ -141,7 +141,7 @@ export async function onRequest(context) {
         status: 302,
         headers: {
           Location: url.pathname,
-          'Set-Cookie': COOKIE + '=' + token + '; Path=/admin; HttpOnly; Secure; SameSite=Lax; Max-Age=' + MAX_AGE
+          'Set-Cookie': COOKIE + '=' + token + '; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=' + MAX_AGE
         }
       });
     }
