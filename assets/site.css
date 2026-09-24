@@ -516,3 +516,54 @@ body{font-size:18px;line-height:1.75}
 .embed-head{padding:12px 15px 0}
 .embed-head h3{margin:0 0 3px;font-size:16px}
 .embed-head p{margin:0 0 10px;font-size:13.5px;color:#8a8a92}
+
+
+/* ---------- BLOG: EDITORIAL TILE GRID ---------- */
+.bgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:20px;margin-top:30px}
+.bcard{grid-column:span 2;display:flex;flex-direction:column;background:var(--s1);
+  border:1px solid var(--line);border-radius:var(--r);overflow:hidden;color:inherit;
+  transition:border-color .22s ease,transform .22s ease}
+.bcard:hover{border-color:var(--gold);transform:translateY(-4px)}
+.bcard:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.b-lg{grid-column:span 4}
+.b-wide{grid-column:span 6;flex-direction:row}
+.b-sm{grid-column:span 2}
+
+.bpic{position:relative;overflow:hidden;background:#141416}
+.bpic img{display:block;width:100%;height:100%;object-fit:cover;
+  transition:transform .5s ease;filter:grayscale(.15) contrast(1.04)}
+.bcard:hover .bpic img{transform:scale(1.04);filter:grayscale(0) contrast(1.06)}
+.b-sm .bpic{aspect-ratio:16/10}
+.b-lg .bpic{aspect-ratio:16/9}
+.b-wide .bpic{flex:0 0 42%;aspect-ratio:auto;min-height:230px}
+
+.btag{position:absolute;left:12px;top:12px;background:rgba(0,0,0,.72);
+  border:1px solid rgba(255,255,255,.18);color:var(--gold);
+  font-family:var(--d);font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;padding:6px 11px;border-radius:var(--r-pill)}
+
+.bbody{padding:18px 20px 22px;display:flex;flex-direction:column;gap:7px;flex:1 1 auto}
+.b-wide .bbody{justify-content:center;padding:26px 30px}
+.bbody h3{margin:0;line-height:1.28;font-weight:700}
+.b-sm .bbody h3{font-size:18px}
+.b-lg .bbody h3{font-size:25px}
+.b-wide .bbody h3{font-size:27px}
+.bbody .meta{margin:0;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#8a8a92}
+.bx{margin:0;color:#b4b4bb;font-size:15.5px;line-height:1.65}
+.b-sm .bx{font-size:14.5px}
+.bbody .go{margin-top:6px}
+
+@media(max-width:900px){
+  .bgrid{grid-template-columns:repeat(4,1fr);gap:16px}
+  .b-lg,.b-wide{grid-column:span 4}
+  .b-sm{grid-column:span 2}
+  .b-wide{flex-direction:column}
+  .b-wide .bpic{flex:none;aspect-ratio:16/9;min-height:0}
+  .b-lg .bbody h3,.b-wide .bbody h3{font-size:22px}
+}
+@media(max-width:600px){
+  .bgrid{grid-template-columns:1fr}
+  .b-lg,.b-wide,.b-sm{grid-column:span 1}
+  .b-sm .bbody h3{font-size:19px}
+}
