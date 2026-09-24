@@ -60,7 +60,7 @@
  "tiktok": {
   "handle": "derrickfiles",
   "profile": "https://www.tiktok.com/@derrickfiles",
-  "intro": "Short-form sets, behind-the-scenes clips and studio updates from DJ Derrick Files."
+  "intro": "Short-form sets, mixing tips, behind-the-scenes clips and studio updates from DJ Derrick Files on TikTok, @derrickfiles, posted from Kampala, Uganda."
  },
  "home": {
   "heroKicker": "From Kampala, To the World",
@@ -645,7 +645,7 @@
   ]
  },
  "gallery": {
-  "intro": "Portraits, sessions, stage builds and events — Kampala and beyond.",
+  "intro": "Portraits, studio sessions, stage and truss builds, LED walls and live events, shot around Kampala and upcountry Uganda by Derrick Files Studio.",
   "items": [
    {
     "image": "/assets/img/derrick-hero.jpg",
@@ -682,7 +682,7 @@
   ]
  },
  "youtube": {
-  "intro": "Sets, tutorials, gear breakdowns and behind-the-scenes from Derrick Files Studio.",
+  "intro": "Full sets, mixing tutorials, gear breakdowns and behind-the-scenes from Derrick Files Studio in Kampala. Watch here, then come and learn it at the academy.",
   "channel": "https://www.youtube.com/c/derrickfiles",
   "videos": []
  },
