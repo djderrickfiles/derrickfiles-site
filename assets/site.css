@@ -568,3 +568,65 @@ body{font-size:18px;line-height:1.75}
   .b-sm .bbody h3{font-size:19px}
 }
 /* blog tiles */
+
+/* ---------- DOCKED PLAYER: REAL TRANSPORT (2026-09-25) ---------- */
+.mxdock-in{flex-wrap:nowrap}
+.mxdock audio{display:none}
+
+.mxdock-ctl{display:flex;align-items:center;gap:4px;flex:0 0 auto}
+.mxd-btn{width:36px;height:36px;display:grid;place-items:center;padding:0;cursor:pointer;
+  background:transparent;border:1px solid transparent;color:#cfcfd4;border-radius:var(--r-sm);
+  transition:color .18s ease,border-color .18s ease,background .18s ease}
+.mxd-btn svg{width:19px;height:19px;fill:currentColor;display:block}
+.mxd-btn:hover{color:var(--gold);border-color:var(--line)}
+.mxd-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.mxd-main{width:44px;height:44px;background:var(--gold);color:#000;border-color:var(--gold)}
+.mxd-main svg{width:22px;height:22px}
+.mxd-main:hover{background:#fff;border-color:#fff;color:#000}
+.mxd-out svg{fill:none;stroke:currentColor}
+.mxd-mute .v-on,.mxd-mute .v-off{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+
+.mxdock-seek{display:flex;align-items:center;gap:10px;flex:1 1 auto;min-width:0}
+.mxd-t{font-variant-numeric:tabular-nums;font-size:12px;color:#8a8a92;flex:0 0 auto;min-width:42px}
+.mxd-t:last-child{text-align:right}
+
+.mxd-bar,.mxd-vol{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;
+  height:18px;margin:0;flex:1 1 auto;min-width:0}
+.mxd-bar::-webkit-slider-runnable-track,.mxd-vol::-webkit-slider-runnable-track{
+  height:4px;border-radius:999px;background:#2e2e33}
+.mxd-bar::-moz-range-track,.mxd-vol::-moz-range-track{
+  height:4px;border-radius:999px;background:#2e2e33}
+.mxd-bar::-webkit-slider-thumb,.mxd-vol::-webkit-slider-thumb{
+  -webkit-appearance:none;appearance:none;width:13px;height:13px;border-radius:50%;
+  background:var(--gold);border:0;margin-top:-4.5px;
+  box-shadow:0 0 0 0 rgba(255,201,30,.35);transition:box-shadow .18s ease}
+.mxd-bar::-moz-range-thumb,.mxd-vol::-moz-range-thumb{
+  width:13px;height:13px;border-radius:50%;background:var(--gold);border:0}
+.mxd-bar:hover::-webkit-slider-thumb,.mxd-vol:hover::-webkit-slider-thumb{
+  box-shadow:0 0 0 6px rgba(255,201,30,.18)}
+.mxd-bar:focus-visible,.mxd-vol:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
+.mxdock-vol{display:flex;align-items:center;gap:6px;flex:0 0 132px}
+.mxdock-vol .mxd-vol{flex:1 1 auto}
+
+/* widget mode — Mixcloud draws its own transport, so ours steps aside */
+.mxdock-frame{display:none}
+.mxdock.is-widget .mxdock-frame{display:block;flex:1 1 auto;min-width:0;height:60px}
+.mxdock.is-widget .mxdock-frame iframe{height:60px}
+.mxdock.is-widget .mxdock-ctl,
+.mxdock.is-widget .mxdock-seek,
+.mxdock.is-widget .mxdock-vol{display:none}
+
+@media(max-width:1080px){
+  .mxdock-vol{display:none}
+}
+@media(max-width:720px){
+  .mxdock-in{flex-wrap:wrap;row-gap:6px}
+  .mxdock-art{width:40px;height:40px;flex-basis:40px}
+  .mxdock-meta{display:flex;flex:1 1 auto;order:1}
+  .mxdock-ctl{order:2}
+  .mxdock-x{order:3}
+  .mxdock-seek{order:4;flex-basis:100%}
+  .mxdock .wave{display:none}
+  body.has-dock{padding-bottom:118px}
+}

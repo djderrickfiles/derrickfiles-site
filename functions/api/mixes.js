@@ -48,7 +48,11 @@ export async function onRequestGet() {
         played: parseInt(t.playback_count, 10) || 0,
         liked: parseInt(t.favorite_count, 10) || 0,
         released: t.release_date || t.release_timestamp || '',
-        embed: 'https://app.hearthis.at/embed/' + t.id + '/transparent_black/?style=2'
+        embed: 'https://app.hearthis.at/embed/' + t.id + '/transparent_black/?style=2',
+        // Real audio for the on-site player. Resolved fresh per play,
+        // because HearThis signs stream URLs and they expire.
+        stream: '/api/stream?id=' + t.id,
+        waveform: t.waveform_url || ''
       };
     }).filter(m => m.id);
 
