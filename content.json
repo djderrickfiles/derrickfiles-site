@@ -90,10 +90,10 @@
     {
       "slug": "dj-course",
       "title": "DJ Course",
-      "tagline": "Learn the craft on real decks",
+      "tagline": "The syllabus, week by week",
       "excerpt": "Hands-on DJ training for beginners, working DJs and anyone ready to build confidence behind the booth.",
       "image": "/assets/img/derrick-4.jpg",
-      "intro": "Start with the basics, practise on professional equipment and leave with a real set you are proud to play. Ask for the current course price and schedule.",
+      "intro": "This is what you actually learn inside the Derrick Files DJ Academy: the running order of the course, what each stage covers and what you can do by the end of it. If you want the room, the gear and how to enrol, start on the DJ Academy page.",
       "lessons": [
         {
           "t": "Foundations",
@@ -188,6 +188,22 @@
         {
           "q": "How long does a course take?",
           "a": "It depends on the track and how often you come in. Call 0789 191 660 and we will map a schedule around you."
+        },
+        {
+          "q": "Where are the classes held?",
+          "a": "At the Derrick Files Studio room on Plot 1 Bukoto Street, Kisementi, next to Acacia Mall, Kampala. You train in the same space the studio works in, so the gear and the monitoring are what you will meet on a real job."
+        },
+        {
+          "q": "What does a DJ course cost in Kampala?",
+          "a": "Price depends on the track you take and how many sessions you book, so we quote per student rather than posting one figure. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
+        },
+        {
+          "q": "Do you teach complete beginners?",
+          "a": "Yes. Most students arrive having never touched a mixer. The beginner track starts at counting bars and ends with you playing a clean 30-minute set."
+        },
+        {
+          "q": "When is the studio open for lessons?",
+          "a": "Monday to Thursday 8am to 10pm, Friday 8am to 11pm, Saturday 10am to 11pm and Sunday 12pm to 8pm. Sessions are booked around your schedule inside those hours."
         }
       ]
     },
@@ -225,6 +241,18 @@
         {
           "q": "Is a deposit required?",
           "a": "Terms depend on the package and the length of hire. Call 0789 191 660 for a quote."
+        },
+        {
+          "q": "What DJ equipment can I hire in Kampala?",
+          "a": "Controllers, mixers, players, speakers, monitors and the stands and cabling that go with them, from the Pioneer, Denon and Numark kit the studio runs on."
+        },
+        {
+          "q": "How much does it cost to hire DJ gear?",
+          "a": "It depends on the items, the number of days and whether you need delivery or an operator, so we price each hire against your run sheet. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
+        },
+        {
+          "q": "Do you deliver and set up?",
+          "a": "Yes, delivery and setup can be arranged in and around Kampala. Tell us the venue and the time you need sound in the room and we will work back from that."
         }
       ]
     },
@@ -262,6 +290,22 @@
         {
           "q": "Can you service gear you did not sell?",
           "a": "Yes. Bring in any make — the bench is not limited to equipment bought from us."
+        },
+        {
+          "q": "What equipment do you repair?",
+          "a": "DJ controllers, mixers, media players, amplifiers, speakers and studio gear, plus computers used for music work. Pioneer, Denon and Numark are the brands we handle most."
+        },
+        {
+          "q": "How long does a repair take?",
+          "a": "Straightforward faults are often same day or next day. Anything waiting on a part takes longer, and we tell you which it is before you leave the unit."
+        },
+        {
+          "q": "Do you charge to look at it?",
+          "a": "We diagnose first and quote before any work starts. You decide whether to go ahead once you know the cost. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
+        },
+        {
+          "q": "Can you service gear before an event?",
+          "a": "Yes, and it is worth doing. Bring it in with time to spare rather than discovering a dead channel at soundcheck."
         }
       ]
     },
@@ -299,6 +343,22 @@
         {
           "q": "Do you provide microphones for speeches?",
           "a": "Yes, wired and wireless, along with a technician to manage handovers during the programme."
+        },
+        {
+          "q": "What size events do you cover?",
+          "a": "From a boardroom launch to an outdoor show. The system is specified against the room, the head count and whether there is a live band, not sold as one fixed package."
+        },
+        {
+          "q": "Do you provide an engineer?",
+          "a": "Yes. A system without someone on it is a risk. We can supply the operator with the hire, or work alongside your own engineer."
+        },
+        {
+          "q": "How much is PA hire in Kampala?",
+          "a": "It depends on the room, the hours and whether you need lighting or LED with it. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
+        },
+        {
+          "q": "Do you cover events outside Kampala?",
+          "a": "Yes, upcountry work is normal for us. Transport and crew are quoted with the job."
         }
       ]
     },
@@ -336,6 +396,22 @@
         {
           "q": "Can you work with our venue's existing rig?",
           "a": "Yes — we regularly supplement house systems rather than replacing them."
+        },
+        {
+          "q": "Do you build the stage as well as light it?",
+          "a": "Yes. Stage decking, truss, rigging and lighting are one job here, which is why the timings actually line up on the day."
+        },
+        {
+          "q": "How early do you need access to the venue?",
+          "a": "Build time depends on the size of the structure. We agree an access time with the venue in advance and we are on site before your crew call."
+        },
+        {
+          "q": "Can you match a design I have been shown?",
+          "a": "Send the reference and we will tell you honestly what is possible in the space and the budget before you commit."
+        },
+        {
+          "q": "What does stage and lighting hire cost?",
+          "a": "It is quoted per build, because a truss frame and a full stage are different jobs. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
         }
       ]
     },
@@ -373,6 +449,22 @@
         {
           "q": "Can the screen run during daylight?",
           "a": "Our outdoor panels are specified for daylight visibility. Indoor panels are not — tell us the environment when you enquire."
+        },
+        {
+          "q": "What LED screen sizes are available?",
+          "a": "Panels are modular, so the wall is built to the size your stage and sightlines need rather than a fixed dimension. Tell us the venue and we will work it out."
+        },
+        {
+          "q": "Can the screen be used outdoors?",
+          "a": "Yes, with the right panels and rigging for the conditions. Daylight visibility and weather cover are part of the spec we agree with you."
+        },
+        {
+          "q": "What content format should I send?",
+          "a": "Send content early and we will confirm the resolution and aspect ratio for the exact wall being built, so nothing is stretched or cropped on the day."
+        },
+        {
+          "q": "How much is an LED wall in Kampala?",
+          "a": "It depends on the square metres, the build and the number of days. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
         }
       ]
     },
@@ -410,6 +502,22 @@
         {
           "q": "Can you supply only part of the event?",
           "a": "Yes. Plenty of clients book only the technical, or only the DJ. Take what you need."
+        },
+        {
+          "q": "What does events management include?",
+          "a": "Planning, suppliers, run sheet, crew and the technical side on the day, so sound, stage, lighting and LED are handled by one team instead of four."
+        },
+        {
+          "q": "Can you take over an event already part-planned?",
+          "a": "Yes. Tell us what is booked and what is still open and we will pick it up from there."
+        },
+        {
+          "q": "How far in advance should I book?",
+          "a": "The earlier the better, especially in December and wedding season. If the date is close, call anyway and we will tell you straight whether we can do it well."
+        },
+        {
+          "q": "Do you work outside Kampala?",
+          "a": "Yes. Upcountry and cross-border events are quoted with transport and accommodation included."
         }
       ]
     },
@@ -447,6 +555,22 @@
         {
           "q": "Can we give you a playlist?",
           "a": "Absolutely. Bring must-plays and do-not-plays; the reading of the room is our job."
+        },
+        {
+          "q": "Do you handle the DJ and the sound too?",
+          "a": "Yes, and that is the point of booking it together. One team on planning, sound, lighting and the DJ means no one is blaming anyone else at 7pm."
+        },
+        {
+          "q": "Can you work with our venue and caterer?",
+          "a": "Yes. We coordinate with whoever you have already chosen and build the run sheet around them."
+        },
+        {
+          "q": "How much does a wedding cost to plan?",
+          "a": "It depends entirely on scale, venue and how much you want us to run. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
+        },
+        {
+          "q": "Do you do introductions and traditional ceremonies?",
+          "a": "Yes, kwanjula and giveaway included. The sound and the running order matter as much there as at the reception."
         }
       ]
     },
@@ -484,6 +608,22 @@
         {
           "q": "Can you master as well?",
           "a": "Tell us the destination — streaming, club play or radio — and we will advise on the right finishing chain."
+        },
+        {
+          "q": "What can I record at the studio?",
+          "a": "Vocals, voice-overs, podcasts, instrumentals and full productions, at Plot 1 Bukoto Street, Kisementi, next to Acacia Mall, Kampala."
+        },
+        {
+          "q": "Do you provide a producer or engineer?",
+          "a": "Yes. You can book the room with an engineer, or work with your own if you prefer."
+        },
+        {
+          "q": "How are studio sessions charged?",
+          "a": "By session, and the rate depends on what you are doing and how long you need the room. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
+        },
+        {
+          "q": "Do I keep the rights to my music?",
+          "a": "Yes. What you record here is yours. We agree credits and any production split in writing before we start."
         }
       ]
     },
@@ -521,6 +661,22 @@
         {
           "q": "Can I hear a set first?",
           "a": "Yes — over sixty mixes are published on Mixcloud and SoundCloud. Links are on the Mixes page."
+        },
+        {
+          "q": "What kind of events do you play?",
+          "a": "Weddings, corporate nights, launches, clubs and private parties. Open format, which means the set is built for the room in front of it rather than one genre."
+        },
+        {
+          "q": "How much is it to book a DJ in Kampala?",
+          "a": "It depends on the date, the hours and whether sound and lighting come with it. Call or WhatsApp 0789 191 660, or email contact@derrickfiles.com."
+        },
+        {
+          "q": "Do you bring your own equipment?",
+          "a": "We can. Some venues have a house system, and where they do not, the studio supplies decks, sound and lighting as one booking."
+        },
+        {
+          "q": "How do I hold a date?",
+          "a": "A deposit holds it. Dates in December and wedding season go early, so ask sooner rather than later."
         }
       ]
     }
