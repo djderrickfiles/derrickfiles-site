@@ -179,7 +179,7 @@ function layout({ title, desc, url, extraSchema = [], body, image, active }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20260924-blog">
+<link rel="stylesheet" href="/assets/site.css?v=20260925-player">
 ${adsHead}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
@@ -533,13 +533,20 @@ function pageMixes() {
       ${render(x)}
     </div>`).join('');
 
-  const mixcloudBody = embedList(ch.mixcloud && ch.mixcloud.items, x =>
-    `<iframe height="120" loading="lazy" title="${esc(x.title || 'Mixcloud set')}" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=0&feed=${encodeURIComponent(new URL(x.url, 'https://www.mixcloud.com').pathname)}"></iframe>`
-  ) || '<p class="sub">No Mixcloud sets added yet.</p>';
+  // Pulled live from the Mixcloud channel by /api/mixcloud, with any
+  // hand-added sets from the panel pinned above the feed.
+  const mixcloudBody =
+    embedList(ch.mixcloud && ch.mixcloud.items, x =>
+      `<iframe height="120" loading="lazy" title="${esc(x.title || 'Mixcloud set')}" src="https://player-widget.mixcloud.com/widget/iframe/?hide_cover=1&light=0&feed=${encodeURIComponent(new URL(x.url, 'https://www.mixcloud.com').pathname)}"></iframe>`
+    ) +
+    '<div id="mclist" class="mx-list"><p class="sub" id="mcmsg">Loading the Mixcloud channel&hellip;</p></div>';
 
   const soundcloudBody = embedList(ch.soundcloud && ch.soundcloud.items, x =>
     `<iframe height="166" loading="lazy" title="${esc(x.title || 'SoundCloud set')}" src="https://w.soundcloud.com/player/?url=${encodeURIComponent(x.url)}&color=%23ffc91e&hide_related=true&show_comments=false&show_teaser=false"></iframe>`
-  ) || '<p class="sub">No SoundCloud sets added yet.</p>';
+  ) || `<div class="embed-card">
+      <div class="embed-head"><h3>The SoundCloud channel</h3><p>Every set on SoundCloud, playing here.</p></div>
+      <iframe height="450" loading="lazy" title="${esc(S.person)} on SoundCloud" src="https://w.soundcloud.com/player/?url=${encodeURIComponent(S.social.soundcloud)}&color=%23ffc91e&hide_related=true&show_comments=false&show_teaser=false&visual=false"></iframe>
+    </div>`;
 
   const spotifyBody = embedList(ch.spotify && ch.spotify.items, x =>
     `<iframe height="380" loading="lazy" title="${esc(x.title || 'Spotify playlist')}" src="${esc(spotifyEmbed(x.url))}" allow="encrypted-media"></iframe>`
@@ -626,9 +633,41 @@ ${TABS.map((t, n) =>
     <img class="mxdock-art" id="mxdart" src="" alt="">
     <span class="wave" id="mxwave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
     <div class="mxdock-meta"><strong id="mxdtitle"></strong><span id="mxdsub"></span></div>
+
+    <div class="mxdock-ctl">
+      <button class="mxd-btn" id="mxdprev" aria-label="Previous mix" title="Previous">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5v14l-11-7z"/><rect x="4" y="5" width="2.4" height="14" rx="1"/></svg>
+      </button>
+      <button class="mxd-btn mxd-main" id="mxdplay" aria-label="Play" title="Play">
+        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
+        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg>
+      </button>
+      <button class="mxd-btn" id="mxdnext" aria-label="Next mix" title="Next">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14l11-7z"/><rect x="17.6" y="5" width="2.4" height="14" rx="1"/></svg>
+      </button>
+    </div>
+
+    <div class="mxdock-seek">
+      <span class="mxd-t" id="mxdnow">0:00</span>
+      <input type="range" id="mxdbar" class="mxd-bar" min="0" max="1000" value="0" step="1" aria-label="Seek">
+      <span class="mxd-t" id="mxdend">0:00</span>
+    </div>
+
+    <div class="mxdock-vol">
+      <button class="mxd-btn mxd-mute" id="mxdmute" aria-label="Mute" title="Mute">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="v-on" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="v-off" d="M17 9.5l4 5M21 9.5l-4 5" hidden/></svg>
+      </button>
+      <input type="range" id="mxdvol" class="mxd-vol" min="0" max="100" value="100" step="1" aria-label="Volume">
+    </div>
+
+    <a class="mxd-btn mxd-out" id="mxdout" href="#" rel="noopener" target="_blank" aria-label="Open on the source platform" title="Open on the source platform">
+      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
+    </a>
+
     <div class="mxdock-frame" id="mxdframe"></div>
     <button class="mxdock-x" id="mxdx" aria-label="Close player">&times;</button>
   </div>
+  <audio id="mxaudio" preload="none"></audio>
 </div>
 
 <script>
@@ -636,21 +675,136 @@ ${TABS.map((t, n) =>
   var list=document.getElementById('mxlist'), msg=document.getElementById('mxmsg'), q=document.getElementById('mxq');
   var dock=document.getElementById('mxdock'), dframe=document.getElementById('mxdframe');
   var dart=document.getElementById('mxdart'), dtitle=document.getElementById('mxdtitle'), dsub=document.getElementById('mxdsub');
-  var ALL=[], FAV={};
+  var au=document.getElementById('mxaudio');
+  var bPlay=document.getElementById('mxdplay'), bPrev=document.getElementById('mxdprev'), bNext=document.getElementById('mxdnext');
+  var bar=document.getElementById('mxdbar'), tNow=document.getElementById('mxdnow'), tEnd=document.getElementById('mxdend');
+  var vol=document.getElementById('mxdvol'), bMute=document.getElementById('mxdmute'), outLink=document.getElementById('mxdout');
+  var ALL=[], MC=[], QUEUE=[], CUR=-1, SEEKING=false, FAV={};
   try{ FAV=JSON.parse(localStorage.getItem('dfs_fav')||'{}'); }catch(e){ FAV={}; }
   function saveFav(){ try{ localStorage.setItem('dfs_fav',JSON.stringify(FAV)); }catch(e){} }
   function esc(s){var e=document.createElement('div');e.textContent=s==null?'':s;return e.innerHTML;}
   function track(ev,item){ fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:ev,item:item})}).catch(function(){}); }
 
-  function play(mx){
-    dframe.innerHTML='<iframe src="'+esc(mx.embed)+'&autoplay=1" title="'+esc(mx.title)+'" allow="autoplay" scrolling="no"></iframe>';
-    dart.src=mx.artwork||''; dtitle.textContent=mx.title;
+  // ---- the player ----------------------------------------------------
+  function clock(sec){
+    sec=Math.max(0, Math.floor(sec||0));
+    var h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s2=sec%60;
+    var pad=function(n){ return n<10?'0'+n:''+n; };
+    return h ? h+':'+pad(m)+':'+pad(s2) : m+':'+pad(s2);
+  }
+  function icon(on){
+    bPlay.querySelector('.i-play').hidden=on;
+    bPlay.querySelector('.i-pause').hidden=!on;
+    bPlay.setAttribute('aria-label', on?'Pause':'Play');
+    bPlay.title = on?'Pause':'Play';
+    if(wave) wave.classList.toggle('is-paused', !on);
+  }
+  function openDock(mx){
+    dart.src=mx.artwork||''; dart.alt='';
+    dtitle.textContent=mx.title;
     dsub.textContent=mx.length+(mx.played?'  \u00b7  '+mx.played+' plays':'');
+    outLink.href=mx.permalink||'#';
     dock.hidden=false; document.body.classList.add('has-dock');
+  }
+
+  // HearThis: real audio through /api/stream, so it plays in our own
+  // control bar. Mixcloud has no open audio URL, so it keeps its widget.
+  function play(mx, queue, i){
+    QUEUE = queue || [mx]; CUR = (typeof i === 'number') ? i : 0;
+    openDock(mx);
+
+    if(mx.stream){
+      dframe.innerHTML=''; dframe.hidden=true;
+      dock.classList.remove('is-widget');
+      au.src=mx.stream;
+      au.play().catch(function(){ icon(false); });
+    } else {
+      // widget mode — the platform draws its own transport
+      dframe.hidden=false;
+      dock.classList.add('is-widget');
+      au.removeAttribute('src'); au.load();
+      dframe.innerHTML='<iframe src="'+esc(mx.embed)+(mx.embed.indexOf('?')>0?'&':'?')+'autoplay=1" title="'+esc(mx.title)+'" allow="autoplay" scrolling="no"></iframe>';
+      icon(true);
+    }
     track('play', mx.title);
   }
+
+  function step(d){
+    if(!QUEUE.length) return;
+    var i=(CUR+d+QUEUE.length)%QUEUE.length;
+    play(QUEUE[i], QUEUE, i);
+  }
+  bPrev.addEventListener('click',function(){
+    if(au.src && au.currentTime>4){ au.currentTime=0; return; }
+    step(-1);
+  });
+  bNext.addEventListener('click',function(){ step(1); });
+
+  bPlay.addEventListener('click',function(){
+    if(!au.src) return;
+    if(au.paused) au.play().catch(function(){}); else au.pause();
+  });
+
+  au.addEventListener('play',  function(){ icon(true); });
+  au.addEventListener('pause', function(){ icon(false); });
+  au.addEventListener('ended', function(){ step(1); });
+  au.addEventListener('loadedmetadata', function(){
+    tEnd.textContent = isFinite(au.duration) ? clock(au.duration) : (QUEUE[CUR]&&QUEUE[CUR].length)||'0:00';
+  });
+  au.addEventListener('timeupdate', function(){
+    if(SEEKING || !isFinite(au.duration) || !au.duration) return;
+    bar.value = Math.round((au.currentTime/au.duration)*1000);
+    tNow.textContent = clock(au.currentTime);
+  });
+  au.addEventListener('error', function(){
+    icon(false);
+    dsub.textContent='Could not load that mix — opening it on HearThis instead.';
+  });
+
+  bar.addEventListener('input', function(){
+    SEEKING=true;
+    if(isFinite(au.duration)) tNow.textContent=clock((bar.value/1000)*au.duration);
+  });
+  var commitSeek=function(){
+    if(isFinite(au.duration) && au.duration) au.currentTime=(bar.value/1000)*au.duration;
+    SEEKING=false;
+  };
+  bar.addEventListener('change', commitSeek);
+  bar.addEventListener('mouseup', commitSeek);
+  bar.addEventListener('touchend', commitSeek);
+
+  try{ au.volume = Math.min(1, Math.max(0, parseFloat(localStorage.getItem('dfs_vol')||'1'))); }catch(e){}
+  vol.value = Math.round(au.volume*100);
+  vol.addEventListener('input', function(){
+    au.volume = vol.value/100; au.muted = au.volume===0;
+    try{ localStorage.setItem('dfs_vol', String(au.volume)); }catch(e){}
+    paintMute();
+  });
+  function paintMute(){
+    var off = au.muted || au.volume===0;
+    bMute.querySelector('.v-on').hidden = off;
+    bMute.querySelector('.v-off').hidden = !off;
+    bMute.setAttribute('aria-label', off?'Unmute':'Mute');
+  }
+  bMute.addEventListener('click', function(){
+    au.muted=!au.muted;
+    if(!au.muted && au.volume===0){ au.volume=0.8; vol.value=80; }
+    paintMute();
+  });
+  paintMute();
+
   document.getElementById('mxdx').addEventListener('click',function(){
+    au.pause(); au.removeAttribute('src'); au.load();
     dock.hidden=true; dframe.innerHTML=''; document.body.classList.remove('has-dock');
+  });
+
+  // space bar toggles playback unless the visitor is typing
+  document.addEventListener('keydown', function(e){
+    if(e.code!=='Space' || dock.hidden || !au.src) return;
+    var t=e.target.tagName;
+    if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT'||e.target.isContentEditable) return;
+    e.preventDefault();
+    if(au.paused) au.play().catch(function(){}); else au.pause();
   });
 
   function share(mx,btn){
@@ -674,7 +828,7 @@ ${TABS.map((t, n) =>
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.5 12c-2 4.4-9.5 9-9.5 9z"/></svg></button>'+
         '<button class="mx-ico" data-act="share" aria-label="Copy link" title="Copy link">'+
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></button>'+
-        '<a class="mx-ico" href="'+esc(mx.permalink)+'" data-track-outbound="'+esc(mx.title)+'" rel="noopener" target="_blank" aria-label="Open on HearThis" title="Open on HearThis">'+
+        '<a class="mx-ico" href="'+esc(mx.permalink)+'" data-track-outbound="'+esc(mx.title)+'" rel="noopener" target="_blank" aria-label="Open on the source platform" title="Open on the source platform">'+
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></a>'+
       '</div></article>';
   }
@@ -685,7 +839,9 @@ ${TABS.map((t, n) =>
     list.querySelectorAll('.mx').forEach(function(el){
       var mx=ALL.filter(function(x){return x.id===el.dataset.id;})[0];
       if(!mx) return;
-      el.querySelector('.mx-play').addEventListener('click',function(){ play(mx); });
+      el.querySelector('.mx-play').addEventListener('click',function(){
+        play(mx, items, items.indexOf(mx));
+      });
       el.querySelectorAll('[data-act]').forEach(function(b){
         b.addEventListener('click',function(){
           if(b.dataset.act==='share') return share(mx,b);
@@ -705,6 +861,34 @@ ${TABS.map((t, n) =>
     if(!data.mixes||!data.mixes.length){ msg.textContent='Catalogue is loading slowly. The platform links above still work.'; return; }
     ALL=data.mixes; render(ALL);
   }).catch(function(){ msg.textContent='Could not reach the catalogue. The platform links above still work.'; });
+
+  // ---- Mixcloud channel, pulled live ----
+  var mclist=document.getElementById('mclist'), mcmsg=document.getElementById('mcmsg');
+  if(mclist){
+    fetch('/api/mixcloud').then(function(r){return r.json();}).then(function(data){
+      if(!data.mixes||!data.mixes.length){
+        mcmsg.textContent='Could not reach Mixcloud right now. The Mixcloud link above still works.';
+        return;
+      }
+      MC=data.mixes;
+      mclist.innerHTML=MC.map(row).join('');
+      mclist.querySelectorAll('.mx').forEach(function(el){
+        var mx=MC.filter(function(x){return String(x.id)===el.dataset.id;})[0];
+        if(!mx) return;
+        el.querySelector('.mx-play').addEventListener('click',function(){
+          play(mx, MC, MC.indexOf(mx));
+        });
+        el.querySelectorAll('[data-act]').forEach(function(b){
+          b.addEventListener('click',function(){
+            if(b.dataset.act==='share') return share(mx,b);
+            FAV[mx.id]=!FAV[mx.id]; saveFav(); b.classList.toggle('on',!!FAV[mx.id]);
+          });
+        });
+      });
+    }).catch(function(){
+      mcmsg.textContent='Could not reach Mixcloud right now. The Mixcloud link above still works.';
+    });
+  }
 
   // ---- channel tabs ----
   var tabs=[].slice.call(document.querySelectorAll('.mxtab'));
