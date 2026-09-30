@@ -569,64 +569,136 @@ body{font-size:18px;line-height:1.75}
 }
 /* blog tiles */
 
-/* ---------- DOCKED PLAYER: REAL TRANSPORT (2026-09-25) ---------- */
-.mxdock-in{flex-wrap:nowrap}
+/* ==========================================================
+   DOCKED PLAYER — SoundCloud-style transport bar (2026-09-30)
+   Order: transport | seek | volume | now-playing | actions
+   ========================================================== */
+.mxdock{position:fixed;left:0;right:0;bottom:0;z-index:80;
+  background:rgba(10,10,11,.97);backdrop-filter:blur(18px);
+  border-top:1px solid #26262b;box-shadow:0 -10px 40px rgba(0,0,0,.5)}
+.mxdock[hidden]{display:none}
 .mxdock audio{display:none}
+.mxdock-in{max-width:1280px;margin:0 auto;display:flex;align-items:center;
+  gap:14px;padding:9px 20px}
+body.has-dock{padding-bottom:78px}
 
-.mxdock-ctl{display:flex;align-items:center;gap:4px;flex:0 0 auto}
-.mxd-btn{width:36px;height:36px;display:grid;place-items:center;padding:0;cursor:pointer;
-  background:transparent;border:1px solid transparent;color:#cfcfd4;border-radius:var(--r-sm);
-  transition:color .18s ease,border-color .18s ease,background .18s ease}
-.mxd-btn svg{width:19px;height:19px;fill:currentColor;display:block}
-.mxd-btn:hover{color:var(--gold);border-color:var(--line)}
+/* --- buttons --- */
+.mxd-btn{width:32px;height:32px;display:grid;place-items:center;padding:0;flex:0 0 auto;
+  background:transparent;border:0;color:#9a9aa2;cursor:pointer;border-radius:8px;
+  transition:color .16s ease,background .16s ease}
+.mxd-btn svg{width:17px;height:17px;fill:currentColor;display:block}
+.mxd-btn:hover{color:#fff;background:#1c1c20}
 .mxd-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.mxd-main{width:44px;height:44px;background:var(--gold);color:#000;border-color:var(--gold)}
-.mxd-main svg{width:22px;height:22px}
-.mxd-main:hover{background:#fff;border-color:#fff;color:#000}
-.mxd-out svg{fill:none;stroke:currentColor}
-.mxd-mute .v-on,.mxd-mute .v-off{fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round}
+.mxd-btn.on{color:var(--gold)}
+.mxd-fav.on svg{fill:var(--gold);stroke:var(--gold)}
+.mxd-btn.ok{color:var(--gold)}
+.mxdock-x{font-size:21px;line-height:1}
 
+/* circular play/pause — the one solid accent in the bar */
+.mxd-transport{display:flex;align-items:center;gap:4px;flex:0 0 auto}
+.mxd-main{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;padding:0;
+  border:0;border-radius:50%;background:var(--gold);color:#000;cursor:pointer;
+  transition:transform .14s ease,background .16s ease,box-shadow .16s ease}
+.mxd-main svg{width:20px;height:20px;fill:currentColor;display:block}
+.mxd-main .i-play{margin-left:2px}
+.mxd-main:hover{background:#ffd54a;transform:scale(1.06)}
+.mxd-main:active{transform:scale(.96)}
+.mxd-main:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+.mxdock.is-playing .mxd-main{box-shadow:0 0 0 5px rgba(255,201,30,.14)}
+
+/* --- seek --- */
 .mxdock-seek{display:flex;align-items:center;gap:10px;flex:1 1 auto;min-width:0}
-.mxd-t{font-variant-numeric:tabular-nums;font-size:12px;color:#8a8a92;flex:0 0 auto;min-width:42px}
-.mxd-t:last-child{text-align:right}
+.mxd-t{font-variant-numeric:tabular-nums;font-size:11.5px;color:#7e7e87;flex:0 0 auto;
+  min-width:40px;letter-spacing:.02em}
+.mxd-tend{text-align:right;color:#5f5f68}
+.mxd-track{position:relative;flex:1 1 auto;min-width:0;height:16px;display:flex;align-items:center}
+.mxd-track::before{content:"";position:absolute;left:0;right:0;height:3px;border-radius:99px;background:#2b2b31}
+.mxd-fill{position:absolute;left:0;height:3px;width:0;border-radius:99px;background:var(--gold);
+  pointer-events:none;transition:width .12s linear}
+.mxd-bar{position:relative;-webkit-appearance:none;appearance:none;width:100%;height:16px;
+  margin:0;background:transparent;cursor:pointer}
+.mxd-bar::-webkit-slider-runnable-track{height:3px;background:transparent}
+.mxd-bar::-moz-range-track{height:3px;background:transparent}
+.mxd-bar::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:11px;height:11px;
+  border-radius:50%;background:var(--gold);border:0;margin-top:-4px;opacity:0;
+  transition:opacity .16s ease}
+.mxd-bar::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:var(--gold);
+  border:0;opacity:0;transition:opacity .16s ease}
+.mxd-track:hover .mxd-bar::-webkit-slider-thumb,
+.mxd-bar:focus-visible::-webkit-slider-thumb{opacity:1}
+.mxd-track:hover .mxd-bar::-moz-range-thumb{opacity:1}
+.mxd-track:hover .mxd-fill{background:#ffd54a}
 
-.mxd-bar,.mxd-vol{-webkit-appearance:none;appearance:none;background:transparent;cursor:pointer;
-  height:18px;margin:0;flex:1 1 auto;min-width:0}
-.mxd-bar::-webkit-slider-runnable-track,.mxd-vol::-webkit-slider-runnable-track{
-  height:4px;border-radius:999px;background:#2e2e33}
-.mxd-bar::-moz-range-track,.mxd-vol::-moz-range-track{
-  height:4px;border-radius:999px;background:#2e2e33}
-.mxd-bar::-webkit-slider-thumb,.mxd-vol::-webkit-slider-thumb{
-  -webkit-appearance:none;appearance:none;width:13px;height:13px;border-radius:50%;
-  background:var(--gold);border:0;margin-top:-4.5px;
-  box-shadow:0 0 0 0 rgba(255,201,30,.35);transition:box-shadow .18s ease}
-.mxd-bar::-moz-range-thumb,.mxd-vol::-moz-range-thumb{
-  width:13px;height:13px;border-radius:50%;background:var(--gold);border:0}
-.mxd-bar:hover::-webkit-slider-thumb,.mxd-vol:hover::-webkit-slider-thumb{
-  box-shadow:0 0 0 6px rgba(255,201,30,.18)}
-.mxd-bar:focus-visible,.mxd-vol:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+/* --- volume --- */
+.mxdock-vol{display:flex;align-items:center;gap:4px;flex:0 0 112px}
+.mxd-vol{-webkit-appearance:none;appearance:none;flex:1 1 auto;min-width:0;height:16px;
+  margin:0;background:transparent;cursor:pointer}
+.mxd-vol::-webkit-slider-runnable-track{height:3px;border-radius:99px;background:#2b2b31}
+.mxd-vol::-moz-range-track{height:3px;border-radius:99px;background:#2b2b31}
+.mxd-vol::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:11px;height:11px;
+  border-radius:50%;background:#c9c9d0;border:0;margin-top:-4px}
+.mxd-vol::-moz-range-thumb{width:11px;height:11px;border-radius:50%;background:#c9c9d0;border:0}
+.mxd-vol:hover::-webkit-slider-thumb{background:var(--gold)}
+.mxd-vol:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
-.mxdock-vol{display:flex;align-items:center;gap:6px;flex:0 0 132px}
-.mxdock-vol .mxd-vol{flex:1 1 auto}
+/* --- now playing --- */
+.mxd-now{display:flex;align-items:center;gap:10px;flex:0 1 250px;min-width:0;color:inherit}
+.mxdock-art{width:38px;height:38px;flex:0 0 38px;object-fit:cover;border-radius:4px;background:#17171a}
+.mxd-line{display:flex;flex-direction:column;gap:2px;min-width:0}
+.mxd-line strong{font-size:12.5px;font-weight:600;color:#ededf1;white-space:nowrap;
+  overflow:hidden;text-overflow:ellipsis}
+.mxd-line span{font-size:11px;color:#7e7e87;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mxd-now:hover .mxd-line strong{color:var(--gold)}
 
-/* widget mode — Mixcloud draws its own transport, so ours steps aside */
+.mxd-acts{display:flex;align-items:center;gap:2px;flex:0 0 auto}
+
+/* widget mode — Mixcloud brings its own transport */
 .mxdock-frame{display:none}
 .mxdock.is-widget .mxdock-frame{display:block;flex:1 1 auto;min-width:0;height:60px}
-.mxdock.is-widget .mxdock-frame iframe{height:60px}
-.mxdock.is-widget .mxdock-ctl,
+.mxdock.is-widget .mxdock-frame iframe{width:100%;height:60px;border:0;display:block}
+.mxdock.is-widget .mxd-transport,
 .mxdock.is-widget .mxdock-seek,
 .mxdock.is-widget .mxdock-vol{display:none}
 
-@media(max-width:1080px){
-  .mxdock-vol{display:none}
-}
+/* in-page navigation */
+.pjax-busy{cursor:progress}
+.pjax-busy #pjax{opacity:.55;transition:opacity .12s ease}
+
+@media(max-width:1100px){ .mxdock-vol{display:none} }
+@media(max-width:860px){ .mxd-rep{display:none} }
 @media(max-width:720px){
-  .mxdock-in{flex-wrap:wrap;row-gap:6px}
-  .mxdock-art{width:40px;height:40px;flex-basis:40px}
-  .mxdock-meta{display:flex;flex:1 1 auto;order:1}
-  .mxdock-ctl{order:2}
-  .mxdock-x{order:3}
+  .mxdock-in{flex-wrap:wrap;row-gap:4px;padding:8px 14px}
+  .mxd-now{order:1;flex:1 1 auto}
+  .mxd-transport{order:2}
+  .mxd-acts{order:3}
   .mxdock-seek{order:4;flex-basis:100%}
-  .mxdock .wave{display:none}
-  body.has-dock{padding-bottom:118px}
+  .mxd-acts .mxd-fav,.mxd-acts #mxdshare{display:none}
+  body.has-dock{padding-bottom:104px}
 }
+@media(prefers-reduced-motion:reduce){
+  .mxd-main,.mxd-fill{transition:none}
+  .mxd-main:hover{transform:none}
+}
+
+/* ==========================================================
+   WORDMARK — matches the Derrick Files Studio lockup:
+   gold italic script over a play-triangle + spaced STUDIO
+   (an uploaded logo image in the panel still overrides this)
+   ========================================================== */
+.lgo{display:flex;flex-direction:column;gap:1px;line-height:1;text-decoration:none}
+.lgo-name{font-family:"Playfair Display",Georgia,serif;font-style:italic;font-weight:800;
+  font-size:23px;letter-spacing:-.005em;color:var(--gold);white-space:nowrap;
+  text-shadow:0 1px 0 rgba(0,0,0,.6)}
+.lgo-sub{display:flex;align-items:center;gap:5px;font-family:var(--d);font-size:8.5px;
+  font-weight:700;letter-spacing:.34em;color:#f2f2f4;text-transform:uppercase;
+  padding-left:2px}
+.lgo-sub i{display:block;width:0;height:0;font-style:normal;
+  border-left:6px solid var(--gold);border-top:4px solid transparent;border-bottom:4px solid transparent}
+.lgo:hover .lgo-name{color:#ffd54a}
+.lgo-img img{max-height:44px;width:auto}
+
+.fb-mark{display:flex;flex-direction:column;gap:2px;margin-bottom:10px;text-transform:none}
+.fb-mark .lgo-name{font-size:26px}
+.fb-mark .lgo-sub{font-size:9px}
+
+@media(max-width:560px){ .lgo-name{font-size:20px} }
