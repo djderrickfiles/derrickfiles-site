@@ -178,8 +178,8 @@ function layout({ title, desc, url, extraSchema = [], body, image, active }) {
 <meta name="geo.region" content="UG-102"><meta name="geo.placename" content="${esc(S.city)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20260925-player">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css?v=20260930-sc">
 ${adsHead}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
@@ -187,19 +187,350 @@ ${adsHead}
 <div class="cursor-ring" aria-hidden="true"></div>
 ${promo}
 <nav class="nav"><div class="w">
-  ${S.logo ? `<a class="lgo lgo-img" href="/"><img src="${esc(S.logo)}" alt="${esc(S.brand)}"></a>` : `<a class="lgo" href="/">DERRICK<b>FILES</b><small>STUDIO</small></a>`}
+  ${S.logo ? `<a class="lgo lgo-img" href="/"><img src="${esc(S.logo)}" alt="${esc(S.brand)}"></a>` : `<a class="lgo" href="/"><span class="lgo-name">Derrick Files</span><span class="lgo-sub"><i aria-hidden="true"></i>STUDIO</span></a>`}
   <ul class="nl" id="nl">
     ${NAV.map(n => `<li><a href="${n.u}"${active === n.u ? ' class="on"' : ''}>${esc(n.t)}</a></li>`).join('\n    ')}
   </ul>
   <button class="burger" id="burger" aria-label="Menu">MENU</button>
   <a class="nb" href="${tel}">Book &middot; ${esc(S.phoneDisplay)}</a>
 </div></nav>
-${body}
+<div id="pjax">${body}</div>
+
+<div class="mxdock" id="mxdock" hidden>
+  <div class="mxdock-in">
+
+    <div class="mxd-transport">
+      <button class="mxd-btn" id="mxdprev" aria-label="Previous mix" title="Previous">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5.5v13L9 12z"/><rect x="5" y="5.5" width="2.2" height="13" rx="1"/></svg>
+      </button>
+      <button class="mxd-main" id="mxdplay" aria-label="Play" title="Play">
+        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M8.5 5.4v13.2L18.5 12z"/></svg>
+        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><rect x="7.6" y="5.4" width="3.4" height="13.2" rx="1.1"/><rect x="13" y="5.4" width="3.4" height="13.2" rx="1.1"/></svg>
+      </button>
+      <button class="mxd-btn" id="mxdnext" aria-label="Next mix" title="Next">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5.5v13L15 12z"/><rect x="16.8" y="5.5" width="2.2" height="13" rx="1"/></svg>
+      </button>
+      <button class="mxd-btn mxd-rep" id="mxdrep" aria-label="Repeat" title="Repeat" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      </button>
+    </div>
+
+    <div class="mxdock-seek">
+      <span class="mxd-t" id="mxdnow">0:00</span>
+      <div class="mxd-track" id="mxdtrack">
+        <div class="mxd-fill" id="mxdfill"></div>
+        <input type="range" id="mxdbar" class="mxd-bar" min="0" max="1000" value="0" step="1" aria-label="Seek">
+      </div>
+      <span class="mxd-t mxd-tend" id="mxdend">0:00</span>
+    </div>
+
+    <div class="mxdock-vol">
+      <button class="mxd-btn mxd-mute" id="mxdmute" aria-label="Mute" title="Mute">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9.5v5h3.4L12 18.5v-13L7.4 9.5z"/><path class="v-on" d="M15.6 9.2a4 4 0 0 1 0 5.6M18.2 6.8a7.6 7.6 0 0 1 0 10.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path class="v-off" d="M15.8 9.8l5 4.4M20.8 9.8l-5 4.4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" hidden/></svg>
+      </button>
+      <input type="range" id="mxdvol" class="mxd-vol" min="0" max="100" value="100" step="1" aria-label="Volume">
+    </div>
+
+    <a class="mxd-now" id="mxdnowlink" href="#" rel="noopener" target="_blank">
+      <img class="mxdock-art" id="mxdart" src="" alt="">
+      <span class="mxd-line">
+        <strong id="mxdtitle"></strong>
+        <span id="mxdsub"></span>
+      </span>
+    </a>
+
+    <div class="mxd-acts">
+      <button class="mxd-btn mxd-fav" id="mxdfav" aria-label="Like" title="Like" aria-pressed="false">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7.5-4.6-9.5-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.5 12c-2 4.4-9.5 9-9.5 9z"/></svg>
+      </button>
+      <button class="mxd-btn" id="mxdshare" aria-label="Copy link" title="Copy link">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg>
+      </button>
+      <button class="mxd-btn mxdock-x" id="mxdx" aria-label="Close player" title="Close">&times;</button>
+    </div>
+
+    <div class="mxdock-frame" id="mxdframe"></div>
+  </div>
+  <audio id="mxaudio" preload="none"></audio>
+</div>
+<script>
+/* ==========================================================
+   DFS GLOBAL PLAYER
+   Lives outside #pjax, so it survives page navigation. Links
+   are intercepted and the page swapped in place, which means
+   a mix keeps playing while you read the blog.
+   ========================================================== */
+(function(){
+  var dock=document.getElementById('mxdock'); if(!dock) return;
+  var au=document.getElementById('mxaudio'), frame=document.getElementById('mxdframe');
+  var art=document.getElementById('mxdart'), ttl=document.getElementById('mxdtitle'), sub=document.getElementById('mxdsub');
+  var nowlink=document.getElementById('mxdnowlink');
+  var bPlay=document.getElementById('mxdplay'), bPrev=document.getElementById('mxdprev'), bNext=document.getElementById('mxdnext');
+  var bRep=document.getElementById('mxdrep'), bFav=document.getElementById('mxdfav'), bShare=document.getElementById('mxdshare');
+  var bar=document.getElementById('mxdbar'), fill=document.getElementById('mxdfill');
+  var tNow=document.getElementById('mxdnow'), tEnd=document.getElementById('mxdend');
+  var vol=document.getElementById('mxdvol'), bMute=document.getElementById('mxdmute');
+  var QUEUE=[], CUR=-1, SEEK=false, REPEAT=false, FAV={};
+
+  try{ FAV=JSON.parse(localStorage.getItem('dfs_fav')||'{}'); }catch(e){ FAV={}; }
+  function saveFav(){ try{ localStorage.setItem('dfs_fav',JSON.stringify(FAV)); }catch(e){} }
+  function esc(x){ var d=document.createElement('div'); d.textContent=x==null?'':x; return d.innerHTML; }
+  function track(ev,item){ fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:ev,item:item})}).catch(function(){}); }
+  function clock(sec){
+    sec=Math.max(0,Math.floor(sec||0));
+    var h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), x=sec%60, pad=function(n){return n<10?'0'+n:''+n;};
+    return h? h+':'+pad(m)+':'+pad(x) : m+':'+pad(x);
+  }
+  function icon(on){
+    bPlay.querySelector('.i-play').hidden=on;
+    bPlay.querySelector('.i-pause').hidden=!on;
+    bPlay.setAttribute('aria-label',on?'Pause':'Play');
+    bPlay.title=on?'Pause':'Play';
+    dock.classList.toggle('is-playing',on);
+  }
+  function paintFav(){
+    var mx=QUEUE[CUR];
+    var on=!!(mx&&FAV[mx.id]);
+    bFav.setAttribute('aria-pressed',on?'true':'false');
+    bFav.classList.toggle('on',on);
+  }
+  function save(){
+    var mx=QUEUE[CUR]; if(!mx) return;
+    try{ sessionStorage.setItem('dfs_now', JSON.stringify({
+      q:QUEUE, i:CUR, t:au.currentTime||0, playing:!au.paused
+    })); }catch(e){}
+  }
+
+  function paint(mx){
+    art.src=mx.artwork||''; art.alt='';
+    ttl.textContent=mx.title||'';
+    sub.textContent=(mx.length||'')+(mx.played?'  ·  '+mx.played+' plays':'');
+    nowlink.href=mx.permalink||'#';
+    tEnd.textContent=mx.length||'0:00';
+    dock.hidden=false;
+    document.body.classList.add('has-dock');
+    paintFav();
+  }
+
+  // The one entry point pages call.
+  function play(mx, queue, i){
+    if(!mx) return;
+    QUEUE = (queue&&queue.length)?queue:[mx];
+    CUR = (typeof i==='number'&&i>=0)?i:0;
+    paint(mx);
+    if(mx.stream){
+      frame.innerHTML=''; dock.classList.remove('is-widget');
+      au.src=mx.stream;
+      au.play().catch(function(){ icon(false); });
+    } else {
+      dock.classList.add('is-widget');
+      au.removeAttribute('src'); au.load();
+      frame.innerHTML='<iframe src="'+esc(mx.embed)+(String(mx.embed).indexOf('?')>0?'&':'?')+'autoplay=1" title="'+esc(mx.title)+'" allow="autoplay" scrolling="no"></iframe>';
+      icon(true);
+    }
+    track('play', mx.title);
+    save();
+  }
+
+  function step(d){
+    if(!QUEUE.length) return;
+    play(QUEUE[(CUR+d+QUEUE.length)%QUEUE.length], QUEUE, (CUR+d+QUEUE.length)%QUEUE.length);
+  }
+  bPrev.addEventListener('click',function(){
+    if(au.src && au.currentTime>4){ au.currentTime=0; return; }
+    step(-1);
+  });
+  bNext.addEventListener('click',function(){ step(1); });
+  bPlay.addEventListener('click',function(){
+    if(!au.src) return;
+    if(au.paused) au.play().catch(function(){}); else au.pause();
+  });
+  bRep.addEventListener('click',function(){
+    REPEAT=!REPEAT; bRep.setAttribute('aria-pressed',REPEAT?'true':'false'); bRep.classList.toggle('on',REPEAT);
+  });
+  bFav.addEventListener('click',function(){
+    var mx=QUEUE[CUR]; if(!mx) return;
+    FAV[mx.id]=!FAV[mx.id]; saveFav(); paintFav();
+    var row=document.querySelector('.mx[data-id="'+mx.id+'"] .mx-fav');
+    if(row) row.classList.toggle('on',!!FAV[mx.id]);
+  });
+  bShare.addEventListener('click',function(){
+    var mx=QUEUE[CUR]; if(!mx) return;
+    var url=mx.permalink||location.href;
+    if(navigator.share){ navigator.share({title:mx.title,url:url}).catch(function(){}); return; }
+    navigator.clipboard.writeText(url).then(function(){
+      bShare.classList.add('ok'); setTimeout(function(){ bShare.classList.remove('ok'); },1500);
+    }).catch(function(){ window.prompt('Copy this link', url); });
+  });
+
+  au.addEventListener('play', function(){ icon(true); save(); });
+  au.addEventListener('pause',function(){ icon(false); save(); });
+  au.addEventListener('ended',function(){
+    if(REPEAT){ au.currentTime=0; au.play().catch(function(){}); return; }
+    step(1);
+  });
+  au.addEventListener('loadedmetadata',function(){
+    if(isFinite(au.duration)) tEnd.textContent=clock(au.duration);
+  });
+  var lastSave=0;
+  au.addEventListener('timeupdate',function(){
+    if(SEEK||!isFinite(au.duration)||!au.duration) return;
+    var pct=(au.currentTime/au.duration);
+    bar.value=Math.round(pct*1000);
+    fill.style.width=(pct*100)+'%';
+    tNow.textContent=clock(au.currentTime);
+    var n=Date.now(); if(n-lastSave>3000){ lastSave=n; save(); }
+  });
+  au.addEventListener('error',function(){
+    icon(false);
+    sub.textContent='Could not load that mix.';
+  });
+
+  bar.addEventListener('input',function(){
+    SEEK=true;
+    fill.style.width=(bar.value/10)+'%';
+    if(isFinite(au.duration)) tNow.textContent=clock((bar.value/1000)*au.duration);
+  });
+  function commit(){
+    if(isFinite(au.duration)&&au.duration) au.currentTime=(bar.value/1000)*au.duration;
+    SEEK=false; save();
+  }
+  bar.addEventListener('change',commit);
+  bar.addEventListener('mouseup',commit);
+  bar.addEventListener('touchend',commit);
+
+  try{ au.volume=Math.min(1,Math.max(0,parseFloat(localStorage.getItem('dfs_vol')||'1'))); }catch(e){}
+  vol.value=Math.round(au.volume*100);
+  function paintMute(){
+    var off=au.muted||au.volume===0;
+    bMute.querySelector('.v-on').hidden=off;
+    bMute.querySelector('.v-off').hidden=!off;
+    bMute.setAttribute('aria-label',off?'Unmute':'Mute');
+  }
+  vol.addEventListener('input',function(){
+    au.volume=vol.value/100; au.muted=au.volume===0;
+    try{ localStorage.setItem('dfs_vol',String(au.volume)); }catch(e){}
+    paintMute();
+  });
+  bMute.addEventListener('click',function(){
+    au.muted=!au.muted;
+    if(!au.muted&&au.volume===0){ au.volume=0.8; vol.value=80; }
+    paintMute();
+  });
+  paintMute();
+
+  document.getElementById('mxdx').addEventListener('click',function(){
+    au.pause(); au.removeAttribute('src'); au.load();
+    frame.innerHTML='';
+    dock.hidden=true; document.body.classList.remove('has-dock');
+    try{ sessionStorage.removeItem('dfs_now'); }catch(e){}
+  });
+
+  document.addEventListener('keydown',function(e){
+    if(e.code!=='Space'||dock.hidden||!au.src) return;
+    var t=e.target.tagName;
+    if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT'||e.target.isContentEditable) return;
+    e.preventDefault();
+    if(au.paused) au.play().catch(function(){}); else au.pause();
+  });
+
+  /* ---- resume after a genuine reload ---- */
+  (function restore(){
+    var raw=null; try{ raw=sessionStorage.getItem('dfs_now'); }catch(e){}
+    if(!raw) return;
+    var st; try{ st=JSON.parse(raw); }catch(e){ return; }
+    if(!st||!st.q||!st.q.length) return;
+    QUEUE=st.q; CUR=st.i||0;
+    var mx=QUEUE[CUR]; if(!mx) return;
+    paint(mx);
+    if(mx.stream){
+      au.src=mx.stream;
+      au.addEventListener('loadedmetadata',function once(){
+        au.removeEventListener('loadedmetadata',once);
+        if(st.t) try{ au.currentTime=st.t; }catch(e){}
+      });
+      au.load();
+    }
+    icon(false);
+  })();
+
+  window.DFS={ play:play, queue:function(){return QUEUE;}, audio:au, fav:FAV, saveFav:saveFav };
+})();
+</script>
+
+<script>
+/* ==========================================================
+   IN-PAGE NAVIGATION
+   Swaps #pjax instead of reloading, so audio never stops.
+   Falls back to a normal page load on any problem.
+   ========================================================== */
+(function(){
+  if(!window.history||!window.fetch||!document.getElementById('pjax')) return;
+  var BUSY=false;
+
+  function runScripts(root){
+    root.querySelectorAll('script').forEach(function(old){
+      var n=document.createElement('script');
+      for(var i=0;i<old.attributes.length;i++) n.setAttribute(old.attributes[i].name, old.attributes[i].value);
+      n.text=old.textContent;
+      old.parentNode.replaceChild(n, old);
+    });
+  }
+
+  function swap(html, url, push){
+    var doc=new DOMParser().parseFromString(html,'text/html');
+    var next=doc.getElementById('pjax');
+    var here=document.getElementById('pjax');
+    if(!next||!here){ location.href=url; return; }
+    here.innerHTML=next.innerHTML;
+    document.title=doc.title;
+    var path=new URL(url, location.origin).pathname;
+    document.querySelectorAll('.nl a').forEach(function(a){
+      a.classList.toggle('on', a.getAttribute('href')===path);
+    });
+    if(push) history.pushState({pjax:1}, '', url);
+    window.scrollTo(0,0);
+    runScripts(here);
+    var nl=document.getElementById('nl'); if(nl) nl.classList.remove('open');
+  }
+
+  function go(url, push){
+    if(BUSY) return; BUSY=true;
+    document.documentElement.classList.add('pjax-busy');
+    fetch(url, {headers:{'X-Requested-With':'pjax'}})
+      .then(function(r){ if(!r.ok) throw new Error(r.status); return r.text(); })
+      .then(function(h){ swap(h, url, push); })
+      .catch(function(){ location.href=url; })
+      .then(function(){ BUSY=false; document.documentElement.classList.remove('pjax-busy'); });
+  }
+
+  document.addEventListener('click', function(e){
+    if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+    var a=e.target.closest && e.target.closest('a[href]');
+    if(!a) return;
+    if(a.target&&a.target!=='_self') return;
+    if(a.hasAttribute('download')||a.hasAttribute('data-no-pjax')) return;
+    var href=a.getAttribute('href')||'';
+    if(!href||href[0]==='#'||/^(mailto:|tel:|javascript:)/i.test(href)) return;
+    var u;
+    try{ u=new URL(a.href); }catch(err){ return; }
+    if(u.origin!==location.origin) return;
+    if(/\.(pdf|zip|mp3|wav|jpg|jpeg|png|gif|webp|svg|docx?|xlsx?)$/i.test(u.pathname)) return;
+    if(u.pathname===location.pathname && u.search===location.search){
+      if(u.hash) return;               // let the browser handle anchors
+    }
+    e.preventDefault();
+    go(a.href, true);
+  });
+
+  window.addEventListener('popstate', function(){ go(location.href, false); });
+})();
+</script>
 <footer>
   <div class="w">
     <div class="fgrid">
       <div class="fb">
-        <strong>DERRICK <b>FILES</b> STUDIO</strong>
+        <strong class="fb-mark"><span class="lgo-name">Derrick Files</span><span class="lgo-sub"><i aria-hidden="true"></i>STUDIO</span></strong>
         Founded by ${esc(S.person)}<br>
         ${esc(S.street)}<br>${esc(S.city)}, ${esc(S.country)}<br><br>
         ${esc(S.tagline)}.<br>
@@ -628,305 +959,109 @@ ${TABS.map((t, n) =>
 
 </div></section>
 
-<div class="mxdock" id="mxdock" hidden>
-  <div class="mxdock-in">
-    <img class="mxdock-art" id="mxdart" src="" alt="">
-    <span class="wave" id="mxwave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-    <div class="mxdock-meta"><strong id="mxdtitle"></strong><span id="mxdsub"></span></div>
-
-    <div class="mxdock-ctl">
-      <button class="mxd-btn" id="mxdprev" aria-label="Previous mix" title="Previous">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 5v14l-11-7z"/><rect x="4" y="5" width="2.4" height="14" rx="1"/></svg>
-      </button>
-      <button class="mxd-btn mxd-main" id="mxdplay" aria-label="Play" title="Play">
-        <svg class="i-play" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4.5v15l13-7.5z"/></svg>
-        <svg class="i-pause" viewBox="0 0 24 24" aria-hidden="true" hidden><rect x="6" y="4.5" width="4" height="15" rx="1.2"/><rect x="14" y="4.5" width="4" height="15" rx="1.2"/></svg>
-      </button>
-      <button class="mxd-btn" id="mxdnext" aria-label="Next mix" title="Next">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5v14l11-7z"/><rect x="17.6" y="5" width="2.4" height="14" rx="1"/></svg>
-      </button>
-    </div>
-
-    <div class="mxdock-seek">
-      <span class="mxd-t" id="mxdnow">0:00</span>
-      <input type="range" id="mxdbar" class="mxd-bar" min="0" max="1000" value="0" step="1" aria-label="Seek">
-      <span class="mxd-t" id="mxdend">0:00</span>
-    </div>
-
-    <div class="mxdock-vol">
-      <button class="mxd-btn mxd-mute" id="mxdmute" aria-label="Mute" title="Mute">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9z"/><path class="v-on" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/><path class="v-off" d="M17 9.5l4 5M21 9.5l-4 5" hidden/></svg>
-      </button>
-      <input type="range" id="mxdvol" class="mxd-vol" min="0" max="100" value="100" step="1" aria-label="Volume">
-    </div>
-
-    <a class="mxd-btn mxd-out" id="mxdout" href="#" rel="noopener" target="_blank" aria-label="Open on the source platform" title="Open on the source platform">
-      <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg>
-    </a>
-
-    <div class="mxdock-frame" id="mxdframe"></div>
-    <button class="mxdock-x" id="mxdx" aria-label="Close player">&times;</button>
-  </div>
-  <audio id="mxaudio" preload="none"></audio>
-</div>
-
 <script>
+/* mixes page: build the lists, hand playback to the global player */
 (function(){
+  // the global player is defined after this block on first paint, so wait for it
+  function ready(cb){
+    if(window.DFS) return cb();
+    var n=0, t=setInterval(function(){
+      if(window.DFS){ clearInterval(t); cb(); }
+      else if(++n>200) clearInterval(t);
+    },25);
+  }
+  ready(function(){ start(); });
+
+  function start(){
   var list=document.getElementById('mxlist'), msg=document.getElementById('mxmsg'), q=document.getElementById('mxq');
-  var dock=document.getElementById('mxdock'), dframe=document.getElementById('mxdframe');
-  var dart=document.getElementById('mxdart'), dtitle=document.getElementById('mxdtitle'), dsub=document.getElementById('mxdsub');
-  var au=document.getElementById('mxaudio');
-  var bPlay=document.getElementById('mxdplay'), bPrev=document.getElementById('mxdprev'), bNext=document.getElementById('mxdnext');
-  var bar=document.getElementById('mxdbar'), tNow=document.getElementById('mxdnow'), tEnd=document.getElementById('mxdend');
-  var vol=document.getElementById('mxdvol'), bMute=document.getElementById('mxdmute'), outLink=document.getElementById('mxdout');
-  var ALL=[], MC=[], QUEUE=[], CUR=-1, SEEKING=false, FAV={};
-  try{ FAV=JSON.parse(localStorage.getItem('dfs_fav')||'{}'); }catch(e){ FAV={}; }
-  function saveFav(){ try{ localStorage.setItem('dfs_fav',JSON.stringify(FAV)); }catch(e){} }
-  function esc(s){var e=document.createElement('div');e.textContent=s==null?'':s;return e.innerHTML;}
-  function track(ev,item){ fetch('/api/track',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({event:ev,item:item})}).catch(function(){}); }
-
-  // ---- the player ----------------------------------------------------
-  function clock(sec){
-    sec=Math.max(0, Math.floor(sec||0));
-    var h=Math.floor(sec/3600), m=Math.floor((sec%3600)/60), s2=sec%60;
-    var pad=function(n){ return n<10?'0'+n:''+n; };
-    return h ? h+':'+pad(m)+':'+pad(s2) : m+':'+pad(s2);
-  }
-  function icon(on){
-    bPlay.querySelector('.i-play').hidden=on;
-    bPlay.querySelector('.i-pause').hidden=!on;
-    bPlay.setAttribute('aria-label', on?'Pause':'Play');
-    bPlay.title = on?'Pause':'Play';
-    if(wave) wave.classList.toggle('is-paused', !on);
-  }
-  function openDock(mx){
-    dart.src=mx.artwork||''; dart.alt='';
-    dtitle.textContent=mx.title;
-    dsub.textContent=mx.length+(mx.played?'  \u00b7  '+mx.played+' plays':'');
-    outLink.href=mx.permalink||'#';
-    dock.hidden=false; document.body.classList.add('has-dock');
-  }
-
-  // HearThis: real audio through /api/stream, so it plays in our own
-  // control bar. Mixcloud has no open audio URL, so it keeps its widget.
-  function play(mx, queue, i){
-    QUEUE = queue || [mx]; CUR = (typeof i === 'number') ? i : 0;
-    openDock(mx);
-
-    if(mx.stream){
-      dframe.innerHTML=''; dframe.hidden=true;
-      dock.classList.remove('is-widget');
-      au.src=mx.stream;
-      au.play().catch(function(){ icon(false); });
-    } else {
-      // widget mode — the platform draws its own transport
-      dframe.hidden=false;
-      dock.classList.add('is-widget');
-      au.removeAttribute('src'); au.load();
-      dframe.innerHTML='<iframe src="'+esc(mx.embed)+(mx.embed.indexOf('?')>0?'&':'?')+'autoplay=1" title="'+esc(mx.title)+'" allow="autoplay" scrolling="no"></iframe>';
-      icon(true);
-    }
-    track('play', mx.title);
-  }
-
-  function step(d){
-    if(!QUEUE.length) return;
-    var i=(CUR+d+QUEUE.length)%QUEUE.length;
-    play(QUEUE[i], QUEUE, i);
-  }
-  bPrev.addEventListener('click',function(){
-    if(au.src && au.currentTime>4){ au.currentTime=0; return; }
-    step(-1);
-  });
-  bNext.addEventListener('click',function(){ step(1); });
-
-  bPlay.addEventListener('click',function(){
-    if(!au.src) return;
-    if(au.paused) au.play().catch(function(){}); else au.pause();
-  });
-
-  au.addEventListener('play',  function(){ icon(true); });
-  au.addEventListener('pause', function(){ icon(false); });
-  au.addEventListener('ended', function(){ step(1); });
-  au.addEventListener('loadedmetadata', function(){
-    tEnd.textContent = isFinite(au.duration) ? clock(au.duration) : (QUEUE[CUR]&&QUEUE[CUR].length)||'0:00';
-  });
-  au.addEventListener('timeupdate', function(){
-    if(SEEKING || !isFinite(au.duration) || !au.duration) return;
-    bar.value = Math.round((au.currentTime/au.duration)*1000);
-    tNow.textContent = clock(au.currentTime);
-  });
-  au.addEventListener('error', function(){
-    icon(false);
-    dsub.textContent='Could not load that mix — opening it on HearThis instead.';
-  });
-
-  bar.addEventListener('input', function(){
-    SEEKING=true;
-    if(isFinite(au.duration)) tNow.textContent=clock((bar.value/1000)*au.duration);
-  });
-  var commitSeek=function(){
-    if(isFinite(au.duration) && au.duration) au.currentTime=(bar.value/1000)*au.duration;
-    SEEKING=false;
-  };
-  bar.addEventListener('change', commitSeek);
-  bar.addEventListener('mouseup', commitSeek);
-  bar.addEventListener('touchend', commitSeek);
-
-  try{ au.volume = Math.min(1, Math.max(0, parseFloat(localStorage.getItem('dfs_vol')||'1'))); }catch(e){}
-  vol.value = Math.round(au.volume*100);
-  vol.addEventListener('input', function(){
-    au.volume = vol.value/100; au.muted = au.volume===0;
-    try{ localStorage.setItem('dfs_vol', String(au.volume)); }catch(e){}
-    paintMute();
-  });
-  function paintMute(){
-    var off = au.muted || au.volume===0;
-    bMute.querySelector('.v-on').hidden = off;
-    bMute.querySelector('.v-off').hidden = !off;
-    bMute.setAttribute('aria-label', off?'Unmute':'Mute');
-  }
-  bMute.addEventListener('click', function(){
-    au.muted=!au.muted;
-    if(!au.muted && au.volume===0){ au.volume=0.8; vol.value=80; }
-    paintMute();
-  });
-  paintMute();
-
-  document.getElementById('mxdx').addEventListener('click',function(){
-    au.pause(); au.removeAttribute('src'); au.load();
-    dock.hidden=true; dframe.innerHTML=''; document.body.classList.remove('has-dock');
-  });
-
-  // space bar toggles playback unless the visitor is typing
-  document.addEventListener('keydown', function(e){
-    if(e.code!=='Space' || dock.hidden || !au.src) return;
-    var t=e.target.tagName;
-    if(t==='INPUT'||t==='TEXTAREA'||t==='SELECT'||e.target.isContentEditable) return;
-    e.preventDefault();
-    if(au.paused) au.play().catch(function(){}); else au.pause();
-  });
-
-  function share(mx,btn){
-    var url=mx.permalink||location.href;
-    if(navigator.share){ navigator.share({title:mx.title,url:url}).catch(function(){}); return; }
-    navigator.clipboard.writeText(url).then(function(){
-      btn.classList.add('ok'); setTimeout(function(){btn.classList.remove('ok');},1600);
-    }).catch(function(){ window.prompt('Copy this link', url); });
-  }
+  var mclist=document.getElementById('mclist'), mcmsg=document.getElementById('mcmsg');
+  var ALL=[], MC=[];
+  var FAV=window.DFS.fav;
+  function esc(x){ var d=document.createElement('div'); d.textContent=x==null?'':x; return d.innerHTML; }
 
   function row(mx){
-    var fav=!!FAV[mx.id];
     return '<article class="mx" data-id="'+esc(mx.id)+'">'+
       '<button class="mx-play" aria-label="Play '+esc(mx.title)+'">'+
         (mx.artwork?'<img src="'+esc(mx.artwork)+'" alt="" loading="lazy">':'<span class="mx-noart"></span>')+
         '<span class="mx-tri" aria-hidden="true"></span></button>'+
       '<div class="mx-info"><h3>'+esc(mx.title)+'</h3>'+
-      '<p class="mx-sub">'+esc(mx.length)+(mx.played?' &middot; '+mx.played+' plays':'')+'</p></div>'+
+        '<p class="mx-sub">'+esc(mx.length)+(mx.played?' &middot; '+mx.played+' plays':'')+'</p></div>'+
       '<div class="mx-acts">'+
-        '<button class="mx-ico mx-fav'+(fav?' on':'')+'" data-act="fav" aria-label="Favourite" title="Favourite">'+
+        '<button class="mx-ico mx-fav'+(FAV[mx.id]?' on':'')+'" data-act="fav" aria-label="Favourite" title="Favourite">'+
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7.5-4.6-9.5-9A5.2 5.2 0 0 1 12 6.6 5.2 5.2 0 0 1 21.5 12c-2 4.4-9.5 9-9.5 9z"/></svg></button>'+
         '<button class="mx-ico" data-act="share" aria-label="Copy link" title="Copy link">'+
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7 0l3-3a5 5 0 0 0-7-7l-1 1"/><path d="M14 11a5 5 0 0 0-7 0l-3 3a5 5 0 0 0 7 7l1-1"/></svg></button>'+
-        '<a class="mx-ico" href="'+esc(mx.permalink)+'" data-track-outbound="'+esc(mx.title)+'" rel="noopener" target="_blank" aria-label="Open on the source platform" title="Open on the source platform">'+
+        '<a class="mx-ico" href="'+esc(mx.permalink)+'" data-no-pjax data-track-outbound="'+esc(mx.title)+'" rel="noopener" target="_blank" aria-label="Open on the source platform" title="Open on the source platform">'+
           '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3h7v7"/><path d="M21 3l-9 9"/><path d="M19 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h5"/></svg></a>'+
       '</div></article>';
+  }
+
+  function share(mx,btn){
+    var url=mx.permalink||location.href;
+    if(navigator.share){ navigator.share({title:mx.title,url:url}).catch(function(){}); return; }
+    navigator.clipboard.writeText(url).then(function(){
+      btn.classList.add('ok'); setTimeout(function(){btn.classList.remove('ok');},1500);
+    }).catch(function(){ window.prompt('Copy this link', url); });
+  }
+
+  function wire(el, items){
+    el.querySelectorAll('.mx').forEach(function(card){
+      var mx=items.filter(function(x){return String(x.id)===card.dataset.id;})[0];
+      if(!mx) return;
+      card.querySelector('.mx-play').addEventListener('click',function(){
+        window.DFS.play(mx, items, items.indexOf(mx));
+      });
+      card.querySelectorAll('[data-act]').forEach(function(b){
+        b.addEventListener('click',function(){
+          if(b.dataset.act==='share') return share(mx,b);
+          FAV[mx.id]=!FAV[mx.id]; window.DFS.saveFav(); b.classList.toggle('on',!!FAV[mx.id]);
+        });
+      });
+    });
   }
 
   function render(items){
     if(!items.length){ list.innerHTML='<p class="sub">Nothing matches that search.</p>'; return; }
     list.innerHTML=items.map(row).join('');
-    list.querySelectorAll('.mx').forEach(function(el){
-      var mx=ALL.filter(function(x){return x.id===el.dataset.id;})[0];
-      if(!mx) return;
-      el.querySelector('.mx-play').addEventListener('click',function(){
-        play(mx, items, items.indexOf(mx));
-      });
-      el.querySelectorAll('[data-act]').forEach(function(b){
-        b.addEventListener('click',function(){
-          if(b.dataset.act==='share') return share(mx,b);
-          FAV[mx.id]=!FAV[mx.id]; saveFav(); b.classList.toggle('on',!!FAV[mx.id]);
-        });
-      });
-    });
+    wire(list, items);
   }
 
-  function filter(){
+  if(q) q.addEventListener('input',function(){
     var v=(q.value||'').toLowerCase().trim();
-    render(!v?ALL:ALL.filter(function(x){return x.title.toLowerCase().indexOf(v)>=0;}));
-  }
-  q.addEventListener('input',filter);
+    render(!v?ALL:ALL.filter(function(x){ return x.title.toLowerCase().indexOf(v)>=0; }));
+  });
 
-  fetch('/api/mixes').then(function(r){return r.json();}).then(function(data){
-    if(!data.mixes||!data.mixes.length){ msg.textContent='Catalogue is loading slowly. The platform links above still work.'; return; }
-    ALL=data.mixes; render(ALL);
+  if(list) fetch('/api/mixes').then(function(r){return r.json();}).then(function(d){
+    if(!d.mixes||!d.mixes.length){ msg.textContent='Catalogue is loading slowly. The platform links above still work.'; return; }
+    ALL=d.mixes; render(ALL);
   }).catch(function(){ msg.textContent='Could not reach the catalogue. The platform links above still work.'; });
 
-  // ---- Mixcloud channel, pulled live ----
-  var mclist=document.getElementById('mclist'), mcmsg=document.getElementById('mcmsg');
-  if(mclist){
-    fetch('/api/mixcloud').then(function(r){return r.json();}).then(function(data){
-      if(!data.mixes||!data.mixes.length){
-        mcmsg.textContent='Could not reach Mixcloud right now. The Mixcloud link above still works.';
-        return;
-      }
-      MC=data.mixes;
-      mclist.innerHTML=MC.map(row).join('');
-      mclist.querySelectorAll('.mx').forEach(function(el){
-        var mx=MC.filter(function(x){return String(x.id)===el.dataset.id;})[0];
-        if(!mx) return;
-        el.querySelector('.mx-play').addEventListener('click',function(){
-          play(mx, MC, MC.indexOf(mx));
-        });
-        el.querySelectorAll('[data-act]').forEach(function(b){
-          b.addEventListener('click',function(){
-            if(b.dataset.act==='share') return share(mx,b);
-            FAV[mx.id]=!FAV[mx.id]; saveFav(); b.classList.toggle('on',!!FAV[mx.id]);
-          });
-        });
-      });
-    }).catch(function(){
-      mcmsg.textContent='Could not reach Mixcloud right now. The Mixcloud link above still works.';
-    });
-  }
+  if(mclist) fetch('/api/mixcloud').then(function(r){return r.json();}).then(function(d){
+    if(!d.mixes||!d.mixes.length){ mcmsg.textContent='Could not reach Mixcloud right now. The Mixcloud link above still works.'; return; }
+    MC=d.mixes; mclist.innerHTML=MC.map(row).join(''); wire(mclist, MC);
+  }).catch(function(){ mcmsg.textContent='Could not reach Mixcloud right now. The Mixcloud link above still works.'; });
 
-  // ---- channel tabs ----
   var tabs=[].slice.call(document.querySelectorAll('.mxtab'));
   function show(key){
     tabs.forEach(function(b){
       var on=b.dataset.tab===key;
-      b.setAttribute('aria-selected', on?'true':'false');
-      var p=document.getElementById('panel-'+b.dataset.tab);
-      if(p) p.hidden=!on;
+      b.setAttribute('aria-selected',on?'true':'false');
+      var pnl=document.getElementById('panel-'+b.dataset.tab);
+      if(pnl) pnl.hidden=!on;
     });
-    try{ history.replaceState(null,'','#'+key); }catch(e){}
   }
   tabs.forEach(function(b){
-    b.addEventListener('click',function(){ show(b.dataset.tab); track('tab', b.dataset.tab); });
+    b.addEventListener('click',function(){ show(b.dataset.tab); });
     b.addEventListener('keydown',function(e){
       var n=tabs.indexOf(b);
-      if(e.key==='ArrowRight'){ e.preventDefault(); tabs[(n+1)%tabs.length].focus(); tabs[(n+1)%tabs.length].click(); }
-      if(e.key==='ArrowLeft'){ e.preventDefault(); var p=(n-1+tabs.length)%tabs.length; tabs[p].focus(); tabs[p].click(); }
+      if(e.key==='ArrowRight'){ e.preventDefault(); var a=tabs[(n+1)%tabs.length]; a.focus(); a.click(); }
+      if(e.key==='ArrowLeft'){ e.preventDefault(); var c=tabs[(n-1+tabs.length)%tabs.length]; c.focus(); c.click(); }
     });
   });
-  var fromHash=(location.hash||'').replace('#','');
-  if(fromHash && document.getElementById('panel-'+fromHash)) show(fromHash);
-
-  // ---- waveform reacts to any audio on the page ----
-  var wave=document.getElementById('mxwave');
-  function waveOn(on){ if(wave) wave.classList.toggle('is-paused', !on); }
-  waveOn(false);
-  document.querySelectorAll('audio,video').forEach(function(a){
-    a.addEventListener('play',function(){
-      document.querySelectorAll('audio,video').forEach(function(o){ if(o!==a) o.pause(); });
-      waveOn(true);
-    });
-    a.addEventListener('pause',function(){ waveOn(false); });
-  });
-  var _play = play;
-  play = function(mx){ _play(mx); waveOn(true); };
+  }
 })();
-</script>`;
+</script>
+`;
   const gate = `
 <div class="gate-modal" id="gate-modal" hidden>
   <div class="gate-shade" data-gate-close></div>
