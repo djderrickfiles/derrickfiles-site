@@ -702,3 +702,14 @@ body.has-dock{padding-bottom:78px}
 .fb-mark .lgo-sub{font-size:9px}
 
 @media(max-width:560px){ .lgo-name{font-size:20px} }
+
+/* ---------- REAL LOGO LOCKUP (2026-10-01) ---------- */
+/* The artwork already carries the frame, the gold wordmark and STUDIO,
+   so the image replaces the CSS wordmark wherever site.logo is set. */
+.lgo-img{display:block;line-height:0}
+.lgo-img img{height:42px;width:auto;max-width:none;display:block}
+@media(max-width:1080px){ .lgo-img img{height:38px} }
+@media(max-width:560px){ .lgo-img img{height:32px} }
+
+.fb-mark-img{display:block;margin:0 0 14px;line-height:0}
+.fb-mark-img img{height:58px;width:auto;max-width:100%;display:block}
