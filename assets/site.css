@@ -713,3 +713,22 @@ body.has-dock{padding-bottom:78px}
 
 .fb-mark-img{display:block;margin:0 0 14px;line-height:0}
 .fb-mark-img img{height:58px;width:auto;max-width:100%;display:block}
+
+/* ==========================================================
+   TITLES IN THE BRAND FACE (2026-10-01)
+   The wordmark is a bold oblique grotesque. Headings now carry
+   the same weight and slant so titles read as the brand.
+   ========================================================== */
+h1, h2, h3, h4, .dsp,
+.lane h3, .card h3, .feat h3, .box h3, .bbody h3,
+.mxtab, .nb, .bt, .faq summary, .band blockquote{
+  font-family:"Archivo", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  font-style:italic;
+}
+h1 em{ font-style:italic }
+h1, h2{ font-weight:900 }
+h3, h4{ font-weight:800 }
+.band blockquote{ font-weight:900 }
+h1, h2, .band blockquote{ padding-right:.06em }
+.eyeb, .crumb, .meta, .artmeta, .roles li, .kick,
+.fgrid h4, .fsoc-t, .promo .k, .lpic .badge, .nl a{ font-style:normal }
