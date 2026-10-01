@@ -715,20 +715,22 @@ body.has-dock{padding-bottom:78px}
 .fb-mark-img img{height:58px;width:auto;max-width:100%;display:block}
 
 /* ==========================================================
-   TITLES IN THE BRAND FACE (2026-10-01)
-   The wordmark is a bold oblique grotesque. Headings now carry
-   the same weight and slant so titles read as the brand.
+   BRAND FACE — DISPLAY ONLY (2026-10-01, revised)
+   The oblique Archivo is the wordmark voice. It stays on logo
+   lockups and big display marks. Article and blog headings keep
+   the original header type so long-form reading is unaffected.
    ========================================================== */
-h1, h2, h3, h4, .dsp,
-.lane h3, .card h3, .feat h3, .box h3, .bbody h3,
-.mxtab, .nb, .bt, .faq summary, .band blockquote{
+.dsp, .lgo-name, .lgo-sub, .fb-mark, .band blockquote{
   font-family:"Archivo", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
   font-style:italic;
+  font-weight:900;
 }
-h1 em{ font-style:italic }
-h1, h2{ font-weight:900 }
-h3, h4{ font-weight:800 }
-.band blockquote{ font-weight:900 }
-h1, h2, .band blockquote{ padding-right:.06em }
+.dsp, .band blockquote{ padding-right:.06em }
+/* Long-form and blog headings: original headers, upright. */
+article h1, article h2, article h3, article h4,
+.bbody h1, .bbody h2, .bbody h3, .bbody h4,
+.post h1, .post h2, .post h3, .post h4,
+.lane h3, .card h3, .feat h3, .box h3,
+.mxtab, .nb, .bt, .faq summary,
 .eyeb, .crumb, .meta, .artmeta, .roles li, .kick,
 .fgrid h4, .fsoc-t, .promo .k, .lpic .badge, .nl a{ font-style:normal }
