@@ -179,7 +179,7 @@ function layout({ title, desc, url, extraSchema = [], body, image, active }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20260930-sc">
+<link rel="stylesheet" href="/assets/site.css?v=20261001-logo">
 ${adsHead}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
@@ -530,7 +530,7 @@ ${promo}
   <div class="w">
     <div class="fgrid">
       <div class="fb">
-        <strong class="fb-mark"><span class="lgo-name">Derrick Files</span><span class="lgo-sub"><i aria-hidden="true"></i>STUDIO</span></strong>
+        ${S.logo ? `<span class="fb-mark-img"><img src="${esc(S.logo)}" alt="${esc(S.brand)}" loading="lazy"></span>` : `<strong class="fb-mark"><span class="lgo-name">Derrick Files</span><span class="lgo-sub"><i aria-hidden="true"></i>STUDIO</span></strong>`}
         Founded by ${esc(S.person)}<br>
         ${esc(S.street)}<br>${esc(S.city)}, ${esc(S.country)}<br><br>
         ${esc(S.tagline)}.<br>
