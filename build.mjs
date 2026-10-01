@@ -163,23 +163,29 @@ function layout({ title, desc, url, extraSchema = [], body, image, active }) {
 <link rel="canonical" href="${S.domain}${url}">
 <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1">
 <meta name="theme-color" content="#000000">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/favicon.svg">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon-48.png" sizes="48x48" type="image/png">
+<link rel="icon" href="/assets/img/favicon-192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png">
 <link rel="manifest" href="/site.webmanifest">
+<meta name="theme-color" content="#000000">
 <meta property="og:type" content="website">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(desc)}">
 <meta property="og:url" content="${S.domain}${url}">
 <meta property="og:site_name" content="${esc(S.brand)}">
 <meta property="og:locale" content="en_UG">
-<meta property="og:image" content="${S.domain}${image || C.home.heroImage}">
+<meta property="og:image" content="${S.domain}${image || '/assets/img/og-card.jpg'}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="${esc(S.brand)} — DJ classes, events, computer repair, gear rental, LED screens">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@derrickfiles">
 <meta name="geo.region" content="UG-102"><meta name="geo.placename" content="${esc(S.city)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20261001-logo">
+<link rel="stylesheet" href="/assets/site.css?v=20261001-icons">
 ${adsHead}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
@@ -697,7 +703,7 @@ ${visitSection()}
   return layout({
     title: `${S.person} — DJ, Producer & Events Tech | ${S.brand}, ${S.city}`,
     desc: `${S.person} is a Ugandan DJ, personality, artiste, producer, events tech and stage manager based in ${S.city}, and the founder of ${S.brand} — DJ classes, gear hire and repair, production, stage, sound, lighting and LED screens. ${S.street}. Bookings ${S.phoneDisplay}.`,
-    url: '/', active: '/', body, image: C.home.heroImage,
+    url: '/', active: '/', body,
     extraSchema: [{
       '@type': 'FAQPage', '@id': `${S.domain}/#faq`,
       mainEntity: [
@@ -1335,7 +1341,7 @@ C.blog.forEach(p => write(`blog/${p.slug}`, pagePost(p)));
 copyDir(path.join(ROOT, 'assets'), path.join(OUT, 'assets'));
 copyDir(path.join(ROOT, 'admin'), path.join(OUT, 'admin'));
 fs.copyFileSync(path.join(ROOT, 'content.json'), path.join(OUT, 'content.json'));
-fs.copyFileSync(path.join(ROOT, 'assets', 'favicon.svg'), path.join(OUT, 'favicon.svg'));
+
 fs.copyFileSync(path.join(ROOT, 'assets', 'site.webmanifest'), path.join(OUT, 'site.webmanifest'));
 
 /* sitemap + robots */
