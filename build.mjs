@@ -184,8 +184,8 @@ function layout({ title, desc, url, extraSchema = [], body, image, active }) {
 <meta name="geo.region" content="UG-102"><meta name="geo.placename" content="${esc(S.city)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@1,700;1,800;1,900&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/site.css?v=20261001-icons">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,600;0,700;0,800;0,900;1,600;1,700;1,800;1,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/site.css?v=20261001-type">
 ${adsHead}
 <script type="application/ld+json">${JSON.stringify({ '@context': 'https://schema.org', '@graph': graph })}</script>
 </head>
