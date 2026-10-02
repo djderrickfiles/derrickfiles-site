@@ -1353,8 +1353,13 @@ fs.writeFileSync(path.join(OUT, 'sitemap.xml'),
   `\n</urlset>\n`);
 fs.writeFileSync(path.join(OUT, 'robots.txt'),
   `User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: ${S.domain}/sitemap.xml\n`);
-fs.writeFileSync(path.join(OUT, 'ads.txt'),
-  `google.com, ${C.adsense?.client?.replace(/^ca-/, '') || ''}, DIRECT, f08c47fec0942fa0\n`);
+/* ads.txt is written only when a publisher ID we actually control is set.
+   A file naming someone else's publisher is a standing authorisation to sell
+   ads on this domain, so no ID means no file at all. */
+if (C.adsense?.enabled && C.adsense?.client) {
+  fs.writeFileSync(path.join(OUT, 'ads.txt'),
+    `google.com, ${C.adsense.client.replace(/^ca-/, '')}, DIRECT, f08c47fec0942fa0\n`);
+}
 fs.writeFileSync(path.join(OUT, '_headers'),
   `/*\n  Cache-Control: no-cache\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n/admin/*\n  X-Robots-Tag: noindex\n`);
 
